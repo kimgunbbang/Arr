@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import product.svc.ProductListService;
 import vo.ActionForward;
 import vo.Product;
 
-public class ProductAllListAction implements Action {
+public class MainAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,7 +25,7 @@ public class ProductAllListAction implements Action {
 		
 		
 		request.setAttribute("productList", productList);
-	    request.setAttribute("pagefile", "/product/productList.jsp");
+	    request.setAttribute("pagefile", "/main.jsp");
 		forward = new ActionForward("/index.jsp",false);//보여주는경로
 		forward.setPath("/index.jsp");
 		return forward;

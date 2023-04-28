@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import product.action.MainAction;
 import product.action.ProductAddAction;
 import product.action.ProductAllListAction;
 import product.action.ProductDetailViewAction;
@@ -109,7 +110,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/main.p")) {
-			action = new ProductAllListAction();
+			action = new MainAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
