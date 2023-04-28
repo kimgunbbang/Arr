@@ -40,6 +40,8 @@ public class ProductDAO {
 			}else {
 				num=rs.getInt(1)+1;
 			}
+			close(rs);
+			close(pstmt);
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -130,47 +132,47 @@ public class ProductDAO {
 	}
 
 	public Product getProduct(int p_num) {//상품한개가져와서보여주기
-	       Product product = null;
-	       PreparedStatement pstmt = null;
-	       ResultSet rs = null;
-	       
-	       try {
-	          try {
-	             String sql1 = "update product set p_readcount=p_readcount+1 where p_num='"+p_num+"'";
-	            pstmt=conn.prepareStatement(sql1);
-	            int result=pstmt.executeUpdate();
-	            if(result>0) commit(conn);
-	         } catch (Exception e) {
-	            e.printStackTrace();
-	         }finally {
-	            close(pstmt);
-	         }
-	          
-	          String sql = "select * from product where p_num='"+p_num+"'";
-	          pstmt=conn.prepareStatement(sql);
-	           rs = pstmt.executeQuery();
+	    Product product = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	    	try {
+	    		String sql1 = "update product set p_readcount=p_readcount+1 where p_num='"+p_num+"'";
+				pstmt=conn.prepareStatement(sql1);
+				int result=pstmt.executeUpdate();
+				if(result>0) commit(conn);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+	    	
+	    	String sql = "select * from product where p_num='"+p_num+"'";
+	    	pstmt=conn.prepareStatement(sql);
+	        rs = pstmt.executeQuery();
 
-	           if(rs.next()) {
-	               product = new Product();
-	               product.setP_num(rs.getInt("p_num"));
-	               product.setP_name(rs.getString("p_name"));
-	               product.setP_price(rs.getInt("p_price"));
-	               product.setP_detail(rs.getString("p_detail"));
-	               product.setP_image(rs.getString("p_image"));
-	               product.setP_image2(rs.getString("p_image2"));
-	               product.setCategory_name(rs.getString("category_name"));
-	               product.setP_readcount(rs.getInt("p_readcount"));
-	               product.setP_hide(rs.getBoolean("p_hide"));
+	        if(rs.next()) {
+	            product = new Product();
+	            product.setP_num(rs.getInt("p_num"));
+	            product.setP_name(rs.getString("p_name"));
+	            product.setP_price(rs.getInt("p_price"));
+	            product.setP_detail(rs.getString("p_detail"));
+	            product.setP_image(rs.getString("p_image"));
+	            product.setP_image2(rs.getString("p_image2"));
+	            product.setCategory_name(rs.getString("category_name"));
+	            product.setP_readcount(rs.getInt("p_readcount"));
+	            product.setP_hide(rs.getBoolean("p_hide"));
 
-	           }
-	       } catch (Exception e) {
-	           System.out.println("DAO getProduct 에러임"+e);
-	       } finally {
-	           close(rs);
-	           close(pstmt);
-	       }
-	       return product;
-	   }
+	        }
+	    } catch (Exception e) {
+	        System.out.println("DAO getProduct 에러임"+e);
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return product;
+	}
 
 	public int modifyProduct(Product product) {
 		int modifyCount=0;

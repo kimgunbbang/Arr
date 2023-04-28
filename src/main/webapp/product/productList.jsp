@@ -45,7 +45,7 @@
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
-					조회수: ${productlist.p_readcount}<br>
+					조회수: ${productList.p_readcount}<br>
 					품절입니다.
 			</div>
 			<c:if test="${status.count % 4 == 0}">

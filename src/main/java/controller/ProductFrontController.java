@@ -56,7 +56,9 @@ public class ProductFrontController extends HttpServlet {
 		String uri=request.getRequestURI();
 		String contextPath=request.getContextPath();
 		String command = uri.substring(contextPath.length());
-		
+		if(command=="") {
+			command="/mainForm.p";
+		}
 		System.out.println(command);
 		
 		Action action=null;//액션초기화
@@ -102,6 +104,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/productModifyAction.p")) {
 			action = new ProductModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/mainForm.p")) {
+			action = new ProductAllListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
