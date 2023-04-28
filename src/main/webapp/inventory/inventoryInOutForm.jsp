@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
 <form action="inventoryInOutAction.in" method="post">
     <div class="row">

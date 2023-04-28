@@ -40,6 +40,7 @@ function dateChk() {
 
 </script>
 <body>
+<jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
 <form action="invenSearchList.in" method="post" onsubmit="return dateChk()">
 			<select name="invenSearchOption" onchange="optionChange(event)">
