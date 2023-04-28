@@ -11,6 +11,9 @@
 
 </head>
 <body>
+<c:if test="${pagefile == null }">
+<jsp:forward page="main.p"></jsp:forward>
+</c:if>
 	<div class="container">
 		<!-- 사이트 상단 부분 -->
 		<div class="row" >
@@ -27,9 +30,6 @@
 				<c:when test="${pagefile != null }">
 					<jsp:include page="${pagefile}"></jsp:include>
 				</c:when>
-				<c:otherwise>
-					<jsp:include page="main.jsp"></jsp:include>
-				</c:otherwise>
 			</c:choose>
 			</div>
 		</div>
