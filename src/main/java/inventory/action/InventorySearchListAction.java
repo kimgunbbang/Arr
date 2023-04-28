@@ -53,6 +53,7 @@ public class InventorySearchListAction implements Action {
 			String invenStartDate = request.getParameter("invenSearchValueStartDate");//시작날짜 저장해주고,
 			String invenEndDate = request.getParameter("invenSearchValueEndDate");//끝날짜 저장해주고,
 			
+			
 			InventoryListService inventoryListService = new InventoryListService();
 			ArrayList<Inventory> inventoryList = 
 					inventoryListService.inventorySearchList(invenSearchOption,invenStartDate,invenEndDate);

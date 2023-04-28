@@ -42,7 +42,7 @@ function dateChk() {
 <body>
 <jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
-<form action="invenSearchList.in" method="post" onsubmit="return dateChk()">
+<form action="invenSearchList.in"  onsubmit="return dateChk()">
 			<select name="invenSearchOption" onchange="optionChange(event)">
 				<option value="p_num" ${invenSearchOption == 'p_num' ? 'selected' : ''}>상품번호</option>
 				<option value="p_name" ${invenSearchOption == 'p_name' ? 'selected' : ''}>상품명</option>

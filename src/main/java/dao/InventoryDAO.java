@@ -210,10 +210,16 @@ public class InventoryDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="";
+		String start="STR_TO_DATE('"+invenStartDate+" 00:00:00', '%Y-%m-%d %H:%i:%s')";
+		String end="STR_TO_DATE('"+invenEndDate+" 23:59:59', '%Y-%m-%d %H:%i:%s')";
+		System.out.println(start);
+		System.out.println(end);
+		
 		
 		if(!invenStartDate.equals("") && !invenEndDate.equals("")) {//시작과 끝날짜가 있을때
-			sql = "select * from inventory where inven_date>='"+invenStartDate
-					+"' and inven_date<='"+invenEndDate+"'";
+			sql = "select * from inventory where inven_date >= "+start;
+			sql+= " and inven_date <= "+end;
+			
 			try {
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -238,8 +244,7 @@ public class InventoryDAO {
 			}
 		}
 		if(invenStartDate.equals("") && !invenEndDate.equals("")) {//끝날짜만 있을때
-			sql = "select * from inventory where inven_date<='"+invenEndDate+"'";
-			
+			sql = "select * from inventory where inven_date<="+end;
 			try {
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -264,8 +269,7 @@ public class InventoryDAO {
 			}
 		}
 		if(!invenStartDate.equals("") && invenEndDate.equals("")) {//시작날짜만 있을때
-			sql = "select * from inventory where inven_date>='"+invenStartDate+"'";
-			
+			sql = "select * from inventory where inven_date>="+start;
 			try {
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
@@ -283,7 +287,7 @@ public class InventoryDAO {
 				}
 				
 			}catch(Exception e) {
-				System.out.println("inventoryDAO inventorySearchList에러임"+e);
+				e.printStackTrace();
 			}finally {
 				close(rs);
 				close(pstmt);
