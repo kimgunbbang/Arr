@@ -10,6 +10,22 @@ import vo.Delivery;
 
 public class DeliveryViewService {
 
+	public Delivery selectDelivery(String id, int deli_num) {
+		Delivery delivery = new Delivery();
+		Connection conn=getConnection();
+		try {
+			DeliveryDAO deliveryDAO = DeliveryDAO.getInstance();
+			deliveryDAO.setConnection(conn);
+			delivery = deliveryDAO.selectDelivery(id,deli_num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return delivery;
+	}
+
 	public Delivery selectDelivery(String id) {
 		Delivery delivery = new Delivery();
 		Connection conn=getConnection();

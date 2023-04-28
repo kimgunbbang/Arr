@@ -17,11 +17,12 @@ public class DeliveryViewAction implements Action {
 	    ActionForward forward = null;
 	    HttpSession session = request.getSession();
 	    String id = (String) session.getAttribute("id");
+	    int deli_num = Integer.parseInt(request.getParameter("deli_num"));
 	    if (id == null) {
 	        forward = new ActionForward("productAllList.p", true);
 	    } else {
 	        DeliveryViewService deliveryViewService = new DeliveryViewService();
-	        Delivery delivery = deliveryViewService.selectDelivery(id);
+	        Delivery delivery = deliveryViewService.selectDelivery(id,deli_num);
 	        session.setAttribute("delivery", delivery);
 	        request.setAttribute("pagefile", "/delivery/deliveryInfo.jsp");
 	        forward = new ActionForward("/index.jsp", false);

@@ -27,18 +27,17 @@
 			<div class="열1">전화번호 : </div><div class="열1">${user.user_phone }</div>
 			<div class="열1"><a href="userModifyForm.u?id=${user.id }">수정</a></div>
 			<div class="열1"><a href="deliveryListAction.del?id=${user.id }">배송지관리</a></div>
-			<div class="열1"><a href="userByeAction.u?id=${user.id}">탈퇴</a></div>
+			<div class="열1"><a href="userByeAction.u?id=${user.id}" onclick="confirmDelete('${user.id}')">탈퇴</a></div>
 
-<!-- <script>
+<script>
 function confirmDelete(userId) {
   if (confirm("정말 탈퇴하시겠습니까?")) {
     location.href = "userByeAction.u?id=" + userId;
   } else {
-    window.close();
+    // 아무것도 하지 않고 창을 닫습니다.
   }
 }
-</script> -->
-			
+</script>
 		</div>
 	</div>
 </div>

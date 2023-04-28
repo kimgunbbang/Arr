@@ -27,15 +27,15 @@
 			<div class="열1"><a href="deliveryModifyForm.del?id=${user.id }">수정</a></div>
 			<div class="열1"><a href="deliveryDeleteAction.del?id=${user.id}">삭제</a></div>
 
-<!-- <script>
+<script>
 function confirmDelete(userId) {
-  if (confirm("정말 탈퇴하시겠습니까?")) {
-    location.href = "userByeAction.u?id=" + userId;
+  if (confirm("정말 삭제하시겠습니까?")) {
+    location.href = "deliveryDeleteAction.del?id=" + userId;
   } else {
     window.close();
   }
 }
-</script> -->
+</script>
 			
 		</div>
 	</div>

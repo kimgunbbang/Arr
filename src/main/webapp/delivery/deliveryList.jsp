@@ -27,7 +27,7 @@ text-align: center;
 			<h3>배송지 목록</h3>
 			<div class="열1"><a href="deliveryAdd.del?id=${user.id }">배송지신규등록</a></div>
 			<c:forEach var="delivery" items="${deliveryList }">
-			<div class="열2"><a href="deliveryViewAction.del?id=${user.id }">${delivery.deli_name }</a></div>
+			<div class="열2"><a href="deliveryViewAction.del?deli_num=${delivery.deli_num }">${delivery.deli_name }</a></div>
 			</c:forEach>
 			</div>
 		</div>

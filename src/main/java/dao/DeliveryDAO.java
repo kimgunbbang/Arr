@@ -67,25 +67,27 @@ public class DeliveryDAO {
 		return addCount;
 	}
 
-	public ArrayList<Delivery> selectDeliveryList() {
+	public ArrayList<Delivery> selectDeliveryList(String id) {
 		ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from delivery";
+		String sql = "select * from delivery where id = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				do {
 					Delivery delivery = new Delivery();
-					delivery.setDeli_name("deli_name");
-					delivery.setDeli_zipcode("deli_zipcode");
-					delivery.setDeli_addr("deli_addr");
-					delivery.setDeli_addr2("deli_addr2");
-					delivery.setDeli_username("deli_username");
-					delivery.setDeli_phone("deli_phone");
+					delivery.setDeli_num(rs.getInt("deli_num"));
+					delivery.setDeli_name(rs.getString("deli_name"));
+					delivery.setDeli_zipcode(rs.getString("deli_zipcode"));
+					delivery.setDeli_addr(rs.getString("deli_addr"));
+					delivery.setDeli_addr2(rs.getString("deli_addr2"));
+					delivery.setDeli_username(rs.getString("deli_username"));
+					delivery.setDeli_phone(rs.getString("deli_phone"));
 					deliveryList.add(delivery);
 				}while(rs.next());
 			}
@@ -99,14 +101,15 @@ public class DeliveryDAO {
 		return deliveryList;
 	}
 
-	public Delivery selectDelivery(String id) {
+	public Delivery selectDelivery(String id, int deli_num) {
 		Delivery delivery = new Delivery();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from delivery where id = ?";
+		String sql="select * from delivery where id = ? and deli_num = ?";
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, deli_num);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {//결과가 있으면
 				delivery.setDeli_name(rs.getString("deli_name"));
@@ -171,4 +174,33 @@ public class DeliveryDAO {
 		    
 		    return updateResult;
 		}
+
+	public Delivery selectDelivery(String id) {
+		Delivery delivery = new Delivery();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from delivery where id = ?";
+		try{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {//결과가 있으면
+				delivery.setDeli_name(rs.getString("deli_name"));
+				delivery.setDeli_zipcode(rs.getString("deli_zipcode"));
+				delivery.setDeli_addr(rs.getString("deli_addr"));
+				delivery.setDeli_addr2(rs.getString("deli_addr2"));
+				delivery.setDeli_username(rs.getString("deli_username"));
+				delivery.setDeli_phone(rs.getString("deli_phone"));
+			}
+		}catch(Exception e) {
+			System.out.println("selectDelivery에러 :"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return delivery;
+	}
 }

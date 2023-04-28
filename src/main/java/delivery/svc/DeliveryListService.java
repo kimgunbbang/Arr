@@ -11,7 +11,7 @@ import vo.Delivery;
 
 public class DeliveryListService {
 
-	public ArrayList<Delivery> getDeliveryList() {
+	public ArrayList<Delivery> getDeliveryList(String id) {
 		ArrayList<Delivery> deliveryList = null;
 		Connection conn = null;
 		DeliveryDAO deliveryDAO = null;
@@ -20,7 +20,7 @@ public class DeliveryListService {
 			conn=getConnection();
 			deliveryDAO = DeliveryDAO.getInstance();
 			deliveryDAO.setConnection(conn);
-			deliveryList = deliveryDAO.selectDeliveryList();
+			deliveryList = deliveryDAO.selectDeliveryList(id);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

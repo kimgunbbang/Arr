@@ -25,8 +25,9 @@ public class DeliveryListAction implements Action {
 		
 		if(id !=null ) {
 			DeliveryListService deliveryListService = new DeliveryListService();
-			ArrayList<Delivery> deliveryList = deliveryListService.getDeliveryList();
+			ArrayList<Delivery> deliveryList = deliveryListService.getDeliveryList(id);
 			request.setAttribute("deliveryList", deliveryList);
+
 			request.setAttribute("pagefile", "/delivery/deliveryList.jsp");
 			forward = new ActionForward("/index.jsp",false);
 		}else if(id == null ){
