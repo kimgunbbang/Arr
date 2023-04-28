@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource
+	name="jdbc/sdt22kp"
+	auth="Container"
+	type="javax.sql.DataSource"
+	username="sdt22kp"
+	password="sdt22kp"
+	driverClassName="com.mysql.cj.jdbc.Driver"
+	factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+	url="jdbc:mysql://118.131.179.138/sdt22kp?serverTimezone=Asia/Seoul"
+	maxTotal="500"
+	/>
+</Context>
