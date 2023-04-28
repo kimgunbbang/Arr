@@ -68,7 +68,7 @@
 			<% if (userId != null && userId.equals("admin")) { %>
 			 <li class="nav-item dropdown">
 				<a href="adminMain.ad" class="nav-link" style="color: black;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="myFunction()">
-            	<b>관리자모드1</b></a>
+            	<b>관리자모드</b></a>
             	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
 					<li><a class="dropdown-item" href="inventoryInOutForm.in">재고등록</a></li>
