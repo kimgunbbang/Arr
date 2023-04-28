@@ -49,10 +49,12 @@ public class AdminFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		
-		if(command.equals("/adminMain.ad")) {
+		if(command.equals("/adminMain.ad")) {//메인폼 없애버림(menu_top에서만 선택할수있또록)
 			request.setAttribute("pagefile", "/admin/adminMainForm.jsp");
 			forward = new ActionForward("/index.jsp",false);
 		}
+		
+		
 		if(forward != null) {
 			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
