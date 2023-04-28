@@ -1,22 +1,21 @@
-package product.action;
+package admin.action;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
+import product.action.ProductInventoryCheckService;
 import product.svc.ProductListService;
 import vo.ActionForward;
 import vo.Product;
 
-public class ProductAllListAction implements Action {
+public class AdminProductAllList implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-		String id = request.getSession().getId();
 		
 		ProductListService productListService = new ProductListService();
 		ArrayList<Product> productList = productListService.getProductAllList();
@@ -26,7 +25,7 @@ public class ProductAllListAction implements Action {
 		
 		
 		request.setAttribute("productList", productList);
-		request.setAttribute("pagefile", "/product/productList.jsp");
+		request.setAttribute("pagefile", "/admin/adminProductList.jsp");
 	
 		forward = new ActionForward("/index.jsp",false);//보여주는경로
 		

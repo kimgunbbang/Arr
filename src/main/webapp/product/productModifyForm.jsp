@@ -45,10 +45,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<input type="radio" name="p_hide" id="p_hide" value="false" ${product.p_hide eq 'false' ? 'checked' : ''}>보이기
-				<input type="radio" name="p_hide" id ="p_hide" value ="true" ${product.p_hide eq 'true' ? 'checked' : ''}>품절
-			</div>
-			<div class="row">
 				<div class="col">
 				<input type="submit" value="상품수정">&nbsp;
 				<input type="reset"  value="다시작성">&nbsp;
