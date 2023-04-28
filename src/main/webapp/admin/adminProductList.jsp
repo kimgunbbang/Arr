@@ -34,6 +34,8 @@
 					조회수: ${productList.p_readcount}<br>
 					상품명: ${productList.p_name}<br>
 					금액: ${productList.p_price}<br>
+					<button onclick="javascript:location.href='productModifyForm.p'">상품수정</button>
+
 			</div>
 			<c:if test="${status.count % 4 == 0}">
 				<div style="clear: both;"></div>

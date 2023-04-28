@@ -7,15 +7,7 @@
 <script src="https://kit.fontawesome.com/cb777d7294.js" crossorigin="anonymous"></script>
 <html>
 <head>
-<script>
-  const link = document.querySelector("#navbarDropdown");
 
-  link.addEventListener("click", myFunction);
-
-  function myFunction() {
-    location.href='adminMain.ad'
-  }
-</script>
 <style>
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -29,14 +21,14 @@
 <div class="container" style="height:200px; background-color: #FFF" >
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
     <div class="col-lg-4">
-    <a href="main.jsp">
+    <a href="productMain.p">
       <img src="${pageContext.request.contextPath}/images/logo4.png" alt="로고" width="150" height="150"/>
     </a>
     </div>
     <div class="col-lg-4">
       <ul class="nav nav-pills">
         <li class="nav-item dropdown">
-          <a class="nav-link" style="color: black;" href="productALLList.p" id="navbarDropdown" role="button"  aria-expanded="false">
+          <a class="nav-link" style="color: black;" href="productAllList.p" id="navbarDropdown" role="button"  aria-expanded="false">
             <b>SHOP</b>
           </a>
           <!-- 드롭다운 메뉴 -->
@@ -67,13 +59,13 @@
 			
 			<% if (userId != null && userId.equals("admin")) { %>
 			 <li class="nav-item dropdown">
-				<a href="#" class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false" onclick="myFunction()">
+				<a href="" class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false">
             	<b>관리자모드</b></a>
             	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
 					<li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
 					<li><a class="dropdown-item" href="">주문관리</a></li>
-					<li><a class="dropdown-item" href="">서브메뉴4</a></li>
+					<li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
 				</ul>
 			</li>
 			<% } else if(userId != null){ %>

@@ -15,7 +15,8 @@
 		베스트상품 영역입니다.
 	</div>
 	<div class="row">
-		<jsp:forward page="productAllList.p" />
+		<!-- 메인상품 리스트 -->
+		메인상품 영역입니다.
 	</div>
 
 

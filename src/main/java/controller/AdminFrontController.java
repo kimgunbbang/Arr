@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-
+import product.action.ProductAllListAction;
 import vo.ActionForward;
 
 /**
@@ -48,10 +48,14 @@ public class AdminFrontController extends HttpServlet {
 		
 		Action action = null;
 		ActionForward forward = null;
-		
-		if(command.equals("")) {//메인폼 없애버림(menu_top에서만 선택할수있또록)
-			request.setAttribute("pagefile", "/admin/adminMainForm.jsp");
-			forward = new ActionForward("/index.jsp",false);
+		//관리자메인폼 없애버림(menu_top에서만 선택할수있또록)
+		if(command.equals("/adminProductList.ad")) {
+			action = new ProductAllListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

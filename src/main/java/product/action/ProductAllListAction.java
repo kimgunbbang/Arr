@@ -20,7 +20,7 @@ public class ProductAllListAction implements Action {
 		ArrayList<Product> productList = productListService.getProductAllList();
 		
 		request.setAttribute("productList", productList);
-		request.setAttribute("pagefile", "/product/productList.jsp");
+		request.setAttribute("pagefile", "/admin/adminProductList.jsp");
 		
 		forward = new ActionForward("/index.jsp",false);//보여주는경로
 		
