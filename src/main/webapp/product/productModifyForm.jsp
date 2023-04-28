@@ -8,7 +8,7 @@
 <title>상품 수정 페이지</title>
 </head>
 <body>
-
+<jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
 <h1> 상품 수정 페이지</h1>
 	<form action="productModifyAction.p" name="productModifyForm" method="post" enctype="multipart/form-data">
