@@ -21,7 +21,7 @@
 <div class="container" style="height:200px; background-color: #FFF" >
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
     <div class="col-lg-4">
-    <a href="productMain.p">
+    <a href="main.p">
       <img src="${pageContext.request.contextPath}/images/logo4.png" alt="로고" width="150" height="150"/>
     </a>
     </div>

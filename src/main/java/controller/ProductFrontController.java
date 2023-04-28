@@ -108,7 +108,7 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/productMain.p")) {
+		}else if(command.equals("/main.p")) {
 			action = new ProductAllListAction();
 			try {
 				forward = action.execute(request, response);

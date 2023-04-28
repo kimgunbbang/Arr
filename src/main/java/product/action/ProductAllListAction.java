@@ -26,10 +26,9 @@ public class ProductAllListAction implements Action {
 		
 		
 		request.setAttribute("productList", productList);
-		request.setAttribute("pagefile", "/product/productList.jsp");
-	
+	    request.setAttribute("pagefile", "main.jsp");
 		forward = new ActionForward("/index.jsp",false);//보여주는경로
-		
+		forward.setPath("/index.jsp");
 		return forward;
 	}
 
