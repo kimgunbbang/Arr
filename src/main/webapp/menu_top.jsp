@@ -36,7 +36,7 @@
     <div class="col-lg-4">
       <ul class="nav nav-pills">
         <li class="nav-item dropdown">
-          <a class="nav-link" style="color: black;" href="productALLList.p" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link" style="color: black;" href="productALLList.p" id="navbarDropdown" role="button"  aria-expanded="false">
             <b>SHOP</b>
           </a>
           <!-- 드롭다운 메뉴 -->
@@ -53,7 +53,7 @@
           <a class="nav-link" href="#" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" style="color: black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link" style="color: black;" href="#" id="navbarDropdown" role="button"  aria-expanded="false">
             <b>커뮤니티</b>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,7 +67,7 @@
 			
 			<% if (userId != null && userId.equals("admin")) { %>
 			 <li class="nav-item dropdown">
-				<a href="adminMain.ad" class="nav-link" style="color: black;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="myFunction()">
+				<a href="adminMain.ad" class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false" onclick="myFunction()">
             	<b>관리자모드</b></a>
             	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
@@ -78,7 +78,7 @@
 			</li>
 			<% } else if(userId != null){ %>
 			<li class="nav-item dropdown">
-				<a class="nav-link" style="color: black;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"href="#">
+				<a class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false"href="#">
 				<b>마이페이지</b></a>
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="userViewAction.u">내정보보기</a></li>
