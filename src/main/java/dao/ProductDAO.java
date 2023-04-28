@@ -207,6 +207,61 @@ public class ProductDAO {
 		}
 		return modifyCount;
 	}
+
+	public int inventoryCheck(ArrayList<Product> productList) {
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    PreparedStatement pstmt1 = null;
+	    ResultSet rs = null;
+
+	    // DB 연결
+	    try {
+
+	        //현재재고 검색하는데 없거나 0이면 p_hide는 1로바꾸기
+	        String sql = "select inven_qty from inventory where inven_num = (select max(inven_num) FROM inventory where p_num=?)";
+	        for (int i = 0; i < productList.size(); i++) {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setInt(1, productList.get(i).getP_num());
+	            rs = pstmt.executeQuery();
+
+	            if (rs.next()) {
+	                int inven_qty = rs.getInt("inven_qty");
+	                if (inven_qty == 0) {
+	                    pstmt1 = conn.prepareStatement("update product set p_hide='1' where p_num=?");
+	                    pstmt1.setInt(1, productList.get(i).getP_num());
+	                } else {
+	                    pstmt1 = conn.prepareStatement("update product set p_hide='0' where p_num=?");
+	                    pstmt1.setInt(1, productList.get(i).getP_num());
+	                }
+	            } else {
+	                pstmt1 = conn.prepareStatement("update product set p_hide='1' where p_num=?");
+	                pstmt1.setInt(1, productList.get(i).getP_num());
+	            }
+
+	            int updateSuccess = pstmt1.executeUpdate();
+
+	            if (updateSuccess > 0) {
+	                result = 1;
+	                conn.commit();
+	            } else {
+	                result = 0;
+	                conn.rollback();
+	            }
+
+	            close(pstmt1);
+	            close(rs);
+	            close(pstmt);
+	        }
+	    } catch (Exception e) {
+	        System.out.println("DAO inventoryCheck 에러임"+e);
+	    } finally {
+	        close(pstmt1);
+	        close(rs);
+	        close(pstmt);
+	    }
+
+	    return result;
+	}
 	
 	
 	

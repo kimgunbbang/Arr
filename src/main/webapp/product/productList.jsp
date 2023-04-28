@@ -27,7 +27,7 @@
 	</c:if>
 	<c:forEach var="productList" items="${productList}" varStatus="status">
 	<c:choose>
-		<c:when test="${productList.p_hide == 'false'}"><!-- 품절아닐때 -->
+		<c:when test="${productList.p_hide == '1'}"><!-- 품절아닐때 -->
 			<div id="product">
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
