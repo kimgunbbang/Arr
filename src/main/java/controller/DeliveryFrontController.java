@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +16,6 @@ import delivery.action.DeliveryViewAction;
 import delivery.action.DeliveryModifyAction;
 import delivery.action.DeliveryModifyFormAction;
 import delivery.action.DeliveryListAction;
-import user.action.UserDeleteAction;
-import user.action.UserJoinAction;
-import user.action.UserListAction;
-import user.action.UserModifyAction;
-import user.action.UserModifyFormAction;
-import user.action.UserViewAction;
 import vo.ActionForward;
 
 @WebServlet("*.del")

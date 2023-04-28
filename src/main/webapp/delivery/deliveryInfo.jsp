@@ -25,7 +25,7 @@
 			<div class="열1">수령인 : </div><div class="열1">${delivery.deli_username }</div>
 			<div class="열1">수령인전화번호 : </div><div class="열1">${delivery.deli_phone }</div>
 			<div class="열1"><a href="deliveryModifyForm.del?id=${user.id }">수정</a></div>
-			<div class="열1"><a href="deliveryDeleteAction.del?id=${user.id}">삭제</a></div>
+			<div class="열1"><a href="deliveryDeleteAction.del?id=${user.id}" onclick="confirmDelete('${user.id}')">삭제</a></div>
 
 <script>
 function confirmDelete(userId) {

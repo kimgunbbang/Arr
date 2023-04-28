@@ -31,7 +31,7 @@
                         <p>${product.p_detail }</p>
                     </div>
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
-                    <button type="button" class="btn btn-secondary my-3">장바구니</button>
+                    <button type="button" class="btn btn-secondary my-3" href="cartAddAction.ct">장바구니</button>
                     
                     <c:if test="${sessionScope.id eq 'admin'}">
                    	 	<a href="productModifyForm.p?p_num=${product.p_num }" class="btn btn-link my-3">수정</a>

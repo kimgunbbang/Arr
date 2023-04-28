@@ -35,7 +35,15 @@ public class UserLoginAction implements Action{
 			out.println("alert('이미 탈퇴한 회원입니다. 회원가입을 해주세요.')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else {
+		}else if(!loginSuccess){
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원정보가 없습니다. 회원가입을 해주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		else {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

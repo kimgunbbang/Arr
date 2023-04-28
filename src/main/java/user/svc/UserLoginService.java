@@ -20,7 +20,7 @@ public class UserLoginService {
 			conn = getConnection();
 			userDAO.setConnection(conn);
 			String user_id = userDAO.selectLoginID(id, user_pass);
-			if(user_id != null) {
+			if(!user_id.equals("")) {
 				loginSuccess = true;
 			}
 		}catch (Exception e) {
