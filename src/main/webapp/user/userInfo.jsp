@@ -34,7 +34,7 @@ function confirmDelete(userId, event) {
 	  event.preventDefault(); // 이벤트의 기본 동작을 취소
 
 	  if (confirm("정말 탈퇴하시겠습니까?")) {
-	    location.href = "deliveryDeleteAction.del?id=" + userId;
+	    location.href = "userByeAction.u?id=" + userId;
 	  }
 	}
 </script>
