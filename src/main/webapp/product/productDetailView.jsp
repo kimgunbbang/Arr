@@ -19,12 +19,13 @@
             </div>
             <div class="col-md-6 my-4">
                 <!-- 상품명,가격,구매수량,구매버튼,장바구니버튼 -->
+                
+                <form action="buyActionForm.buy?id=${id }&p_num=${product.p_num}" method="post">
                 <h2>${product.p_name }</h2>
-                <h4 class="text-muted">${product.p_price }</h4>
-                <form action="buyAction.p?id=${id }&p_num=${product.p_num}" method="post">
+                <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly>${product.p_price }
                     <div class="form-group my-3">
                         <label for="buy_qty">구매수량 :</label>
-                        <input type="text" name="buy_qty" class="form-control">
+                        <input type="text" name="buy_qty" class="form-control" value="1">
                     </div>
                     <div class="form-group my-3">
                         <label for="p_detail">상세설명 :</label>
@@ -32,7 +33,7 @@
                     </div>
                     <c:if test="${product.p_hide=='0' }">
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
-                    <button type="button" class="btn btn-secondary my-3" href="cartAddAction.ct">장바구니</button>
+                    <button type="button" class="btn btn-secondary my-3" onclick="location.href='cartAddAction.ct'">장바구니</button>
                     </c:if>
                     
                 </form>
