@@ -4,8 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import inventory.action.InventoryListAction;
+import inventory.svc.InventoryListService;
 import product.svc.ProductDetailViewService;
 import vo.ActionForward;
+import vo.Inventory;
 import vo.Product;
 
 public class ProductDetailViewAction implements Action {

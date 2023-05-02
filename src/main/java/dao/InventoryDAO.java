@@ -295,6 +295,8 @@ public class InventoryDAO {
 		}
 		return inventoryList;
 	}
+
+	
 	
 	
 }//InventoryDAO끝

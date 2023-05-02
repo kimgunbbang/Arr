@@ -1,5 +1,6 @@
 package inventory.action;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,5 +32,6 @@ public class InventoryListAction implements Action {
 		
 		return forward;
 	}
+
 
 }

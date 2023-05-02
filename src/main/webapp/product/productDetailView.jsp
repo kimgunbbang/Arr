@@ -21,7 +21,7 @@
                 <!-- 상품명,가격,구매수량,구매버튼,장바구니버튼 -->
                 <h2>${product.p_name }</h2>
                 <h4 class="text-muted">${product.p_price }</h4>
-                <form action="productBuyAction.p?id=${id }" method="post">
+                <form action="buyAction.p?id=${id }&p_num=${product.p_num}" method="post">
                     <div class="form-group my-3">
                         <label for="buy_qty">구매수량 :</label>
                         <input type="text" name="buy_qty" class="form-control">
@@ -30,12 +30,18 @@
                         <label for="p_detail">상세설명 :</label>
                         <p>${product.p_detail }</p>
                     </div>
+                    <c:if test="${product.p_hide=='0' }">
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
+<<<<<<< HEAD
                     <button type="button" class="btn btn-secondary my-3" onclick="location.href='cartAddAction.ct'">장바구니</button>
                     
                     <c:if test="${sessionScope.id eq 'admin'}">
                    	 	<a href="productModifyForm.p?p_num=${product.p_num }" class="btn btn-link my-3">수정</a>
                   	</c:if>
+=======
+                    <button type="button" class="btn btn-secondary my-3" href="cartAddAction.ct">장바구니</button>
+                    </c:if>
+>>>>>>> branch 'master' of https://github.com/kimgunbbang/Arr.git
                     
                 </form>
             </div>
