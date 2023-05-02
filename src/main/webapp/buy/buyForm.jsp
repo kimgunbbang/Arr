@@ -8,17 +8,6 @@
 <meta charset="UTF-8">
 <title>구매 정보 입력</title>
 <script type="text/javascript">
-function changeMoney(event) {
-	var qty = event.target.value; // 변경된 수량
-	if(qty<1){
-		qty=1;
-		document.getElementById("buy_qty").value = qty;
-	}
-    var price = document.getElementById("p_price").value; // 상품금액
-    var total = qty * price; // 총금액 계산
-    document.getElementById("buy_totalmoney").value = total; // 총금액 표시
-}
-
 window.onload = function(){
     document.getElementById("zipSearch").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
@@ -32,52 +21,25 @@ window.onload = function(){
     });
 }
 
-const buyId = ${buy.id};  // buy id 값을 가져옴
-const deliSelectButton = document.getElementById("deliSelect");  // 배송지 선택 버튼 요소 가져오기
+function setDeliveryInfo(selectBox) {
+	  // 선택한 배송지의 데이터를 가져옴
+	  var selectedOption = selectBox.options[selectBox.selectedIndex];
+	  var name = selectedOption.getAttribute('data-name');
+	  var phone = selectedOption.getAttribute('data-phone');
+	  var zipcode = selectedOption.getAttribute('data-zipcode');
+	  var addr = selectedOption.getAttribute('data-addr');
+	  var addr2 = selectedOption.getAttribute('data-addr2');
 
-// 배송지 선택 버튼 클릭 이벤트 핸들러 함수
-deliSelectButton.addEventListener("click", function() {
-  // 아이디에 맞는 배송지 리스트를 보여주는 함수 호출
-  showDeliveryList(buyId);
-});
-
-// 아이디에 맞는 배송지 리스트를 보여주는 함수
-function showDeliveryList(buyId) {
-  // 아이디에 맞는 배송지 리스트를 가져오는 로직 작성
-  // ...
-
-  // 가져온 배송지 리스트를 보여주는 로직 작성
-  // ...
-
-  // 배송지 리스트에서 배송지 선택시 수행할 로직 작성
-  const deliverySelect = function() {
-    // 선택한 배송지 정보를 가져오는 로직 작성
-    // ...
-
-    // 선택한 배송지 정보를 입력할 input 요소들을 생성하는 로직 작성
-    const deliveryInfoDiv = document.createElement("div");
-    deliveryInfoDiv.innerHTML = `
-      수령인 : <input type="text" name="deli_username" id="deli_username" required><br>
-      수령인 전화번호 : <input type="text" name="deli_phone" id="deli_phone" required><br>
-      우편번호 : <input type="text" name="deli_zipcode" id="deli_zipcode" readonly>
-      <input type="button" name="zipSearch" value="주소검색" id="zipSearch"><br>
-      배송지 : <input type="text" name="deli_addr" id="deli_addr" readonly required><br>
-      상세주소 : <input type="text" name="deli_addr2" id="deli_addr2"><br>
-    `;
-
-    // 생성한 input 요소들을 배송지 입력 폼에 추가
-    const deliveryForm = document.getElementById("deliveryForm");
-    deliveryForm.appendChild(deliveryInfoDiv);
-  };
-
-  // 배송지 리스트에서 각 배송지 요소에 클릭 이벤트 핸들러 등록
-  const deliveryElements = document.querySelectorAll(".delivery-element");
-  deliveryElements.forEach(function(element) {
-    element.addEventListener("click", deliverySelect);
-  });
-}
+	  // 가져온 데이터를 폼에 채움
+	  document.getElementById('deli_username').value = name;
+	  document.getElementById('deli_phone').value = phone;
+	  document.getElementById('deli_zipcode').value = zipcode;
+	  document.getElementById('deli_addr').value = addr;
+	  document.getElementById('deli_addr2').value = addr2;
+	}
 
 </script>
+<%int num=0; %>
 </head>
 <body>
 <div class="container">
@@ -85,25 +47,36 @@ function showDeliveryList(buyId) {
 	<form action="buyAction.buy" method="post" name="buyForm" >
 		<input type="hidden" name="id" id="${buy.id }" value="${buy.id }"><br>
 		
+		<c:forEach var="buy" items="${buyList }" varStatus="idx">
+		<%=++num %>.&nbsp;
 		상품번호: ${buy.p_num }
-		<input type="hidden" name="p_num" id="p_num" value="${buy.p_num }"><br>
+		<input type="hidden" name="p_num" id="p_num" value="${buy.p_num }"> &nbsp;
+		구매수량: ${buy.buy_qty }
+		<input type="hidden" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }">&nbsp;
+		<input type="hidden" name="p_price" id="p_price" value ="${p_price }" >
 		
-		<label for="buy_qty">구매수량:</label>
-		<input type="number" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }" onchange="changeMoney(event)"><br>
+		상품금액:${buy.buy_totalmoney }
+		<input type="hidden" name="buy_totalmoney" id="buy_totalmoney"
+			value="${buy.buy_totalmoney }"><br>
+		</c:forEach>
+		총금액 : ${lastTotalMoney }<br>
 		
-		
-		<input type="hidden" name="p_price" id="p_price" value ="${p_price }" ><br>
-		
-		<label for="buy_totalmoney">총금액:</label>
-		<input type="text" name="buy_totalmoney" id="buy_totalmoney"
-			readonly value="${buy.buy_totalmoney }"><br><br>
-		<c:if test="${sessionScope ne null or buy.id ne null or buy.id ne '' }">
-		
-		<input type="button" name="deliSelect" id="deliSelect" value="배송지선택" >
-		${buy.id }
-			<a href="deliveryAdd.del?id=${buy.id }">배송지신규등록</a><br>
-		</c:if>
 		<form id="deliveryForm">
+		<c:if test="${sessionScope ne null or buy.id ne null or buy.id ne '' || not empty deliveryList}">
+		배송지선택 : 
+			<select name="deli_num" onchange="setDeliveryInfo(this)">
+				<option value="newDelivery">신규배송지
+				<c:forEach var="delivery" items="${deliveryList }">
+					<option value="${delivery.deli_num}" data-name="${delivery.deli_name}" data-phone="${delivery.deli_phone}" data-zipcode="${delivery.deli_zipcode}" data-addr="${delivery.deli_addr}" data-addr2="${delivery.deli_addr2}">
+      					${delivery.deli_name}
+				</c:forEach>
+			</select>
+		</c:if>
+		<c:if test="${sessionScope ne null or buy.id ne null or buy.id ne '' }">
+			<a href="deliveryAdd.del?id=${buy.id }">배송지신규등록</a>
+		</c:if>
+		<br>
+			
 			수령인 : <input type="text" name = "deli_username" id = "deli_username" required><br>
 			수령인 전화번호 :<input type="text" name = "deli_phone" id = "deli_phone" required><br>
 			우편번호 : <input type="text" name = "deli_zipcode" id = "deli_zipcode" readonly>

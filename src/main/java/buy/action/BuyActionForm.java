@@ -1,11 +1,16 @@
 package buy.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import delivery.action.DeliveryListAction;
+import delivery.svc.DeliveryListService;
 import vo.ActionForward;
 import vo.Buy;
+import vo.Delivery;
 
 public class BuyActionForm implements Action {
 
@@ -13,19 +18,29 @@ public class BuyActionForm implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;//널처리해주고
 		String id = request.getParameter("id");//파라미터처리해주고 //아이디
-		int p_num = Integer.parseInt(request.getParameter("p_num"));//상품번호
-		int buy_qty = Integer.parseInt(request.getParameter("buy_qty"));//구매수량
-		int p_price = Integer.parseInt(request.getParameter("p_price"));//상품금액
-		int buy_totalmoney=buy_qty*p_price;
+		String[] p_num = request.getParameterValues("p_num");//상품번호
+		String[] buy_qty = request.getParameterValues("buy_qty");//구매수량
+		String[] p_price = request.getParameterValues("p_price");//상품금액
+		int lastTotalMoney=0;
 		
-		Buy buy = new Buy();
-		buy.setId(id);
-		buy.setP_num(p_num);
-		buy.setBuy_qty(buy_qty);
-		buy.setBuy_totalmoney(buy_totalmoney);
+		ArrayList<Buy> buyList = new ArrayList<Buy>();
+		for(int i=0; i<p_num.length;i++) {
+			Buy buy = new Buy();
+			buy.setId(id); //아이디 set
+			buy.setP_num(Integer.parseInt(p_num[i])); //상품번호 set
+			buy.setBuy_qty(Integer.parseInt(buy_qty[i])); //수량 set
+			buy.setBuy_totalmoney(Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i])); //총금액set
+			buyList.add(buy);
+			lastTotalMoney+=Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i]);
+			
+		}
 		
-		request.setAttribute("p_price", p_price);
-		request.setAttribute("buy", buy);
+		
+		DeliveryListService deliveryListService = new DeliveryListService();
+		ArrayList<Delivery> deliveryList = deliveryListService.getDeliveryList(id);
+		request.setAttribute("deliveryList", deliveryList); //배송지리스트
+		request.setAttribute("lastTotalMoney", lastTotalMoney); //찐 전체금액
+		request.setAttribute("buyList", buyList); //구매목록들
 		request.setAttribute("pagefile","/buy/buyForm.jsp");
 		forward = new ActionForward("index.jsp",false);
 		//
