@@ -20,6 +20,15 @@ public class UserLoginAction implements Action{
 		
 		UserLoginService userLoginService = new UserLoginService();
 		User user = userLoginService.getUser(id); 
+		if (user == null) {
+		    response.setContentType("text/html; charset=utf-8");
+		    PrintWriter out = response.getWriter();
+		    out.println("<script>");
+		    out.println("alert('존재하지 않는 아이디입니다. 회원가입을 해주세요.')");
+		    out.println("history.back()");
+		    out.println("</script>");
+		    return null;
+		}
 		boolean loginSuccess = userLoginService.login(id, user_pass); 
 		
 		if (loginSuccess && user != null && user.isUser_bye() == false) { 
@@ -39,7 +48,7 @@ public class UserLoginAction implements Action{
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('회원정보가 없습니다. 회원가입을 해주세요.')");
+			out.println("alert('회원정보가 일치하지 않습니다. 아이디 또는 비밀번호를 확인해주세요.')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
