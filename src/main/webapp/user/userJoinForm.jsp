@@ -14,23 +14,31 @@
 }
 </style>
 <script>
-var chkId=false; //아이디 중복확인창 실행
-var idcheck; //중복확인 완료 사용 가능 아이디
+
 function chkForm(f) {
-	if(!chkId || idcheck != f.id.value.trim()){
-		alert("아이디 중복확인을 하세요!!!");
-		return false;
-	}
-	if(f.pass.value.trim()==""){
+
+	if(f.user_pass.value.trim()==""){
 		alert("비밀번호를 입력하세요.");
-		f.pass.focus();
+		f.user_pass.focus();
 		return false;
 	}
-	if(f.pass.value.trim()!=f.passChk.value.trim()){
+	if(f.user_pass.value.trim()!=f.passChk.value.trim()){
 		alert("비밀번호가 일치하지 않습니다.");
-		f.pass.value="";
+		f.user_pass.value="";
 		f.passChk.value="";
-		f.pass.focus();
+		f.user_pass.focus();
+		return false;
+	}
+	if(f.passChk.value.trim()==""){
+		alert("비밀번호 확인을 입력하세요.");
+		f.passChk.focus();
+		return false;
+	}
+	if(f.user_pass.value.trim()!=f.passChk.value.trim()){
+		alert("비밀번호가 일치하지 않습니다.");
+		f.user_pass.value="";
+		f.passChk.value="";
+		f.user_pass.focus();
 		return false;
 	}
 	f.submit();
@@ -39,15 +47,12 @@ function chkForm(f) {
 </head>
 <body>
 <div class="containor">
-<form name="joinform" action="userJoinAction.u" method="post">
+<form name="joinform" action="userJoinAction.u" method="post" onsubmit="return chkForm(this);">
 	<div class="table">
 		<div class="row">
 			<h2>아르르와 동행하기</h2>
 			<div class="열1">아이디 : </div>
-			<div class="열1"><input type="text" name="id" id="id">
-			<input type="button" name="idCheck" value="중복확인" id="idCheck" 
-			onclick="window.open('idCheck.jsp?openInit=true','','width=400,height=200')"/> 
-			</div>
+			<div class="열1"><input type="text" name="id" id="id"></div>
 			<div class="열2">비밀번호 : </div><div class="열2"><input type="password" name="user_pass" id="user_pass"> </div>
 			<div class="열3">비밀번호 확인 : </div><div class="열3"><input type="password" name="passChk" id="passChk"> </div>
 			<div class="열4">이름 : </div><div class="열4"><input type="text" name="user_name" id="user_name"> </div>

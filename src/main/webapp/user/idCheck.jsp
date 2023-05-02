@@ -1,49 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import= "javax.naming.Context" %>
+<%@ page import= "javax.naming.InitialContext" %>
+<%@ page import= "javax.naming.NamingException" %>
+<%@ page import= "javax.sql.DataSource" %>
+
 <%
-	request.setCharacterEncoding("UTF-8");
-	String openInit = "false";
-	if(request.getParameter("openInit")!=null){
-		openInit="true";
-	}
-%>
-<script>
-function init() {
-	if(<%=openInit%>){
-		document.getElementById("id").value
-			=opener.document.getElementById("id").value;
-	}
+String id = request.getParameter("id");
+String useble = "yes";
+
+try {
+// JDBC를 이용해 데이터베이스에서 아이디 중복여부 검사
+Context initContext = new InitialContext();
+Context envContext = (Context)initContext.lookup("java:/comp/env");
+DataSource ds = (DataSource)envContext.lookup("jdbc/sdt22kp");
+Connection conn = ds.getConnection();
+String sql = "SELECT COUNT(*) FROM user WHERE id = ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, id);
+ResultSet rs = pstmt.executeQuery();
+rs.next();
+int count = rs.getInt(1);
+if (count > 0) {
+useble = "no";
 }
-function ok(v) {
-	opener.idcheck=v.trim();
-	opener.document.getElementById("id").value=v;
-	opener.chkId=true;
-	window.close();
+} catch (Exception e) {
+e.printStackTrace();
+useble = "error";
 }
-</script>
-<body onclick="init()">
-<form action="idCheckProcess.jsp" method="post" name="f">
-	<input type="text" name="id" id="id">
-	<input type="submit" value="중복확인"> 
-</form>
-<%
-	if(request.getParameter("chk_id")!= null){
-		String chk_id = request.getParameter("chk_id");
-		String useble = request.getParameter("useble");
-		out.print("<hr>");
-		if(useble.equals("yes")){%>
-		<h3><%=chk_id %>는 사용 가능한 아이디입니다.
-		<a href ='#' onclick ="ok('<%=chk_id %>')">사용하기</a></h3>
-<% 	}else{%>
-		<h3><%=chk_id %>는 사용 불가능한 아이디입니다. 다시 검색하세요</h3>
-<% 		}
-	}
+
+// JSON 형태로 결과를 반환
+String result = "{\"chk_id\":\"" + id + "\", \"useble\":\"" + useble + "\"}";
+response.setContentType("application/json; charset=UTF-8");
+response.getWriter().write(result);
 %>
-</body>
-</html>
