@@ -33,8 +33,20 @@
                     </div>
                     <c:if test="${product.p_hide=='0' }">
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
+<<<<<<< HEAD
                     <button type="button" class="btn btn-secondary my-3" onclick="location.href='cartAddAction.ct'">장바구니</button>
+=======
+<<<<<<< HEAD
+                    <button type="button" class="btn btn-secondary my-3" onclick="location.href='cartAddAction.ct'">장바구니</button>
+                    
+                    <c:if test="${sessionScope.id eq 'admin'}">
+                   	 	<a href="productModifyForm.p?p_num=${product.p_num }" class="btn btn-link my-3">수정</a>
+                  	</c:if>
+=======
+                    <button type="button" class="btn btn-secondary my-3" href="cartAddAction.ct">장바구니</button>
+>>>>>>> branch 'master' of https://github.com/kimgunbbang/Arr.git
                     </c:if>
+>>>>>>> branch 'master' of https://github.com/kimgunbbang/Arr.git
                     
                 </form>
             </div>

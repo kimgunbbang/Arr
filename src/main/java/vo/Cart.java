@@ -6,6 +6,8 @@ public class Cart {
 	private int p_price;
 	private String id;
 	private int cart_qty;
+	private String p_image;
+	private String p_name;
 	
 	public int getCart_num() {
 		return cart_num;
@@ -36,6 +38,18 @@ public class Cart {
 	}
 	public void setCart_qty(int cart_qty) {
 		this.cart_qty = cart_qty;
+	}
+	public String getP_image() {
+		return p_image;
+	}
+	public void setP_image(String p_image) {
+		this.p_image = p_image;
+	}
+	public String getP_name() {
+		return p_name;
+	}
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 	
 	
