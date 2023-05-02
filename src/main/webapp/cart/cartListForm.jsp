@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <style>
-.container {
+.container1 {
   text-align: center;
   margin: 50px auto;
   width: 80%;
@@ -67,7 +67,7 @@
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container1">
 	<div class="top">
 		<div class="col"><input type="checkbox" id="allCheck" name="allCheck" onclick="checkAll(this.form)"></div>
 		<div class="col">번호</div>
