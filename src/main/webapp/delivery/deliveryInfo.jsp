@@ -25,16 +25,16 @@
 			<div class="열1">수령인 : </div><div class="열1">${delivery.deli_username }</div>
 			<div class="열1">수령인전화번호 : </div><div class="열1">${delivery.deli_phone }</div>
 			<div class="열1"><a href="deliveryModifyForm.del?id=${user.id }">수정</a></div>
-			<div class="열1"><a href="deliveryDeleteAction.del?id=${user.id}" onclick="confirmDelete('${user.id}')">삭제</a></div>
+			<div class="열1"><a href="deliveryDeleteAction.del?id=${user.id}" onclick="confirmDelete('${user.id}', event)">삭제</a></div>
 
 <script>
-function confirmDelete(userId) {
-  if (confirm("정말 삭제하시겠습니까?")) {
-    location.href = "deliveryDeleteAction.del?id=" + userId;
-  } else {
-    window.close();
-  }
-}
+function confirmDelete(userId, event) {
+	  event.preventDefault(); // 이벤트의 기본 동작을 취소
+
+	  if (confirm("정말 삭제하시겠습니까?")) {
+	    location.href = "deliveryDeleteAction.del?id=" + userId;
+	  }
+	}
 </script>
 			
 		</div>

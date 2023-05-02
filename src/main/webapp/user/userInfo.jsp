@@ -27,16 +27,16 @@
 			<div class="열1">전화번호 : </div><div class="열1">${user.user_phone }</div>
 			<div class="열1"><a href="userModifyForm.u?id=${user.id }">수정</a></div>
 			<div class="열1"><a href="deliveryListAction.del?id=${user.id }">배송지관리</a></div>
-			<div class="열1"><a href="userByeAction.u?id=${user.id}" onclick="confirmDelete('${user.id}')">탈퇴</a></div>
+			<div class="열1"><a href="userByeAction.u?id=${user.id}" onclick="confirmDelete('${user.id}' ,event)">탈퇴</a></div>
 
 <script>
-function confirmDelete(userId) {
-  if (confirm("정말 탈퇴하시겠습니까?")) {
-    location.href = "userByeAction.u?id=" + userId;
-  } else {
-    // 아무것도 하지 않고 창을 닫습니다.
-  }
-}
+function confirmDelete(userId, event) {
+	  event.preventDefault(); // 이벤트의 기본 동작을 취소
+
+	  if (confirm("정말 탈퇴하시겠습니까?")) {
+	    location.href = "deliveryDeleteAction.del?id=" + userId;
+	  }
+	}
 </script>
 		</div>
 	</div>

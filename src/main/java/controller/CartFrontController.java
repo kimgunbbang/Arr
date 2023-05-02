@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import cart.action.CartAddAction;
 import cart.action.CartListAction;
 import delivery.action.DeliveryAddAction;
 import product.action.ProductAllListAction;
@@ -52,6 +53,13 @@ public class CartFrontController extends HttpServlet {
 			action = new CartListAction();
 			try {
 				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/cartAddAction.ct")) {
+			action = new CartAddAction();
+			try {
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -46,6 +46,9 @@ primary key(deli_num)
 create table cart(
 cart_num int AUTO_INCREMENT,
 p_num int,
+p_price int,
+p_name varchar(30),
+p_image varchar(20),
 id varchar(20),
 cart_qty int,
 primary key(cart_num)
