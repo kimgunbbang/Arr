@@ -50,7 +50,7 @@ public class UserDAO {
 		int insertCount = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "insert into user values(?,?,?,?,?,?,?,false)";
+		String sql = "insert into user values(?,?,?,?,?,?,?,'0')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
@@ -90,10 +90,12 @@ public class UserDAO {
 					user.setUser_addr(rs.getString("user_addr"));
 					user.setUser_addr2(rs.getString("user_addr2"));
 					user.setUser_phone(rs.getString("user_phone"));
+					user.setUser_bye(rs.getBoolean("user_bye"));
 					userList.add(user);
+					
 				}while(rs.next());
 			}
-			
+			System.out.println(userList);
 		}catch(Exception e) {
 			System.out.println("selectUserList에러 "+e);
 		}finally {
@@ -185,7 +187,7 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE user SET user_bye = true WHERE id = ?";
+			String sql = "UPDATE user SET user_bye = '1' WHERE id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			

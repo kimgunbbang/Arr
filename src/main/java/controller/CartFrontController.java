@@ -47,15 +47,13 @@ public class CartFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 		if(command.equals("/cartList.ct")) {
-			request.setAttribute("pagefile", "/cart/cartListForm.jsp");
-			forward = new ActionForward("/index.jsp",false);
-		}else if(command.equals("/cartListAction.ct")) {
 			action = new CartListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		
 		}else if(command.equals("/cartAddAction.ct")) {
 			action = new CartAddAction();
 			try {

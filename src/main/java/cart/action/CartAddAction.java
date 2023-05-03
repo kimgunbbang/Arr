@@ -27,6 +27,7 @@ public class CartAddAction implements Action {
 		cart.setId(id);
 
 		CartAddService cartAddService = new CartAddService();
+		
 		boolean isAddSuccess = cartAddService.addCart(cart);
 
 		if (!isAddSuccess) {
@@ -40,7 +41,7 @@ public class CartAddAction implements Action {
 
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("productDetail.p?p_num=" + num); 
+		forward.setPath("cartList.ct?p_num=" + num); 
 		return forward;
 	}
 

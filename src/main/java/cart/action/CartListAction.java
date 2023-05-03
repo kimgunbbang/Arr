@@ -19,17 +19,19 @@ public class CartListAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		System.out.println(id);
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
 		CartListService cartListService = new CartListService();
 		int totalMoney = 0;
 		
 
 		cartList = cartListService.getCartList(id);
+		System.out.println(cartList);
 		totalMoney = cartListService.getTotalMoney(id);
 		request.setAttribute("cartList", cartList);
 		request.setAttribute("totalMoney", totalMoney);
-		forward = new ActionForward("cartList.ct", false);
-
+		request.setAttribute("pagefile", "/cart/cartListForm.jsp");
+		forward = new ActionForward("/index.jsp", false);
 		
 		return forward;
 	}

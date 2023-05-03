@@ -11,8 +11,10 @@ import vo.Cart;
 
 public class CartListService {
 
+
+
 	public ArrayList<Cart> getCartList(String id) {
-		ArrayList<Cart> cartList = null;
+		ArrayList<Cart> cartList = new ArrayList<Cart>();
 		Connection conn = null;
 		try {
 			conn = getConnection();

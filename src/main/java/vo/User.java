@@ -60,6 +60,12 @@ public class User {
 	public void setUser_bye(boolean user_bye) {
 		this.user_bye = user_bye;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", user_pass=" + user_pass + ", user_name=" + user_name + ", user_zipcode="
+				+ user_zipcode + ", user_addr=" + user_addr + ", user_addr2=" + user_addr2 + ", user_phone="
+				+ user_phone + ", user_bye=" + user_bye + "]";
+	}
 	
 	
 	

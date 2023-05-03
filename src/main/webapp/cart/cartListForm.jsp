@@ -68,26 +68,26 @@
 </head>
 <body>
 <div class="container1">
-	<div class="top">
-		<div class="col"><input type="checkbox" id="allCheck" name="allCheck" onclick="checkAll(this.form)"></div>
-		<div class="col">번호</div>
-		<div class="col">상품 이미지</div>
-		<div class="col">상품명</div>
-		<div class="col">가격</div>
-		<div class="col">수량</div>
-	</div>
-	<c:forEach var="cart" items="${cartList }" varStatus="status">
-	<div class="list">
-		<div class="col"><input type="checkbox" id="remove" name="remove"></div>
-		<div class="col">${cart.cart_num }</div>
-		<div class="col">${cart.p_image }</div>
-		<div class="col">${cart.p_name }</div>
-		<div class="col">${cart.p_price }</div>
-		<div class="col">${cart.cart_qty }</div>
-	</div>
-	</c:forEach>
-	<div class="money">총 금액 : ${totalMoney }원</div>
-	<div class="remove" ><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
+   <div class="top">
+      <div class="col"><input type="checkbox" id="allCheck" name="allCheck" onclick="checkAll(this.form)"></div>
+      <div class="col">번호</div>
+      <div class="col">상품 이미지</div>
+      <div class="col">상품명</div>
+      <div class="col">가격</div>
+      <div class="col">수량</div>
+   </div>
+   <c:forEach var="cart" items="${cartList }" varStatus="status">
+   <div class="list">
+      <div class="col"><input type="checkbox" id="remove" name="remove"></div>
+      <div class="col">${cart.cart_num }</div>
+      <div class="col">${cart.p_image }</div>
+      <div class="col">${cart.p_name }</div>
+      <div class="col">${cart.p_price }</div>
+      <div class="col">${cart.cart_qty }</div>
+   </div>
+   </c:forEach>
+   <div class="money">총 금액 : ${totalMoney }원</div>
+   <div class="remove" ><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
 </div>
 </body>
 </html>
