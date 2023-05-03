@@ -34,7 +34,10 @@
                     <c:if test="${product.p_hide=='0' }">
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
 
-                    <button type="button" class="btn btn-secondary my-3" onclick="location.href='cartAddAction.ct'">장바구니</button>
+                    <button type="button" class="btn btn-secondary my-3" 
+                    onclick="location.href='cartAddAction.ct?id=${id}&p_num=${product.p_num}
+                    &p_image=${product.p_image}&p_name=${product.p_name}'&p_price=${product.p_price}">
+                    장바구니</button>
 
                     </c:if>
 
