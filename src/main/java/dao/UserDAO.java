@@ -232,6 +232,38 @@ public class UserDAO {
 
 	    return user;
 	}
+	
+	public int joinIdCheck(String id) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+		int result = -1;
+		try {
+			conn = getConnection();
+			
+			String sql = "select id from user where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 0;	
+			}else {
+				result = 1;
+			}
+			System.out.println("아이디 중복체크 결과 : "+result);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+	        close(rs);
+	        close(pstmt);
+	        close(conn);
+		}
+		
+		return result;
+	}
 
 
 }

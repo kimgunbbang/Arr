@@ -1,6 +1,6 @@
 package cart.action;
 
-import java.util.ArrayList;
+import java.io.PrintWriter; 
 
 import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpServletResponse;
@@ -15,18 +15,31 @@ public class CartAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward=null;
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
-		int p_num = Integer.parseInt(request.getParameter("p_num"));
-		
+		String id = (String) session.getAttribute("id");
+
+		int num = Integer.parseInt(request.getParameter("p_num"));
+
+
+		Cart cart = new Cart();
+		cart.setP_num(num);
+		cart.setId(id);
+
 		CartAddService cartAddService = new CartAddService();
-		ArrayList<Cart> cartList = new ArrayList<Cart>();
-		cartList = cartAddService.insertCart(id,p_num);
-		session.setAttribute("cartList", cartList);
-		session.setAttribute("id", session.getAttribute("id"));
-		forward = new ActionForward("cartList.ct",true);
-		
+		boolean isAddSuccess = cartAddService.addCart(cart);
+
+		if (!isAddSuccess) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('장바구니 추가 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(true);
+		forward.setPath("productDetail.p?p_num=" + num); 
 		return forward;
 	}
 

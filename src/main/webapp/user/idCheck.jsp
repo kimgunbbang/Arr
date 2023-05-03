@@ -1,36 +1,54 @@
-<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import= "javax.naming.Context" %>
-<%@ page import= "javax.naming.InitialContext" %>
-<%@ page import= "javax.naming.NamingException" %>
-<%@ page import= "javax.sql.DataSource" %>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+<%@page import="javax.sql.*"%>
+<%@page import="javax.naming.*"%>
+<%@page import="dao.UserDAO"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+<h2>아이디 중복체크</h2>
 <%
-String id = request.getParameter("id");
-String useble = "yes";
-
-try {
-// JDBC를 이용해 데이터베이스에서 아이디 중복여부 검사
-Context initContext = new InitialContext();
-Context envContext = (Context)initContext.lookup("java:/comp/env");
-DataSource ds = (DataSource)envContext.lookup("jdbc/sdt22kp");
-Connection conn = ds.getConnection();
-String sql = "SELECT COUNT(*) FROM user WHERE id = ?";
-PreparedStatement pstmt = conn.prepareStatement(sql);
-pstmt.setString(1, id);
-ResultSet rs = pstmt.executeQuery();
-rs.next();
-int count = rs.getInt(1);
-if (count > 0) {
-useble = "no";
-}
-} catch (Exception e) {
-e.printStackTrace();
-useble = "error";
-}
-
-// JSON 형태로 결과를 반환
-String result = "{\"chk_id\":\"" + id + "\", \"useble\":\"" + useble + "\"}";
-response.setContentType("application/json; charset=UTF-8");
-response.getWriter().write(result);
+	request.setCharacterEncoding("UTF-8");
+	String id = request.getParameter("id");
+	
+	UserDAO userDAO = UserDAO.getInstance();
+	
+	int result = userDAO.joinIdCheck(id);
+	if(result == 1){
+		out.print("사용가능한 아이디입니다");
+		%>
+		<input type="button" value="아이디 사용하기" onclick="result();">
+		<%
+	}else if(result == 0){
+		out.print("중복된 아이디입니다.");
+	}else{
+		out.print("에러(-1)");
+	}
 %>
+
+<fieldset>
+	<form action="idCheck.jsp" method="post" name="wfr">
+		ID : <input type="text" name="id" value="<%=id%>">
+		<input type="submit" value="중복 확인">
+	</form>
+</fieldset>
+
+<script type="text/javascript">
+	function result() {
+		opener.document.fr.id.value = document.wfr.id.value;
+		
+		opener.document.fr.id.readOnly=true;
+		
+		window.close();
+	}
+</script>
+</body>
+</html>

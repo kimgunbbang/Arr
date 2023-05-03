@@ -15,6 +15,16 @@
 </style>
 <script>
 
+function winopen() {
+	var id = document.getElementById('id');
+	if(document.joinform.id.value =="" || document.joinform.id.value.length < 0){
+		alert("아이디를 먼저 입력하세요.");
+		document.joinform.id.focus();
+	}else{
+		window.open("idCheck.jsp?id="+document.joinform.id.value,"","width=500, height=300");
+	}
+}
+
 function chkForm(f) {
 
 	if(f.user_pass.value.trim()==""){
@@ -52,7 +62,9 @@ function chkForm(f) {
 		<div class="row">
 			<h2>아르르와 동행하기</h2>
 			<div class="열1">아이디 : </div>
-			<div class="열1"><input type="text" name="id" id="id"></div>
+			<div class="열1"><input type="text" name="id" id="id" >
+			<input type="button" value="중복확인" onclick="winopen()"><br>
+			</div>
 			<div class="열2">비밀번호 : </div><div class="열2"><input type="password" name="user_pass" id="user_pass"> </div>
 			<div class="열3">비밀번호 확인 : </div><div class="열3"><input type="password" name="passChk" id="passChk"> </div>
 			<div class="열4">이름 : </div><div class="열4"><input type="text" name="user_name" id="user_name"> </div>
