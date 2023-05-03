@@ -18,7 +18,8 @@ public class CartAddAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 
-		int num = Integer.parseInt(request.getParameter("p_num"));
+		String numParam = request.getParameter("p_num");
+		int num = numParam == null ? 0 : Integer.parseInt(numParam);
 
 
 		Cart cart = new Cart();

@@ -84,10 +84,25 @@ public class CartDAO {
 		boolean isInsertSuccess = false;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		Cart cart2 = new Cart();
 		String sql = "INSERT INTO cart VALUES (?,?,?,?,?,?,1)";
 		int num;
 		try {
+			//상품정보담기
+			String sql1 = "select  * from product where p_num=?";
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, cart.getP_num());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cart2.setId(cart.getId());
+				cart2.setP_image(rs.getString("p_image"));
+				cart2.setP_name(rs.getString("p_name"));
+				cart2.setP_price(rs.getInt("p_price"));
+				cart2.setP_num(cart.getP_num());
+			}
+			close(rs);
+			close(pstmt);
+			//insert하기
 			pstmt = conn.prepareStatement("select max(cart_num) from cart");
 	        rs = pstmt.executeQuery();
 	        if(!rs.next()) {
@@ -100,11 +115,11 @@ public class CartDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1,num);
-			pstmt.setInt(2, cart.getP_num());
-			pstmt.setInt(3, cart.getP_price());
-			pstmt.setString(4, cart.getP_name());
-			pstmt.setString(5, cart.getP_image());
-			pstmt.setString(6, cart.getId());
+			pstmt.setInt(2, cart2.getP_num());
+			pstmt.setInt(3, cart2.getP_price());
+			pstmt.setString(4, cart2.getP_name());
+			pstmt.setString(5, cart2.getP_image());
+			pstmt.setString(6, cart2.getId());
 			
 			int insertCount = pstmt.executeUpdate();
 

@@ -1,6 +1,8 @@
 package cart.svc;
 
-import java.sql.Connection;
+import static db.JdbcUtil.*;
+
+import java.sql.Connection; 
 import java.util.ArrayList;
 
 import dao.CartDAO;
@@ -13,7 +15,7 @@ public class CartListService {
 		ArrayList<Cart> cartList = null;
 		Connection conn = null;
 		try {
-			conn = JdbcUtil.getConnection();
+			conn = getConnection();
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.setConnection(conn);
 			cartList = cartDAO.selectCartList(id);
@@ -21,7 +23,7 @@ public class CartListService {
 			e.printStackTrace();
 		}finally {
 			if(conn != null) {
-				JdbcUtil.close(conn);
+				close(conn);
 			}
 		}
 		return cartList;
@@ -31,7 +33,7 @@ public class CartListService {
 		int totalMoney = 0;
 		Connection conn = null;
 		try {
-			conn = JdbcUtil.getConnection();
+			conn = getConnection();
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.setConnection(conn);
 			totalMoney = cartDAO.selectTotalMoney(id);
@@ -39,7 +41,7 @@ public class CartListService {
 			e.printStackTrace();
 		}finally {
 			if(conn != null) {
-				JdbcUtil.close(conn);
+				close(conn);
 			}
 		}
 		return totalMoney;
