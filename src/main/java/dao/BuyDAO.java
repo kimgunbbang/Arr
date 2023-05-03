@@ -48,15 +48,22 @@ public class BuyDAO {
 		        pstmt=conn.prepareStatement(sql);
 		        pstmt.setInt(1, num);
 		        pstmt.setString(2, buy.getId());
-		        pstmt.setString(2, buy.getBuy_memo());
-		        pstmt.setString(2, buy.getBuy_memo());
+		        pstmt.setString(3, buy.getBuy_memo());
+		        pstmt.setInt(4, buy.getBuy_totalmoney());
+		        pstmt.setInt(5, buy.getP_num());
+		        pstmt.setInt(6, buy.getBuy_qty());
+		        insertcount = pstmt.executeUpdate();
+		        if(!(insertcount>0)) {
+		        	return 0;
+		        }
+		        
 			}
 			
 		}catch(Exception e) {
 			System.out.println("BuyDAO insertBuyInfo에러임");
 			e.printStackTrace();
 		}finally {
-			
+			close(conn);
 		}
         
 		
