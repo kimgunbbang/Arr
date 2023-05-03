@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
+import buy.svc.BuyInfoService;
 import buy.svc.BuyService;
 import inventory.svc.InventoryInOutService;
 import vo.ActionForward;
@@ -18,7 +20,8 @@ public class BuyAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;//포워드 널처리하고
 		//리퀘스트값 다 불러와서 저장 한 후,
-		String id = request.getParameter("id");				//아이디 가져오고
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");			//아이디 가져오고
 		String[] p_num=request.getParameterValues("p_num");	//p_num들 가져오고
 		String buy_memo=request.getParameter("buy_memo");	//주문상세요청
 		String[] buy_qty=request.getParameterValues("buy_qty");//주문수량들
@@ -43,14 +46,16 @@ public class BuyAction implements Action {
 			BuyService buyService = new BuyService();
 			boolean insertCheck = buyService.insertBuyInfo(inventoryCheck);//insert됬는지 체크
 			
-			if(insertCheck) {//insert 됬으면 구매완료창 띄우고 main가기
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('구매완료')");
-				out.println("</script>");
-				request.setAttribute("pagefile", "/main.jsp");
-				forward = new ActionForward("/index.jsp",false);
+			int buy_num = buyService.getBuyNum(id);//아이디로 구매번호가져오기
+			boolean insertCheck2=false;
+			if(buy_num>0) {
+				//구매상세테이블 insert하는 service만들기
+				BuyInfoService buyInfoService = new BuyInfoService();
+				insertCheck2 = buyInfoService.insertBuy(buy_num,p_num[0]);
+			}
+			if(insertCheck && insertCheck2) {//둘다 insert 됬으면 구매완료창 띄우고 구매완료창보여주기
+				request.setAttribute("pagefile", "/buy/buySuccess.jsp");
+				forward = new ActionForward("index.jsp",false);
 			}
 		}else {//재고부터안되면 '구매수량을 다시 확인해주세요.'
 			response.setContentType("text/html; charset=utf-8");

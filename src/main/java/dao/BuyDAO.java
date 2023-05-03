@@ -32,17 +32,18 @@ public class BuyDAO {
 																//(구매상태), 4구매상품의금액, 5상품번호, 6구매수량
 		int num;
 		try {
+			//순번구하기
+			pstmt = conn.prepareStatement("select max(buy_num) from buy");
+	        rs = pstmt.executeQuery();
+	        if(!rs.next()) {
+	           num=1;
+	        }else {
+	           num=rs.getInt(1)+1;
+	        }
+	        close(rs);
+	        close(pstmt);
 			for(Buy buy : inventoryCheck) {
-				//순번구하기
-				pstmt = conn.prepareStatement("select max(p_num) from product");
-		        rs = pstmt.executeQuery();
-		        if(!rs.next()) {
-		           num=1;
-		        }else {
-		           num=rs.getInt(1)+1;
-		        }
-		        close(rs);
-		        close(pstmt);
+				
 		        
 		        //insert하기
 		        pstmt=conn.prepareStatement(sql);
@@ -63,11 +64,64 @@ public class BuyDAO {
 			System.out.println("BuyDAO insertBuyInfo에러임");
 			e.printStackTrace();
 		}finally {
-			close(conn);
+			close(rs);
+	        close(pstmt);
 		}
         
 		
 		return insertcount;
+	}
+
+	public int getBuyNum(String id) {//구매상세테이블에 넣을 구매번호얻음
+		int buynum=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select max(buy_num) from buy where id=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				buynum=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return buynum;
+	}
+
+	public int insertBuy(int buy_num, String string) {
+		int insertbuy=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sql = "insert into buyinfo values(?,?,?)";
+		int num;
+		try {
+	         pstmt = conn.prepareStatement("select max(buyinfo_num) from buyinfo");
+	         rs = pstmt.executeQuery();
+	         if(!rs.next()) {
+	            num=1;
+	         }else {
+	            num=rs.getInt(1)+1;
+	         }
+	         close(rs);
+	         close(pstmt);
+	         
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, buy_num);
+			pstmt.setInt(3, Integer.parseInt(string));
+			insertbuy=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return insertbuy;
 	}
 	
 }//BuyDAO클래스끝

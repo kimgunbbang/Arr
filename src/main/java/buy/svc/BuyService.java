@@ -34,4 +34,22 @@ public class BuyService {
 		return success;
 	}
 
+	public int getBuyNum(String id) {
+		int buynum=0;
+		Connection conn=null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			
+			buynum=buyDAO.getBuyNum(id);
+			
+		}catch(Exception e) {
+			
+		}finally {
+			close(conn);
+		}
+		return buynum;
+	}
+
 }
