@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import buy.action.BuyAction;
 import buy.action.BuyActionForm;
 import vo.ActionForward;
 
@@ -46,6 +47,13 @@ public class BuyFrontController extends HttpServlet {
 		ActionForward forward = null;
 		if(command.equals("/buyActionForm.buy")) {
 			action = new BuyActionForm();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/buyAction.buy")) {
+			action = new BuyAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

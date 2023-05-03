@@ -52,8 +52,8 @@ public class ProductModifyAction implements Action {
 					response.setContentType("text/html; charset=utf-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
-					out.println("alert(상품수정 실패')");
-					out.println("historyback()");
+					out.println("alert('상품수정 실패')");
+					out.println("history.back()");
 					out.println("</script>");
 				}
 				

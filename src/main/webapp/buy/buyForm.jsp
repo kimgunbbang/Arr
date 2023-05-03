@@ -37,7 +37,16 @@ function setDeliveryInfo(selectBox) {
 	  document.getElementById('deli_addr').value = addr;
 	  document.getElementById('deli_addr2').value = addr2;
 	}
-
+/* function qtychage(event) {
+	var buy_qty=document.getElementById('buy_qty').value;
+	var p_price=document.getElementById('p_price').value;
+	var buy_totalmoney=buy_qty*p_price;
+	
+	document.getElementById('buy_qty').innerHTML=buy_qty;
+	document.getElementById('p_price').innerHTML=buy_qty;
+	document.getElementById('buy_totalmoney').innerHTML=buy_qty;
+	  
+} */
 </script>
 <%int num=0; %>
 </head>
@@ -52,7 +61,7 @@ function setDeliveryInfo(selectBox) {
 		상품번호: ${buy.p_num }
 		<input type="hidden" name="p_num" id="p_num" value="${buy.p_num }"> &nbsp;
 		구매수량: ${buy.buy_qty }
-		<input type="hidden" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }">&nbsp;
+		<input type="hidden" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }" onchange='qtychage(event)'>&nbsp;
 		<input type="hidden" name="p_price" id="p_price" value ="${p_price }" >
 		
 		상품금액:${buy.buy_totalmoney }
@@ -61,13 +70,17 @@ function setDeliveryInfo(selectBox) {
 		</c:forEach>
 		총금액 : ${lastTotalMoney }<br>
 		
-		<form id="deliveryForm">
+		
 		<c:if test="${sessionScope ne null or buy.id ne null or buy.id ne '' || not empty deliveryList}">
 		배송지선택 : 
 			<select name="deli_num" onchange="setDeliveryInfo(this)">
 				<option value="newDelivery">신규배송지
 				<c:forEach var="delivery" items="${deliveryList }">
-					<option value="${delivery.deli_num}" data-name="${delivery.deli_name}" data-phone="${delivery.deli_phone}" data-zipcode="${delivery.deli_zipcode}" data-addr="${delivery.deli_addr}" data-addr2="${delivery.deli_addr2}">
+					<option value="${delivery.deli_num}" data-name="${delivery.deli_name}" 
+														data-phone="${delivery.deli_phone}" 
+														data-zipcode="${delivery.deli_zipcode}" 
+														data-addr="${delivery.deli_addr}" 
+														data-addr2="${delivery.deli_addr2}">
       					${delivery.deli_name}
 				</c:forEach>
 			</select>
@@ -83,7 +96,7 @@ function setDeliveryInfo(selectBox) {
 			<input type="button" name="zipSearch" value="주소검색"  id="zipSearch" ><br>
 			배송지 : <input type="text" name = "deli_addr" id = "deli_addr" readonly required><br>
 			상세주소 : <input type="text" name = "deli_addr2" id = "deli_addr2" ><br>
-		</form>
+			<textarea rows="" cols="" name="buy_memo"></textarea>
 		
 		<input type="submit" value="구매하기">
 		<!-- 취소하기 눌렀을때 뒤로가기 -->
