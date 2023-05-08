@@ -1,6 +1,7 @@
 package buy.action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ public class BuyActionForm implements Action {
 		ActionForward forward = null;//널처리해주고
 		String id = request.getParameter("id");//파라미터처리해주고 //아이디
 		String[] p_num = request.getParameterValues("p_num");//상품번호
+		System.out.println(Arrays.toString(p_num));
 		String[] buy_qty = request.getParameterValues("buy_qty");//구매수량
 		String[] p_price = request.getParameterValues("p_price");//상품금액
 		String[] cart_num= null;

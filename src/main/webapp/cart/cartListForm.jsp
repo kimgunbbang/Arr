@@ -85,6 +85,7 @@
 </style>
 </head>
 <body>
+<form action="">
 <input type="hidden" name="id" value="${sessionScope.id }">
 <div class="container1">
    <div class="top">
@@ -102,7 +103,7 @@
    
    <div class="list">
       <div class="col" style="display: none;"><input type="hidden" name="cart_num"> ${cart.cart_num }</div>
-      <div class="col" style="display: none;"><input type="hidden" name="p_num"> ${cart.p_num }</div>
+      <div class="col" style="display: none;"><input type="hidden" value="p_num"> ${cart.p_num }</div>
       <div class="col"><input type="checkbox" id="remove" name="remove"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
@@ -117,5 +118,6 @@
    <div class="remove" ><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
    
 </div>
+</form>
 </body>
 </html>
