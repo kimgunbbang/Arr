@@ -70,6 +70,7 @@
 <div class="container1">
    <div class="top">
        <div class="col" style="display: none;"></div>
+       <div class="col" style="display: none;"></div>
       <div class="col"><input type="checkbox" id="allCheck" name="allCheck" onclick="checkAll(this.form)"></div>
       <div class="col">번호</div>
       <div class="col">상품 이미지</div>
@@ -82,6 +83,7 @@
    
    <div class="list">
       <div class="col" style="display: none;">${cart.cart_num }</div>
+      <div class="col" style="display: none;">${cart.p_num }</div>
       <div class="col"><input type="checkbox" id="remove" name="remove"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
