@@ -47,12 +47,12 @@
   font-weight: bold;
 }
 
-.sub {
+.remove {
   margin-top: 20px;
   text-align: center;
 }
 
-.sub input[type="submit"] {
+.remove input[type="submit"] {
   padding: 10px;
   border: none;
   background-color: #f00;
@@ -61,12 +61,31 @@
   cursor: pointer;
 }
 
-.sub input[type="submit"]:hover {
+.remove input[type="submit"]:hover {
+  background-color: #f33;
+}
+
+.buy {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.buy input[type="submit"] {
+  padding: 10px;
+  border: none;
+  background-color: #f00;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy input[type="submit"]:hover {
   background-color: #f33;
 }
 </style>
 </head>
 <body>
+<input type="hidden" name="id" value="${sessionScope.id }">
 <div class="container1">
    <div class="top">
        <div class="col" style="display: none;"></div>
@@ -82,22 +101,21 @@
    <c:forEach var="cart" items="${cartList }" varStatus="status">
    
    <div class="list">
-      <div class="col" style="display: none;">${cart.cart_num }</div>
-      <div class="col" style="display: none;">${cart.p_num }</div>
+      <div class="col" style="display: none;"><input type="hidden" name="cart_num"> ${cart.cart_num }</div>
+      <div class="col" style="display: none;"><input type="hidden" name="p_num"> ${cart.p_num }</div>
       <div class="col"><input type="checkbox" id="remove" name="remove"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
       <div class="col">${cart.p_name }</div>
-      <div class="col">${cart.p_price }</div>
-      <div class="col">${cart.cart_qty }</div>
+      <div class="col"><input type="hidden" name="p_price"> ${cart.p_price }</div>
+      <div class="col"><input type="hidden" name="buy_qty"> ${cart.cart_qty }</div>
    </div>
    </c:forEach>
    <div class="money">총 금액 : ${totalMoney }원</div>
    
-   <div class="sub" >
-   <input type="submit" value="구매" formaction="buyActionForm.buy"> 
-   <input type="submit" value="삭제" formaction="cartRemove.ct" > 
-   </div>
+   <div class="buy" ><input type="submit" value="구매" formaction="buyActionForm.buy"> </div>
+   <div class="remove" ><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
+   
 </div>
 </body>
 </html>
