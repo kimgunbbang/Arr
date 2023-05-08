@@ -62,17 +62,6 @@ public class CartFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-		
-		
-		if(forward != null) {
-			if(forward.isRedirect()) {
-				response.sendRedirect(forward.getPath());
-			}else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
-				dispatcher.forward(request, response);
-			}
 		}else if(command.equals("/cartRemove.ct")) {
 			action = new CartRemoveAction();
 			try {
@@ -93,6 +82,17 @@ public class CartFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		if(forward != null) {
+			if(forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			}else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
 			}
 		}
 	}

@@ -140,22 +140,67 @@ public class CartDAO {
 		return isInsertSuccess;
 	}
 
-	public int removeCart(int cart_num) {
+	public int removeCart(String[] cartList) {
 		int removeCount = 0;
 		PreparedStatement pstmt = null;
 		String sql = "delete from cart where cart_num = ?";
-		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cart_num);
-			removeCount = pstmt.executeUpdate();
-		}catch (Exception e) {
-			System.out.println("removeCart에러 : "+e);
+			for(int i=0;i<cartList.length;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cartList[i]);
+				removeCount = pstmt.executeUpdate();
+				if(!(removeCount>0)) {
+					return 0;
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO cartDelete메서드 에러임");
+			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
 		
 		return removeCount;
+	}
+
+	public int upQty(Cart cart) {
+		int upQty = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE cart SET cart_qty = cart_qty + 1 WHERE cart_num = ?";
+		 try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, cart.getCart_num());
+
+
+		        upQty = pstmt.executeUpdate();
+		        
+		    } catch(Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+		    
+		return upQty;
+	}
+
+	public int downQty(Cart cart) {
+		int downQty = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE cart SET cart_qty = cart_qty - 1 WHERE cart_num = ?";
+		 try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, cart.getCart_num());
+
+
+		        downQty = pstmt.executeUpdate();
+		        
+		    } catch(Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+		    
+		return downQty;
 	}
 
 

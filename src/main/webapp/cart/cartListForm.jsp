@@ -99,6 +99,12 @@ function checkAll(theForm) {
 		}
 	}
 }
+
+function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
+	if(cart_qty != 1){
+		location.href="cartQtyDown.ct?cart_num="+cart_num;
+	}
+}
 </script>
 </head>
 <body>
@@ -121,17 +127,17 @@ function checkAll(theForm) {
    <div class="list">
       <div class="col" style="display: none;"><input type="hidden" name="cart_num" value="${cart.cart_num }"> ${cart.cart_num }</div>
       <div class="col" style="display: none;"><input type="hidden" name="p_num" value="${cart.p_num }"> ${cart.p_num }</div>
-      <div class="col"><input type="checkbox" id="remove" name="remove"></div>
+      <div class="col"><input type="checkbox"id="remove" name="remove" value="${cart.cart_num }"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
       <div class="col">${cart.p_name }</div>
       <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"> ${cart.p_price }</div>
       <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }">
-       					<a href="cartQtyUp.ct?p_num=${cart.p_num }">
+       					<a href="cartQtyUp.ct?cart_num=${cart.cart_num }">
 					<img src="${pageContext.request.contextPath }/images/up.jpg"
 					id="upImage" border=0></a><br>
 					${cart.cart_qty }<br>
-					<a href="javascript:checkQty('${cart.p_num }',${cart.cart_qty })">
+					<a href="javascript:checkQty('${cart.cart_num }',${cart.cart_qty })">
 					<img src="${pageContext.request.contextPath }/images/down.jpg"
 					id="downImage" border=0></a><br>
        </div>

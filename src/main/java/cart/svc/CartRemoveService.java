@@ -12,7 +12,7 @@ import dao.CartDAO;
 
 public class CartRemoveService {
 
-	public boolean removeCart(int cart_num) {
+	public boolean removeCart(String[] cartList) {
 		boolean removeCart = false;
 		Connection conn = null;
 		int removeCount = 0;
@@ -22,7 +22,7 @@ public class CartRemoveService {
 			conn = getConnection();
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.setConnection(conn);
-			removeCount = cartDAO.removeCart(cart_num);
+			removeCount = cartDAO.removeCart(cartList);
 			
 			if(removeCount>0) {
 				commit(conn);

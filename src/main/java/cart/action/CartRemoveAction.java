@@ -15,12 +15,12 @@ public class CartRemoveAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-		HttpSession session = request.getSession();
-		int cart_num = Integer.parseInt(request.getParameter("cart_num"));
+		String[] cartList = null;
+		cartList = request.getParameterValues("remove");
 		CartRemoveService cartRemoveService = new CartRemoveService();
-		boolean removeResult = cartRemoveService.removeCart(cart_num);
+		boolean removeResult = cartRemoveService.removeCart(cartList);
 		if(removeResult){
-			forward = new ActionForward("cartList.ct",true);
+            forward = new ActionForward("cartList.ct",true);
 			
 			
 		}else {

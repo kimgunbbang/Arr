@@ -26,11 +26,7 @@ public class UserModifyAction implements Action {
 			if(request.getParameter("user_pwch")!=null && !request.getParameter("user_pass").equals("")) {
 				user.setUser_pass(request.getParameter("user_pass"));
 			}
-			System.out.println(request.getParameter("user_name"));
-			System.out.println(request.getParameter("user_zipcode"));
-			System.out.println(request.getParameter("user_addr"));
-			System.out.println(request.getParameter("user_addr2"));
-			System.out.println(request.getParameter("user_phone"));
+
 			
 			user.setUser_name(request.getParameter("user_name"));
 			user.setUser_zipcode(request.getParameter("user_zipcode"));
