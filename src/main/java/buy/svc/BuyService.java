@@ -52,4 +52,22 @@ public class BuyService {
 		return buynum;
 	}
 
+	public ArrayList<Buy> getbuyList(String id) {
+		ArrayList<Buy> buyList = new ArrayList<Buy>();
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			
+			buyList = buyDAO.getBuyList(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return buyList;
+	}
+
 }

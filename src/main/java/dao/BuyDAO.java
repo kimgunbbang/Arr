@@ -146,5 +146,39 @@ public class BuyDAO {
 		
 		return success;
 	}
+
+	public ArrayList<Buy> getBuyList(String id) {
+		ArrayList<Buy> buyList = new ArrayList<Buy>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select distinct buy_num from buy where id=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Buy buy = new Buy();
+					buy.setBuy_date(rs.getDate("buy_date"));
+					buy.setBuy_num(rs.getInt("buy_num"));
+					buy.setBuy_memo(rs.getString("buy_memo"));
+					buy.setBuy_state(rs.getString("buy_state"));
+					buy.setP_num(rs.getInt("p_num"));
+					buy.setBuy_qty(rs.getInt("buy_qty"));
+					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
+					buy.setId(rs.getString("id"));
+					
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO getBuyList메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return buyList;
+	}
 	
 }//BuyDAO클래스끝

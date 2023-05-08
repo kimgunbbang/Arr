@@ -3,7 +3,8 @@ package vo;
 public class BuyInfo {
 	private int buyinfo_num;
 	private int buy_num;
-	private int p_num;
+	private int deli_num;
+	
 	public int getBuyinfo_num() {
 		return buyinfo_num;
 	}
@@ -16,11 +17,13 @@ public class BuyInfo {
 	public void setBuy_num(int buy_num) {
 		this.buy_num = buy_num;
 	}
-	public int getP_num() {
-		return p_num;
+	public int getDeli_num() {
+		return deli_num;
 	}
-	public void setP_num(int p_num) {
-		this.p_num = p_num;
+	public void setDeli_num(int deli_num) {
+		this.deli_num = deli_num;
 	}
+	
+	
 	
 }
