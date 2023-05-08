@@ -21,6 +21,12 @@ public class CartAddService {
 			conn = getConnection();
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.setConnection(conn);
+			
+			boolean isExist = cartDAO.isCartExist(cart.getId(), cart.getP_num());
+	        if (isExist) {
+	            return false;
+	        }
+			
 			isAddSuccess = cartDAO.insertCart(cart);
 			if (isAddSuccess) {
 				commit(conn);

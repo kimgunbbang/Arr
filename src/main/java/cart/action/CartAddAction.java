@@ -1,6 +1,7 @@
 package cart.action;
 
-import java.io.PrintWriter; 
+import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import cart.svc.CartAddService;
+import cart.svc.CartQtyUpService;
+import dao.CartDAO;
 import vo.ActionForward;
 import vo.Cart;
+import static db.JdbcUtil.*;
 
 public class CartAddAction implements Action {
 
@@ -27,6 +31,11 @@ public class CartAddAction implements Action {
 		cart.setId(id);
 
 		CartAddService cartAddService = new CartAddService();
+		CartDAO cartDAO = CartDAO.getInstance();
+		Connection conn = getConnection();
+		cartDAO.setConnection(conn);
+		
+
 		
 		boolean isAddSuccess = cartAddService.addCart(cart);
 
@@ -34,7 +43,7 @@ public class CartAddAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('장바구니 추가 실패!')");
+			out.println("alert('이미 장바구니에 담긴 상품입니다!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}

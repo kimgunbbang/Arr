@@ -14,6 +14,7 @@
 }
 </style>
 <script>
+var idChecked = false;
 
 function winopen() {
 	var id = document.getElementById('id');
@@ -22,11 +23,25 @@ function winopen() {
 		document.joinform.id.focus();
 	}else{
 		window.open("idCheck.jsp?id="+document.joinform.id.value,"","width=500, height=300");
+		idChecked = true;
 	}
 }
-
+function checkPasswordFormat(str) {
+	  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 비밀번호 형식을 정규식으로 설정 (8자 이상, 영문과 숫자의 조합)
+	  return regex.test(str);
+	}
 function chkForm(f) {
-
+	if (!idChecked) {
+		alert("아이디 중복확인을 해주세요.");
+		return false;
+	}
+	
+	if(f.id.value.trim() =="" || f.id.value.length < 0){
+	    alert("아이디를 입력하세요.");
+	    f.id.focus();
+	    return false;
+	}
+	
 	if(f.user_pass.value.trim()==""){
 		alert("비밀번호를 입력하세요.");
 		f.user_pass.focus();
@@ -51,7 +66,20 @@ function chkForm(f) {
 		f.user_pass.focus();
 		return false;
 	}
+	
+	if(!checkPasswordFormat(f.user_pass.value.trim())) { // 비밀번호 형식 체크
+		alert("비밀번호는 영문과 숫자의 조합으로 8자 이상이어야 합니다.");
+		f.user_pass.value = "";
+	    f.passChk.value = "";
+		f.user_pass.focus();
+		return false;
+ 	}
+
 	f.submit();
+}
+
+function setIdChecked(checked) {
+	idChecked = checked;
 }
 </script>
 </head>

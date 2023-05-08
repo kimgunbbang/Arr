@@ -203,6 +203,31 @@ public class CartDAO {
 		return downQty;
 	}
 
+	public boolean isCartExist(String id, int p_num) {
+	    boolean isExist = false;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+
+	    try {
+	        String sql = "SELECT * FROM cart WHERE id=? AND p_num=?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, id);
+	        pstmt.setInt(2, p_num);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            isExist = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+
+	    return isExist;
+	}
+
 
 }
 	
