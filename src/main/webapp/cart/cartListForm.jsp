@@ -83,6 +83,17 @@
   background-color: #f33;
 }
 </style>
+<script>
+function checkAll(theForm) {
+	if(theForm.remove.length==undefined){
+		theForm.remove.checked = theForm.allCheck.checked;
+	}else{
+		for(var i=0;i<theForm.remove.length;i++){
+			theForm.remove[i].checked = theForm.allCheck.checked;
+		}
+	}
+}
+</script>
 </head>
 <body>
 <form action="">
@@ -102,14 +113,14 @@
    <c:forEach var="cart" items="${cartList }" varStatus="status">
    
    <div class="list">
-      <div class="col" style="display: none;"><input type="hidden" name="cart_num"> ${cart.cart_num }</div>
-      <div class="col" style="display: none;"><input type="hidden" value="p_num"> ${cart.p_num }</div>
+      <div class="col" style="display: none;"><input type="hidden" name="cart_num" value="${cart.cart_num }"> ${cart.cart_num }</div>
+      <div class="col" style="display: none;"><input type="hidden" name="p_num" value="${cart.p_num }"> ${cart.p_num }</div>
       <div class="col"><input type="checkbox" id="remove" name="remove"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
       <div class="col">${cart.p_name }</div>
-      <div class="col"><input type="hidden" name="p_price"> ${cart.p_price }</div>
-      <div class="col"><input type="hidden" name="buy_qty"> ${cart.cart_qty }</div>
+      <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"> ${cart.p_price }</div>
+      <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }"> ${cart.cart_qty }</div>
    </div>
    </c:forEach>
    <div class="money">총 금액 : ${totalMoney }원</div>
