@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.tribes.util.Arrays;
 
 import action.Action;
 import buy.svc.BuyCartDeleteService;
@@ -16,6 +15,7 @@ import buy.svc.BuyService;
 import inventory.svc.InventoryInOutService;
 import vo.ActionForward;
 import vo.Buy;
+import vo.BuyInfo;
 
 public class BuyAction implements Action {
 
@@ -26,9 +26,15 @@ public class BuyAction implements Action {
       HttpSession session = request.getSession();
       String id = (String)session.getAttribute("id");         //아이디 가져오고
       String[] p_num=request.getParameterValues("p_num");   //p_num들 가져오고
-      String buy_memo=request.getParameter("buy_memo");   //주문상세요청
       String[] buy_qty=request.getParameterValues("buy_qty");//주문수량들
       String[] buy_totalmoney=request.getParameterValues("buy_totalmoney");//상품별 총금액들
+      
+      String deli_username=request.getParameter("deli_username");
+      String deli_phone=request.getParameter("deli_phone");
+      String deli_zipcode=request.getParameter("deli_zipcode");
+      String deli_addr=request.getParameter("deli_addr");
+      String deli_addr2=request.getParameter("deli_addr2");
+      String deli_memo=request.getParameter("deli_memo");   //주문상세요청
       
       
       ArrayList<Buy> inventoryCheck = new ArrayList<Buy>();
@@ -36,7 +42,6 @@ public class BuyAction implements Action {
          Buy buy=new Buy();
          buy.setId(id);
          buy.setP_num(Integer.parseInt(p_num[i]));
-         buy.setBuy_memo(buy_memo);
          buy.setBuy_qty(Integer.parseInt(buy_qty[i]));
          buy.setBuy_totalmoney(Integer.parseInt(buy_totalmoney[i]));
          inventoryCheck.add(buy);
@@ -55,16 +60,25 @@ public class BuyAction implements Action {
          if(buy_num>0) {
             //구매상세테이블 insert하는 service만들기
             BuyInfoService buyInfoService = new BuyInfoService();
-            insertCheck2 = buyInfoService.insertBuy(buy_num,p_num[0]);
+            BuyInfo buyInfo = new BuyInfo();
+            buyInfo.setBuy_num(buy_num);
+            buyInfo.setBuy_name(deli_username);
+            buyInfo.setBuy_phone(deli_phone);
+            buyInfo.setBuy_zipcode(deli_zipcode);
+            buyInfo.setBuy_addr(deli_addr);
+            buyInfo.setBuy_addr2(deli_addr2);
+            buyInfo.setDeli_memo(deli_memo);
+            
+            insertCheck2 = buyInfoService.insertBuy(buyInfo);
          }
          if(insertCheck && insertCheck2) {//둘다 insert 됬으면 
             //cart목록부터 없애보자
             String[] cartList=null;
-            if(request.getParameterValues("cart_num") != null) {
-               cartList = request.getParameterValues("cart_num");//1, 2
-               BuyCartDeleteService buyCartDeleteService = new BuyCartDeleteService();//방금산거 cart목록 없애기
-               buyCartDeleteService.cartDelete(cartList);
-            }
+	            if(request.getParameterValues("cart_num") != null) {
+	               cartList = request.getParameterValues("cart_num");//1, 2
+	               BuyCartDeleteService buyCartDeleteService = new BuyCartDeleteService();//방금산거 cart목록 없애기
+	               buyCartDeleteService.cartDelete(cartList);
+	            }
             //구매완료창보여주기
             request.setAttribute("pagefile", "/buy/buySuccess.jsp");
             forward = new ActionForward("index.jsp",false);

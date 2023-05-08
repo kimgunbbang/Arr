@@ -60,7 +60,7 @@ public class BuyFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/buyInfoForm.buy")) {
+		}else if(command.equals("/buyListForm.buy")) {
 			action = new BuyInfoFormAction();
 			try {
 				forward = action.execute(request, response);

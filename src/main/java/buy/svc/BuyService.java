@@ -70,4 +70,23 @@ public class BuyService {
 		return buyList;
 	}
 
+	public ArrayList<Integer> getBuyNumList(String id) {
+		ArrayList<Integer> buyNumList = new ArrayList<Integer>();
+		
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			
+			buyNumList = buyDAO.getBuyNumList(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return buyNumList;
+	}
+
 }

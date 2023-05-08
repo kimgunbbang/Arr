@@ -77,7 +77,7 @@ function setDeliveryInfo(selectBox) {
 		총금액 : ${lastTotalMoney }<br>
 		
 		
-		<c:if test="${sessionScope ne null and buy.id ne null and buy.id ne '' and not empty deliveryList}">
+		<c:if test="${sessionScope ne null and not empty deliveryList}">
 		배송지선택 : 
 			<select name="deli_num" onchange="setDeliveryInfo(this)">
 				<option value="newDelivery">신규배송지
@@ -91,9 +91,7 @@ function setDeliveryInfo(selectBox) {
 				</c:forEach>
 			</select>
 		</c:if>
-		<c:if test="${sessionScope ne null or buy.id ne null or buy.id ne '' }">
-			<a href="deliveryAdd.del?id=${buy.id }">배송지신규등록</a>
-		</c:if>
+
 		<br>
 			
 			수령인 : <input type="text" name = "deli_username" id = "deli_username" required><br>
@@ -102,7 +100,7 @@ function setDeliveryInfo(selectBox) {
 			<input type="button" name="zipSearch" value="주소검색"  id="zipSearch" ><br>
 			배송지 : <input type="text" name = "deli_addr" id = "deli_addr" readonly required><br>
 			상세주소 : <input type="text" name = "deli_addr2" id = "deli_addr2" ><br>
-			<textarea rows="" cols="" name="buy_memo"></textarea>
+			배송시요청사항<br><textarea rows="20" cols="20" name="deli_memo"></textarea>
 		
 		<input type="submit" value="구매하기">
 		<!-- 취소하기 눌렀을때 뒤로가기 -->

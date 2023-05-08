@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import static db.JdbcUtil.*;
 import vo.Buy;
+import vo.BuyInfo;
 
 public class BuyDAO {
 	private static BuyDAO buyDAO;//싱글톤1 : 선언
@@ -93,36 +94,7 @@ public class BuyDAO {
 		return buynum;
 	}
 
-	public int insertBuy(int buy_num, String string) {
-		int insertbuy=0;
-		PreparedStatement pstmt = null;
-		ResultSet rs =null;
-		String sql = "insert into buyinfo values(?,?,?)";
-		int num;
-		try {
-	         pstmt = conn.prepareStatement("select max(buyinfo_num) from buyinfo");
-	         rs = pstmt.executeQuery();
-	         if(!rs.next()) {
-	            num=1;
-	         }else {
-	            num=rs.getInt(1)+1;
-	         }
-	         close(rs);
-	         close(pstmt);
-	         
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.setInt(2, buy_num);
-			pstmt.setInt(3, Integer.parseInt(string));
-			insertbuy=pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return insertbuy;
-	}
+	
 
 	public int cartDelete(String[] cartList) {
 		int success = 0;
@@ -151,7 +123,7 @@ public class BuyDAO {
 		ArrayList<Buy> buyList = new ArrayList<Buy>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select distinct buy_num from buy where id=?";
+		String sql = "select * from buy where id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -168,7 +140,7 @@ public class BuyDAO {
 					buy.setBuy_qty(rs.getInt("buy_qty"));
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
 					buy.setId(rs.getString("id"));
-					
+					buyList.add(buy);
 				}while(rs.next());
 			}
 		}catch(Exception e) {
@@ -179,6 +151,66 @@ public class BuyDAO {
 			close(pstmt);
 		}
 		return buyList;
+	}
+
+	public int insertBuyInfo(BuyInfo buyInfo) {
+		int insertcount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sql = "insert into buyinfo values(?,?,?,?,?,?,?,?,now())";
+		int num;
+		try {
+			//순번구하기
+			pstmt = conn.prepareStatement("select max(buyinfo_num) from buyinfo");
+	        rs = pstmt.executeQuery();
+	        if(!rs.next()) {
+	           num=1;
+	        }else {
+	           num=rs.getInt(1)+1;
+	        }
+	        close(rs);
+	        close(pstmt);
+	        
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, num);
+	        pstmt.setInt(2, buyInfo.getBuy_num());
+	        pstmt.setString(3, buyInfo.getBuy_name());
+	        pstmt.setString(4, buyInfo.getBuy_phone());
+	        pstmt.setString(5, buyInfo.getBuy_zipcode());
+	        pstmt.setString(6, buyInfo.getBuy_addr());
+	        pstmt.setString(7, buyInfo.getBuy_addr2());
+	        pstmt.setString(8, buyInfo.getDeli_memo());
+	        
+	        insertcount = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+	        close(pstmt);
+		}
+		
+		return insertcount;
+	}
+
+	public ArrayList<Integer> getBuyNumList(String id) {
+		ArrayList<Integer> buyNumList = new ArrayList<Integer>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select distinct buy_num from buy where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				buyNumList.add(rs.getInt("buy_num"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return buyNumList;
 	}
 	
 }//BuyDAO클래스끝

@@ -53,4 +53,12 @@ cart_qty int,
 primary key(cart_num)
 );
 
-
+create table buyinfo(
+buyinfo_num int AUTO_INCREMENT primary key,
+buy_num int,
+buy_name varchar(20),
+buy_phone varchar(15),
+buy_zipcode varchar(5),
+buy_addr varchar(50),
+buy_addr2 varchar(50),
+deli_memo varchar(100));

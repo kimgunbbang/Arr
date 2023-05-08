@@ -25,7 +25,7 @@
                 <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly>${product.p_price }
                     <div class="form-group my-3">
                         <label for="buy_qty">구매수량 :</label>
-                        <input type="text" name="buy_qty" class="form-control" value="1">
+                        <input type="number" name="buy_qty" class="form-control" value="1" min="1">
                     </div>
                     <div class="form-group my-3">
                         <label for="p_detail">상세설명 :</label>

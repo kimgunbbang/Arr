@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>구매가 완료 되었습니다.</h1><br>
-<a href="buyInfoForm.buy?id=${sessionScope.id }">주문내역보기</a>
+<a href="buyListForm.buy?id=${sessionScope.id }">구매목록</a>
 <a href="main.p">홈으로 가기</a>
 </body>
 </html>
