@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import delivery.action.DeliveryListAction;
 import delivery.svc.DeliveryListService;
 import vo.ActionForward;
 import vo.Buy;
@@ -26,6 +25,7 @@ public class BuyActionForm implements Action {
 		String[] cart_num= null;
 		if(request.getParameterValues("cart_num") != null) {
 			cart_num = request.getParameterValues("cart_num");
+			request.setAttribute("cart_num", cart_num);//cart번호
 		}
 		
 		int lastTotalMoney=0;
@@ -45,7 +45,6 @@ public class BuyActionForm implements Action {
 		
 		DeliveryListService deliveryListService = new DeliveryListService();
 		ArrayList<Delivery> deliveryList = deliveryListService.getDeliveryList(id);
-		request.setAttribute("cart_num", cart_num);//cart번호
 		request.setAttribute("deliveryList", deliveryList); //배송지리스트
 		request.setAttribute("lastTotalMoney", lastTotalMoney); //찐 전체금액
 		request.setAttribute("buyList", buyList); //구매목록들
