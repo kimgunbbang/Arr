@@ -140,6 +140,24 @@ public class CartDAO {
 		return isInsertSuccess;
 	}
 
+	public int removeCart(int cart_num) {
+		int removeCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from cart where cart_num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cart_num);
+			removeCount = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("removeCart에러 : "+e);
+		}finally {
+			close(pstmt);
+		}
+		
+		return removeCount;
+	}
+
 
 }
 	

@@ -1,28 +1,43 @@
 package cart.svc;
 
-import java.util.ArrayList;
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.commit;
+import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.rollback;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.sql.Connection;
 
-import vo.Cart;
+
+import dao.CartDAO;
 
 public class CartRemoveService {
 
-	public void cartRemove(HttpServletRequest request, String[] cartArray) {
-		HttpSession session = request.getSession();//세션에 남아있는 것 처리
-		ArrayList<Cart> cartList = (ArrayList<Cart>)session.getAttribute("cartList");
+	public boolean removeCart(int cart_num) {
+		boolean removeCart = false;
+		Connection conn = null;
+		int removeCount = 0;
 		
-		if(cartArray != null) {
-			for(int i=0;i<cartArray.length;i++) {
-				for(int j=0;j<cartList.size();j++) {
-					if(cartArray[i].equals(cartList.get(j).getP_num())) {
-						cartList.remove(j);
-					}
-				}
+		
+		try {
+			conn = getConnection();
+			CartDAO cartDAO = CartDAO.getInstance();
+			cartDAO.setConnection(conn);
+			removeCount = cartDAO.removeCart(cart_num);
+			
+			if(removeCount>0) {
+				commit(conn);
+				removeCart = true;
+			}else {
+				rollback(conn);
 			}
+		}catch(Exception e ) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
 		}
 		
+		return removeCart;
+		
 	}
-
 }
