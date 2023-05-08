@@ -123,5 +123,28 @@ public class BuyDAO {
 		}
 		return insertbuy;
 	}
+
+	public int cartDelete(String[] cartList) {
+		int success = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from cart where cart_num=?";
+		try {
+			for(int i=0;i<cartList.length;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cartList[i]);
+				success = pstmt.executeUpdate();
+				if(!(success>0)) {
+					return 0;
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO cartDelete메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return success;
+	}
 	
 }//BuyDAO클래스끝

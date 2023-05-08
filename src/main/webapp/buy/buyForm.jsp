@@ -54,6 +54,12 @@ function setDeliveryInfo(selectBox) {
 <div class="container">
 	<h1>구매 정보 입력</h1>
 	<form action="buyAction.buy" method="post" name="buyForm" >
+		<c:if test="${not empty cartList}">
+		<c:forEach var="cart" items="${cartList}" varStatus="idx">
+			<input type="hidden" name="cart_num" value="${cart}">
+		</c:forEach>
+	</c:if>
+	
 		<input type="hidden" name="id" id="${buy.id }" value="${buy.id }"><br>
 		
 		<c:forEach var="buy" items="${buyList }" varStatus="idx">

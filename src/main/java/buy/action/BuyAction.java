@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.tribes.util.Arrays;
 
 import action.Action;
+import buy.svc.BuyCartDeleteService;
 import buy.svc.BuyInfoService;
 import buy.svc.BuyService;
 import inventory.svc.InventoryInOutService;
@@ -57,15 +58,13 @@ public class BuyAction implements Action {
             insertCheck2 = buyInfoService.insertBuy(buy_num,p_num[0]);
          }
          if(insertCheck && insertCheck2) {//둘다 insert 됬으면 
-            //cart목록없애고
+            //cart목록부터 없애보자
             String[] cartList=null;
             if(request.getParameterValues("cart_num") != null) {
                cartList = request.getParameterValues("cart_num");//1, 2
-               CartDeleteService cartDeleteService = new CartDeleteService();//방금산거 cart목록 없애기
-               cartDeleteService.cartDelete(cartList);
+               BuyCartDeleteService buyCartDeleteService = new BuyCartDeleteService();//방금산거 cart목록 없애기
+               buyCartDeleteService.cartDelete(cartList);
             }
-            
-            
             //구매완료창보여주기
             request.setAttribute("pagefile", "/buy/buySuccess.jsp");
             forward = new ActionForward("index.jsp",false);
