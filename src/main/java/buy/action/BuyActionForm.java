@@ -21,6 +21,11 @@ public class BuyActionForm implements Action {
 		String[] p_num = request.getParameterValues("p_num");//상품번호
 		String[] buy_qty = request.getParameterValues("buy_qty");//구매수량
 		String[] p_price = request.getParameterValues("p_price");//상품금액
+		String[] cart_num= null;
+		if(request.getParameterValues("cart_num") != null) {
+			cart_num = request.getParameterValues("cart_num");
+		}
+		
 		int lastTotalMoney=0;
 		
 		ArrayList<Buy> buyList = new ArrayList<Buy>();
@@ -38,6 +43,7 @@ public class BuyActionForm implements Action {
 		
 		DeliveryListService deliveryListService = new DeliveryListService();
 		ArrayList<Delivery> deliveryList = deliveryListService.getDeliveryList(id);
+		request.setAttribute("cart_num", cart_num);//cart번호
 		request.setAttribute("deliveryList", deliveryList); //배송지리스트
 		request.setAttribute("lastTotalMoney", lastTotalMoney); //찐 전체금액
 		request.setAttribute("buyList", buyList); //구매목록들
