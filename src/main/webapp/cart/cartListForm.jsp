@@ -82,6 +82,12 @@
 .buy input[type="submit"]:hover {
   background-color: #f33;
 }
+#upImage{
+	width:15px;
+}
+#downImage{
+	width:15px;
+}
 </style>
 <script>
 function checkAll(theForm) {
@@ -120,7 +126,15 @@ function checkAll(theForm) {
       <div class="col">${cart.p_image }</div>
       <div class="col">${cart.p_name }</div>
       <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"> ${cart.p_price }</div>
-      <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }"> ${cart.cart_qty }</div>
+      <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }">
+       					<a href="cartQtyUp.ct?p_num=${cart.p_num }">
+					<img src="${pageContext.request.contextPath }/images/up.jpg"
+					id="upImage" border=0></a><br>
+					${cart.cart_qty }<br>
+					<a href="javascript:checkQty('${cart.p_num }',${cart.cart_qty })">
+					<img src="${pageContext.request.contextPath }/images/down.jpg"
+					id="downImage" border=0></a><br>
+       </div>
    </div>
    </c:forEach>
    <div class="money">총 금액 : ${totalMoney }원</div>
@@ -130,5 +144,10 @@ function checkAll(theForm) {
    
 </div>
 </form>
+<c:if test="${cartList eq null}">
+		<section class="div_empty">
+		장바구니가 비었습니다.
+		</section>
+	</c:if>
 </body>
 </html>

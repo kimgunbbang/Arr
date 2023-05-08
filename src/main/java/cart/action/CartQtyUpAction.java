@@ -13,7 +13,7 @@ public class CartQtyUpAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward =null;
-		String p_num = request.getParameter("p_num");
+		int p_num = Integer.parseInt(request.getParameter("p_num"));
 		CartQtyUpService cartQtyUpService=new CartQtyUpService();
 		cartQtyUpService.upCartQty(p_num,request);
 		HttpSession session =request.getSession();
