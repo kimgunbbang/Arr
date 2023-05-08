@@ -12,7 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import cart.action.CartAddAction;
 import cart.action.CartListAction;
+import cart.action.CartQtyDownAction;
+import cart.action.CartQtyUpAction;
+import cart.action.CartRemoveAction;
 import delivery.action.DeliveryAddAction;
+import dog.action.DogCartQtyDownAction;
+import dog.action.DogCartQtyUpAction;
+import dog.action.DogCartRemoveAction;
 import product.action.ProductAllListAction;
 import vo.ActionForward;
 
@@ -71,6 +77,27 @@ public class CartFrontController extends HttpServlet {
 			}else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
+			}
+		}else if(command.equals("/cartRemove.ct")) {
+			action = new CartRemoveAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/cartQtyUp.ct")) {
+			action = new CartQtyUpAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/cartQtyDown.ct")) {
+			action = new CartQtyDownAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
