@@ -64,7 +64,7 @@
             	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
 					<li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
-					<li><a class="dropdown-item" href="">주문관리</a></li>
+					<li><a class="dropdown-item" href="adminBuyList.ad">주문관리</a></li>
 					<li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
 				</ul>
 			</li>

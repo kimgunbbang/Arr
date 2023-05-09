@@ -13,6 +13,10 @@
     border: 1px solid #ccc; /* 외곽선 스타일 지정 */
     padding: 10px; /* 폼 요소와 외곽선 간격 조정 */
   }
+  img{
+  	width:100px;
+  	height:100px;
+  }
 </style>
 <body>
 <div class="container">
@@ -35,16 +39,16 @@
 		          <a href="#">상세보기</a> &nbsp;
 		          <a href="#">배송조회</a> &nbsp;
 		          <c:if test="${buy.buy_state eq 'ready'}">
-		            <a href="#">주문취소</a> 
-		          </c:if><br>
+		            <a href="#">주문취소</a><br> 
+		          </c:if>
 		          <c:set var="first" value="false" />
 		        </c:if>
 		        <!-- buy 객체 정보 출력 -->
-		        <img src="${pageContext.request.contextPath}/images/${buy.p_image}"> &nbsp;
+		        <a href="productDetailView.p?p_num=${buy.p_num }"><img src="${pageContext.request.contextPath}/images/${buy.p_image}"></a> &nbsp;
 		        ${buy.p_name } &nbsp;
 		        ${buy.buy_qty }개 &nbsp;
-		        ${buy.buy_totalmoney }원 &nbsp;
-		      </c:if><br>
+		        ${buy.buy_totalmoney }원 &nbsp;<br>
+		      </c:if>
 		    </c:forEach>
 		  </form>
 		</c:forEach>
