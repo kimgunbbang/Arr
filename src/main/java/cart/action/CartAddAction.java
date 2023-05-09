@@ -1,6 +1,6 @@
 package cart.action;
 
-import java.io.PrintWriter;
+import java.io.PrintWriter; 
 import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest; 
@@ -19,6 +19,7 @@ public class CartAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 
@@ -31,26 +32,22 @@ public class CartAddAction implements Action {
 		cart.setId(id);
 
 		CartAddService cartAddService = new CartAddService();
-		CartDAO cartDAO = CartDAO.getInstance();
-		Connection conn = getConnection();
-		cartDAO.setConnection(conn);
-		
 
 		
 		boolean isAddSuccess = cartAddService.addCart(cart);
-
-		if (!isAddSuccess) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('이미 장바구니에 담긴 상품입니다!')");
-			out.println("history.back()");
-			out.println("</script>");
+		if (isAddSuccess == false) {
+			 System.out.println(isAddSuccess);
+			 response.setContentType("text/html;charset=UTF-8"); 
+			 PrintWriter out = response.getWriter(); out.println("<script>");
+			 out.println("alert('이미 장바구니에 담긴 상품입니다!')"); 
+			 out.println("history.back()");
+			 out.println("</script>");
+		}else {
+			forward = new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("cartList.ct?p_num=" + num); 
 		}
 
-		ActionForward forward = new ActionForward();
-		forward.setRedirect(true);
-		forward.setPath("cartList.ct?p_num=" + num); 
 		return forward;
 	}
 

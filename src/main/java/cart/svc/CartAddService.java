@@ -25,9 +25,11 @@ public class CartAddService {
 			boolean isExist = cartDAO.isCartExist(cart.getId(), cart.getP_num());
 	        if (isExist) {
 	            return false;
+	        }else {
+	        	isAddSuccess = cartDAO.insertCart(cart);
 	        }
 			
-			isAddSuccess = cartDAO.insertCart(cart);
+		
 			if (isAddSuccess) {
 				commit(conn);
 			} else {

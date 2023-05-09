@@ -182,6 +182,30 @@ public class CartDAO {
 		    
 		return upQty;
 	}
+	
+	public boolean upQty1(Cart cart) {
+		boolean upQty = false;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE cart SET cart_qty = cart_qty + 1 WHERE cart_num = ?";
+		 try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, cart.getCart_num());
+
+
+		        int upCount = pstmt.executeUpdate();
+		        
+		        if(upCount > 0) {
+		        	upQty = true;
+		        }
+		        
+		    } catch(Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+		    
+		return upQty;
+	}
 
 	public int downQty(Cart cart) {
 		int downQty = 0;

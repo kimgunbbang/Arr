@@ -30,6 +30,8 @@ function checkPasswordFormat(str) {
 	  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 비밀번호 형식을 정규식으로 설정 (8자 이상, 영문과 숫자의 조합)
 	  return regex.test(str);
 	}
+	
+
 function chkForm(f) {
 	if (!idChecked) {
 		alert("아이디 중복확인을 해주세요.");
@@ -41,7 +43,7 @@ function chkForm(f) {
 	    f.id.focus();
 	    return false;
 	}
-	
+
 	if(f.user_pass.value.trim()==""){
 		alert("비밀번호를 입력하세요.");
 		f.user_pass.focus();
