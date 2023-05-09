@@ -48,6 +48,24 @@ public class ProductListService {
 		return productList;
 	}
 
+	public Product getProduct(String p_num) {
+		Product product = new Product();
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			product = productDAO.selectProduct(p_num);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return product;
+	}
 	
 
 }

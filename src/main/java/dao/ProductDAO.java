@@ -262,6 +262,39 @@ public class ProductDAO {
 
 	    return result;
 	}
+
+	public Product selectProduct(String p_num) {
+		Product product = new Product();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from product where p_num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				product.setCategory_name(rs.getString("category_name"));
+				product.setP_detail(rs.getString("p_detail"));
+				product.setP_image(rs.getString("p_iamge"));
+				product.setP_image2(rs.getString("p_image2"));
+				product.setP_name(rs.getString("p_name"));
+				product.setP_num(rs.getInt("p_num"));
+				product.setP_price(rs.getInt("p_price"));
+				product.setP_readcount(rs.getInt("p_readcount"));
+				product.setP_hide(rs.getBoolean("p_hide"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return null;
+	}
 	
 	
 	

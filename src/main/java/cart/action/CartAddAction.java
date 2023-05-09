@@ -1,6 +1,7 @@
 package cart.action;
 
-import java.io.PrintWriter; 
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import cart.svc.CartAddService;
+import product.svc.ProductListService;
 import vo.ActionForward;
 import vo.Cart;
+import vo.Product;
 
 public class CartAddAction implements Action {
 
@@ -17,8 +20,17 @@ public class CartAddAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
 
+		
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			Cart cart = new Cart();
+			String p_num = request.getParameter("p_num");
+			ProductListService productListService = new ProductListService();
+			Product product = productListService.getProduct(p_num);
+			CartAddService cartAddService = new CartAddService();
+			ArrayList<Cart> cartList = cartAddService.getCartProduct(request,product);
+		}
 		String numParam = request.getParameter("p_num");
 		int num = numParam == null ? 0 : Integer.parseInt(numParam);
 

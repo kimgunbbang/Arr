@@ -147,13 +147,13 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
    
    <div class="buy" ><input type="submit" value="구매" formaction="buyActionForm.buy"> </div>
    <div class="remove" ><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
-   
-</div>
-</form>
-<c:if test="${cartList eq null}">
+   <c:if test="${cartList eq null}">
 		<section class="div_empty">
 		장바구니가 비었습니다.
 		</section>
 	</c:if>
+</div>
+</form>
+
 </body>
 </html>
