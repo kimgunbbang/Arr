@@ -35,7 +35,7 @@
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
 
                     <button type="button" class="btn btn-secondary my-3" 
-                   onclick="confirmCartMove()">
+                   onclick="location.href = 'cartAddAction.ct?p_num=${product.p_num}'">
                     장바구니</button>
 
                     </c:if>
@@ -51,13 +51,6 @@
             </div>
         </div>
     </div>
-    <script>
-    function confirmCartMove() {
-    	  var result = confirm("장바구니에 상품을 등록하시겠습니까?");
-    	  if (result) {
-    	    location.href = 'cartAddAction.ct?p_num=${product.p_num}';
-    	  }
-    	}
-    </script>
+
 </body>
 </html>

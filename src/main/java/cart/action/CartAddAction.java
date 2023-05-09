@@ -46,6 +46,7 @@ public class CartAddAction implements Action {
 		out.println("<script>");
 		out.println("if(confirm('장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?')){");
 		out.println("location.href='cartList.ct';}");
+		out.println("else { history.back(); }");
 		out.println("</script>");
 		out.flush(); // 버퍼 비우기
 
