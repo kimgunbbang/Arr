@@ -7,6 +7,7 @@ import dao.BuyDAO;
 
 import static db.JdbcUtil.*;
 import vo.Buy;
+import vo.BuyList;
 
 public class BuyService {
 
@@ -52,8 +53,8 @@ public class BuyService {
 		return buynum;
 	}
 
-	public ArrayList<Buy> getbuyList(String id) {
-		ArrayList<Buy> buyList = new ArrayList<Buy>();
+	public ArrayList<BuyList> getbuyList(String id) {
+		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
 		Connection conn = null;
 		try {
 			conn=getConnection();

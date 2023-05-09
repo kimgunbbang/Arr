@@ -10,17 +10,18 @@ import action.Action;
 import buy.svc.BuyService;
 import vo.ActionForward;
 import vo.Buy;
+import vo.BuyList;
 
-public class BuyInfoFormAction implements Action {
+public class BuyListFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");//세션에 아이디 받아와서
-		System.out.println(id);
 		
-		ArrayList<Buy> buyList = new ArrayList<Buy>();//구매목록담을 배열
+		
+		ArrayList<BuyList> buyList = new ArrayList<BuyList>();//구매목록담을 배열
 		BuyService buyService = new BuyService();
 		buyList = buyService.getbuyList(id);
 		ArrayList<Integer> buyNumList = buyService.getBuyNumList(id);
