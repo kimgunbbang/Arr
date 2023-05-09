@@ -252,6 +252,40 @@ public class CartDAO {
 	    return isExist;
 	}
 
+	public ArrayList<Cart> selectCartList(String[] cartList) {
+		ArrayList<Cart> cartSet = new ArrayList<Cart>();
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		String sql="select * from cart where cart_num=?";
+		try {
+			for(int i=0;i<cartList.length;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cartList[i]);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					Cart cart = new Cart();
+					cart.setCart_qty(rs.getInt("cart_qty"));
+					cart.setId(rs.getString("id"));
+					cart.setP_image(rs.getString("p_image"));
+					cart.setP_name(rs.getString("p_name"));
+					cart.setP_num(rs.getInt("p_num"));
+					cart.setP_price(rs.getInt("p_price"));
+					cartSet.add(cart);
+				}
+				close(rs);
+				close(pstmt);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return cartSet;
+	}
+
 
 }
 	
