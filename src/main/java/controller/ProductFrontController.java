@@ -17,6 +17,7 @@ import product.action.ProductDetailViewAction;
 import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
 import product.action.ProductSelectListAction;
+import product.action.productRecentAction;
 import vo.ActionForward;
 
 /**
@@ -111,6 +112,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/main.p")) {
 			action = new MainAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/productRecent.p")) {
+			action = new productRecentAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

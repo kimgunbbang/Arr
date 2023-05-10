@@ -28,6 +28,8 @@ public class Product {
 		this.p_readcount = p_readcount;
 		this.p_hide = p_hide;
 	}
+
+
 	public int getP_num() {
 		return p_num;
 	}
