@@ -28,8 +28,7 @@ public class BuyActionForm implements Action {
       String[] p_price = {};//상품금액
       int lastTotalMoney=0;//완전토탈
       System.out.println("이거 뭐야"+request.getParameterValues("remove"));
-      
-      if(request.getSession().getAttribute(id) == null) {//세션아이디가 null일때
+      if(request.getSession().getAttribute("id") == null) {//세션아이디가 null일때
     	  Cookie[] cookies = request.getCookies();//쿠키정보가져와서
     	  String uuid = null;
     	  if (cookies != null) {
