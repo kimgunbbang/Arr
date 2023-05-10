@@ -20,19 +20,32 @@ public class CartListAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		System.out.println(id);
-		ArrayList<Cart> cartList = new ArrayList<Cart>();
-		CartListService cartListService = new CartListService();
-		int totalMoney = 0;
 		
+		if(id == null) {
+			ArrayList<Cart> originCart = (ArrayList)session.getAttribute("cartList");
+			ArrayList<Cart> cartList = new ArrayList<Cart>(originCart);
+			
+			int totalMoney = 0;
+			System.out.println(cartList);
+			request.setAttribute("cartList", cartList);
+			request.setAttribute("totalMoney", totalMoney);
+			request.setAttribute("pagefile", "/cart/cartListForm.jsp");
+			forward = new ActionForward("/index.jsp", false);
+		}else {
+			ArrayList<Cart> cartList = new ArrayList<Cart>();
+			CartListService cartListService = new CartListService();
+			int totalMoney = 0;
+			
 
-		cartList = cartListService.getCartList(id);
-		System.out.println(cartList);
-		totalMoney = cartListService.getTotalMoney(id);
-		request.setAttribute("cartList", cartList);
-		request.setAttribute("totalMoney", totalMoney);
-		request.setAttribute("pagefile", "/cart/cartListForm.jsp");
-		forward = new ActionForward("/index.jsp", false);
-		
+			cartList = cartListService.getCartList(id);
+			System.out.println(cartList);
+			totalMoney = cartListService.getTotalMoney(id);
+			request.setAttribute("cartList", cartList);
+			request.setAttribute("totalMoney", totalMoney);
+			request.setAttribute("pagefile", "/cart/cartListForm.jsp");
+			forward = new ActionForward("/index.jsp", false);
+		}
+
 		return forward;
 	}
 

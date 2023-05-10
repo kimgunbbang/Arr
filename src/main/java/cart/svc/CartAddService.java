@@ -70,8 +70,12 @@ public class CartAddService {
 		
 		if(isNewCart) {
 			Cart cart = new Cart();
-			
-			
+			cart.setP_name(product.getP_name());
+			cart.setP_image(product.getP_image());
+			cart.setP_price(product.getP_price());
+			cart.setP_num(product.getP_num());
+			cart.setCart_qty(1);
+			cartList.add(cart);
 		}
 		
 		return cartList;

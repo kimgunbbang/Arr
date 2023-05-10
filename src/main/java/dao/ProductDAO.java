@@ -274,11 +274,11 @@ public class ProductDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, p_num);
 			rs = pstmt.executeQuery();
-			
+			System.out.println(pstmt);
 			if(rs.next()) {
 				product.setCategory_name(rs.getString("category_name"));
 				product.setP_detail(rs.getString("p_detail"));
-				product.setP_image(rs.getString("p_iamge"));
+				product.setP_image(rs.getString("p_image"));
 				product.setP_image2(rs.getString("p_image2"));
 				product.setP_name(rs.getString("p_name"));
 				product.setP_num(rs.getInt("p_num"));
@@ -293,7 +293,7 @@ public class ProductDAO {
 			close(pstmt);
 		}
 		
-		return null;
+		return product;
 	}
 	
 	
