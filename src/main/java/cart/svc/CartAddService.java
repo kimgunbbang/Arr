@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import dao.CartDAO;
+import dao.NonCartDAO;
 import vo.Cart;
+import vo.Noncart;
 import vo.Product;
 
 public class CartAddService {
@@ -48,39 +50,36 @@ public class CartAddService {
 		return isAddSuccess;
 	}
 
+	public boolean NonAddCart(Noncart noncart) {
+		boolean isAddSuccess = false;
+		Connection conn = null;
 
-
-	public ArrayList<Cart> getCartProduct(HttpServletRequest request, Product product) {
-		HttpSession session = request.getSession();
-		ArrayList<Cart> cartList = (ArrayList)session.getAttribute("cartList");
-		if(cartList == null) {
-			cartList = new ArrayList<Cart>();
-			session.setAttribute("cartList", cartList);
-		}
+		try {
+			conn = getConnection();
+			NonCartDAO noncartDAO = NonCartDAO.getInstance();
+			noncartDAO.setConnection(conn);
+			
+			boolean isExist = noncartDAO.isNonCartExist(noncart.getId(), noncart.getP_num());
+	        if (isExist) {
+	            return false;
+	        }else {
+	        	isAddSuccess = noncartDAO.insertNonCart(noncart);
+	        }
+			
 		
-		boolean isNewCart = true;
-		
-		for(int i = 0 ; i < cartList.size() ; i++) {
-			if(product.getP_num() == cartList.get(i).getP_num()) {
-				isNewCart = false;
-				cartList.get(i).setCart_qty(cartList.get(i).getCart_qty()+1);
-				break;
+			if (isAddSuccess) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				close(conn);
 			}
 		}
-		
-		if(isNewCart) {
-			Cart cart = new Cart();
-			cart.setP_name(product.getP_name());
-			cart.setP_image(product.getP_image());
-			cart.setP_price(product.getP_price());
-			cart.setP_num(product.getP_num());
-			cart.setCart_qty(1);
-			cartList.add(cart);
-		}
-		
-		return cartList;
+		return isAddSuccess;
 	}
-
-
 
 }

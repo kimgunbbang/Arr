@@ -19,8 +19,9 @@ public class UserViewAction implements Action {
 	    if (id == null) {
 	        forward = new ActionForward("userLogin.u", true);
 	    } else {
+	    	String userId = request.getParameter("id");
 	        UserViewService userViewService = new UserViewService();
-	        User user = userViewService.selectUser(id);
+	        User user = userViewService.selectUser(userId);
 	        session.setAttribute("user", user);
 	        request.setAttribute("pagefile", "/user/userInfo.jsp");
 	        forward = new ActionForward("/index.jsp", false);
