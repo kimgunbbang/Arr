@@ -24,7 +24,6 @@
 	상세주소 : ${buyInfo.buy_addr2 }<br>
 	배송요청사항 : ${buyInfo.deli_memo }<br>
 	
-	<a href="#">배송지변경</a>
 
 </form>
 </div>

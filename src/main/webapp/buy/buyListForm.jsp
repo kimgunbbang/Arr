@@ -13,7 +13,7 @@
     border: 1px solid #ccc; /* 외곽선 스타일 지정 */
     padding: 10px; /* 폼 요소와 외곽선 간격 조정 */
   }
-  img{
+  .img{
   	width:100px;
   	height:100px;
   }
@@ -28,6 +28,7 @@
 	<c:otherwise>
 		
 		<c:forEach var="buyNum" items="${buyNumList}" varStatus="i">
+		<c:set var="lastTotalMoney" value="${0 }"/>
 		  <form class="form-border">
 		    <c:set var="first" value="true" />
 		    <c:forEach var="buy" items="${buyList}" varStatus="j">
@@ -44,12 +45,14 @@
 		          <c:set var="first" value="false" />
 		        </c:if>
 		        <!-- buy 객체 정보 출력 -->
-		        <a href="productDetailView.p?p_num=${buy.p_num }"><img src="${pageContext.request.contextPath}/images/${buy.p_image}"></a> &nbsp;
+		        <a href="productDetailView.p?p_num=${buy.p_num }"><img class="img" src="${pageContext.request.contextPath}/images/${buy.p_image}"></a> &nbsp;
 		        ${buy.p_name } &nbsp;
 		        ${buy.buy_qty }개 &nbsp;
 		        ${buy.buy_totalmoney }원 &nbsp;<br>
+		        <c:set var="lastTotalMoney" value="${lastTotalMoney+buy.buy_totalmoney }"/>
 		      </c:if>
 		    </c:forEach>
+		    <b>총 금액 : ${lastTotalMoney }원</b>
 		  </form>
 		</c:forEach>
 	

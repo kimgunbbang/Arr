@@ -250,5 +250,28 @@ public class BuyDAO {
 		}
 		return buyInfo;
 	}
+
+	public int nonCartDelete(String[] cartList) {
+		int success = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from noncart where cart_num=?";
+		try {
+			for(int i=0;i<cartList.length;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cartList[i]);
+				success = pstmt.executeUpdate();
+				if(!(success>0)) {
+					return 0;
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO noncartDelete메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return success;
+	}
 	
 }//BuyDAO클래스끝

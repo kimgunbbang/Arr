@@ -104,4 +104,22 @@ public class CartListService {
 		return totalMoney;
 	}
 
+	public ArrayList<Cart> selectNonCartList(String[] cartList) {
+		ArrayList<Cart> cartSet = new ArrayList<Cart>();
+		Connection conn=null;
+		try {
+			conn=getConnection();
+			CartDAO cartDAO = CartDAO.getInstance();
+			cartDAO.setConnection(conn);
+			
+			cartSet = cartDAO.selectNonCartList(cartList);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return cartSet;
+	}
+
+
 }
