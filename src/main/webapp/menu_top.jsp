@@ -96,7 +96,7 @@
                   <a href="userJoinForm.u" class="text-decoration-none me-2">JOIN</a>&nbsp;
                   <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                   <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
-                  <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
+                  <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </form>
              </c:when>

@@ -127,7 +127,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
    <div class="list">
       <div class="col" style="display: none;"><input type="hidden" name="cart_num" value="${cart.cart_num }"> ${cart.cart_num }</div>
       <div class="col" style="display: none;"><input type="hidden" name="p_num" value="${cart.p_num }"> ${cart.p_num }</div>
-      <div class="col"><input type="checkbox"id="remove" name="remove" value="${cart.cart_num }"></div>
+      <div class="col"><input type="checkbox"id="remove" name="remove" value="${sessionScope.id==null?cart.p_num : cart.cart_num }"></div>
       <div class="col"><%=++num %></div>
       <div class="col">${cart.p_image }</div>
       <div class="col">${cart.p_name }</div>
