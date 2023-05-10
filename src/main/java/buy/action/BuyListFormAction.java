@@ -1,6 +1,7 @@
 package buy.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ public class BuyListFormAction implements Action {
 		BuyService buyService = new BuyService();
 		buyList = buyService.getbuyList(id);
 		ArrayList<Integer> buyNumList = buyService.getBuyNumList(id);
+		Collections.reverse(buyNumList);//최근구매내역이 먼저 나오게 역순처리
 		
 		request.setAttribute("buyNumList", buyNumList);//17,18,19,20,21,22
 		request.setAttribute("buyList", buyList);

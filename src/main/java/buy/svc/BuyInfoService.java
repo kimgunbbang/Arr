@@ -32,4 +32,22 @@ public class BuyInfoService {
 		return success;
 	}
 
+	public BuyInfo buyInfoView(String buy_num) {
+		BuyInfo buyInfo = new BuyInfo();
+		Connection conn = null;
+		
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			
+			buyInfo = buyDAO.getBuyInfoView(buy_num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return buyInfo;
+	}
+
 }

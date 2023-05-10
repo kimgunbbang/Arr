@@ -20,13 +20,13 @@
 </style>
 <body>
 <div class="container">
-구매목록<br>
+<h1>구매목록</h1><hr>
 <c:choose>
 	<c:when test="${empty buyList }">
 	구매내역이 없습니다.
 	</c:when>
 	<c:otherwise>
-	
+		
 		<c:forEach var="buyNum" items="${buyNumList}" varStatus="i">
 		  <form class="form-border">
 		    <c:set var="first" value="true" />
@@ -36,10 +36,10 @@
 		        <c:if test="${first}">
 		          <h3>${buy.buy_date }</h3>
 		          ${buy.buy_state } &nbsp;
-		          <a href="#">상세보기</a> &nbsp;
+		          <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
 		          <a href="#">배송조회</a> &nbsp;
 		          <c:if test="${buy.buy_state eq 'ready'}">
-		            <a href="#">주문취소</a><br> 
+		            <a href="buyCancel.buy">주문취소</a><br> 
 		          </c:if>
 		          <c:set var="first" value="false" />
 		        </c:if>

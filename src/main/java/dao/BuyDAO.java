@@ -219,5 +219,36 @@ public class BuyDAO {
 		
 		return buyNumList;
 	}
+
+	public BuyInfo getBuyInfoView(String buy_num) {
+		BuyInfo buyInfo = new BuyInfo();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from buyinfo where buy_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, buy_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				buyInfo.setBuy_addr(rs.getString("buy_addr"));
+				buyInfo.setBuy_addr2(rs.getString("buy_addr2"));
+				buyInfo.setBuy_date(rs.getDate("buy_date"));
+				buyInfo.setBuy_name(rs.getString("buy_name"));
+				buyInfo.setBuy_num(rs.getInt("buy_num"));
+				buyInfo.setBuy_phone(rs.getString("buy_phone"));
+				buyInfo.setBuy_zipcode(rs.getString("buy_zipcode"));
+				buyInfo.setBuyinfo_num(rs.getInt("buyinfo_num"));
+				buyInfo.setDeli_memo(rs.getString("deli_memo"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return buyInfo;
+	}
 	
 }//BuyDAO클래스끝
