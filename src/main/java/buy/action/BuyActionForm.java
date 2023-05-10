@@ -121,6 +121,7 @@ public class BuyActionForm implements Action {
           }
     	  /***************************여기까지가 비회원구매일때*************************************/
       }else {//세션아이디가 null아닐때
+    	  id=(String)request.getSession().getAttribute("id");
     	  if(request.getParameterValues("remove") == null){//장바구니널일때,
         	  p_num = request.getParameterValues("p_num");
         	  if(p_num.length == 1) {//p_num이 한개일때
