@@ -25,7 +25,6 @@ public class BuyActionForm implements Action {
       String[] buy_qty = {};//구매수량
       String[] p_price = {};//상품금액
       int lastTotalMoney=0;//완전토탈
-      
       System.out.println("이거 뭐야"+request.getParameterValues("remove"));
       //remove값이 null일때,
       if(request.getParameterValues("remove") == null){//장바구니널일때,

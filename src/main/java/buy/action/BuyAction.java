@@ -71,7 +71,7 @@ public class BuyAction implements Action {
             
             insertCheck2 = buyInfoService.insertBuy(buyInfo);
          }
-         if(insertCheck && insertCheck2) {//둘다 insert 됬으면 
+         if(insertCheck && insertCheck2) {//둘다 insert 됬으면
             //cart목록부터 없애보자
             String[] cartList=null;
 	            if(request.getParameterValues("cart_num") != null) {
