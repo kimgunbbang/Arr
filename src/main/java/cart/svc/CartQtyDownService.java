@@ -8,7 +8,9 @@ import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 
 import dao.CartDAO;
+import dao.NonCartDAO;
 import vo.Cart;
+import vo.Noncart;
 
 public class CartQtyDownService {
 
@@ -16,23 +18,46 @@ public class CartQtyDownService {
 		boolean qtyUpdate = false;
 		Connection conn = getConnection();
 		
-	try {
-		CartDAO cartDAO = CartDAO.getInstance();
-		cartDAO.setConnection(conn);
-		int downResult = cartDAO.downQty(cart);
-		if(downResult>0) {
-			qtyUpdate=true;
-			commit(conn);
-		}else {
+		try {
+			CartDAO cartDAO = CartDAO.getInstance();
+			cartDAO.setConnection(conn);
+			int downResult = cartDAO.downQty(cart);
+			if(downResult>0) {
+				qtyUpdate=true;
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e) {
 			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
 		}
-	}catch(Exception e) {
-		rollback(conn);
-		e.printStackTrace();
-	}finally {
-		close(conn);
-	}
-		return qtyUpdate;
+			return qtyUpdate;
+		}
+
+	public boolean downCartQty(Noncart noncart) {
+		boolean qtyUpdate = false;
+		Connection conn = getConnection();
+		
+		try {
+			NonCartDAO noncartDAO = NonCartDAO.getInstance();
+			noncartDAO.setConnection(conn);
+			int downResult = noncartDAO.downQty(noncart);
+			if(downResult>0) {
+				qtyUpdate=true;
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+			return qtyUpdate;
+		}
 	}
 
-}

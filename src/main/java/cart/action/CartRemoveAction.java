@@ -17,20 +17,42 @@ public class CartRemoveAction implements Action {
 		ActionForward forward = null;
 		String[] cartList = null;
 		cartList = request.getParameterValues("remove");
-		CartRemoveService cartRemoveService = new CartRemoveService();
-		boolean removeResult = cartRemoveService.removeCart(cartList);
-		if(removeResult){
-            forward = new ActionForward("cartList.ct",true);
-			
-			
-		}else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('삭제실패')");
-			out.println("history.back()");
-			out.println("</script>");
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		if(id == null) {
+			CartRemoveService cartRemoveService = new CartRemoveService();
+			boolean removeResult = cartRemoveService.removeNonCart(cartList);
+			if(removeResult){
+	            forward = new ActionForward("cartList.ct",true);
+				
+				
+			}else {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('삭제실패')");
+				out.println("history.back()");
+				out.println("</script>");
+			}
 		}
+		else {
+			CartRemoveService cartRemoveService = new CartRemoveService();
+			boolean removeResult = cartRemoveService.removeCart(cartList);
+			if(removeResult){
+	            forward = new ActionForward("cartList.ct",true);
+				
+				
+			}else {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('삭제실패')");
+				out.println("history.back()");
+				out.println("</script>");
+			}
+		}
+	
 		return forward;
 	}
 

@@ -169,4 +169,67 @@ public class NonCartDAO {
 		}
 		return totalMoney;
 	}
+
+	public int downQty(Noncart noncart) {
+		int downQty = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE noncart SET cart_qty = cart_qty - 1 WHERE cart_num = ?";
+		 try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, noncart.getCart_num());
+
+
+		        downQty = pstmt.executeUpdate();
+		        
+		    } catch(Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+		    
+		return downQty;
+	}
+
+	public int upQty(Noncart noncart) {
+		int upQty = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE noncart SET cart_qty = cart_qty + 1 WHERE cart_num = ?";
+		 try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, noncart.getCart_num());
+
+
+		        upQty = pstmt.executeUpdate();
+		        
+		    } catch(Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+		    
+		return upQty;
+	}
+
+	public int removeCart(String[] cartList) {
+		int removeCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from noncart where cart_num = ?";
+		try {
+			for(int i=0;i<cartList.length;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, cartList[i]);
+				removeCount = pstmt.executeUpdate();
+				if(!(removeCount>0)) {
+					return 0;
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO cartDelete메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return removeCount;
+	}
 }

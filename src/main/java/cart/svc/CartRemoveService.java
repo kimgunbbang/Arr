@@ -9,6 +9,7 @@ import java.sql.Connection;
 
 
 import dao.CartDAO;
+import dao.NonCartDAO;
 
 public class CartRemoveService {
 
@@ -23,6 +24,35 @@ public class CartRemoveService {
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.setConnection(conn);
 			removeCount = cartDAO.removeCart(cartList);
+			
+			if(removeCount>0) {
+				commit(conn);
+				removeCart = true;
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e ) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return removeCart;
+		
+	}
+
+	public boolean removeNonCart(String[] cartList) {
+		boolean removeCart = false;
+		Connection conn = null;
+		int removeCount = 0;
+		
+		
+		try {
+			conn = getConnection();
+			NonCartDAO noncartDAO = NonCartDAO.getInstance();
+			noncartDAO.setConnection(conn);
+			removeCount = noncartDAO.removeCart(cartList);
 			
 			if(removeCount>0) {
 				commit(conn);
