@@ -9,6 +9,7 @@ import action.Action;
 import product.action.ProductInventoryCheckService;
 import product.svc.ProductListService;
 import vo.ActionForward;
+import vo.Inventory;
 import vo.Product;
 
 public class AdminProductAllList implements Action {
