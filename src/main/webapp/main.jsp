@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.img{
+		height:100%;
+		width:100%;
+	}
+</style>
 <body>
 <div class="container">
     <div class="row">
