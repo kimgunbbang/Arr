@@ -76,13 +76,42 @@ function chkForm(f) {
 		f.user_pass.focus();
 		return false;
  	}
-
+	if (!checkIdFormat(f.id.value.trim())) { // 아이디 형식 체크
+		alert("아이디는 영문과 숫자의 조합으로 4자 이상이어야 합니다.");
+		f.id.value = "";
+		f.id.focus();
+		return false;
+		}
 	f.submit();
 }
 
 function setIdChecked(checked) {
 	idChecked = checked;
 }
+
+function chkCharCode(event) {
+	  const regExp = /[^0-9a-zA-Z]/g;
+	  const ele = event.target;
+	  if (regExp.test(ele.value)) {
+	    ele.value = ele.value.replace(regExp, '');
+	  }
+	};
+	
+function chkCharCode2(event) {
+	  const keyCode = event.keyCode;
+	  const isValidKey = (
+	    (keyCode >= 48 && keyCode <= 57) || // Numbers
+	    (keyCode >= 97 && keyCode <= 122) || // Numbers, Keypad
+	    (keyCode >= 65 && keyCode <= 90) || // Alphabet
+	    (keyCode === 32) || // Space
+	    (keyCode === 8) || // BackSpace
+	    (keyCode === 189) // Dash
+	  );
+	  if (!isValidKey) {
+	    event.preventDefault();
+	    return false;
+	  }
+	};
 </script>
 </head>
 <body>
@@ -92,7 +121,7 @@ function setIdChecked(checked) {
 		<div class="row">
 			<h2>아르르와 동행하기</h2>
 			<div class="열1">아이디 : </div>
-			<div class="열1"><input type="text" name="id" id="id" >
+			<div class="열1"><input type="text" name="id" id="id" pattern="[a-zA-Z0-9]" onkeyup="chkCharCode(event)"  onkeypress="chkCharCode2(event)">
 			<input type="button" value="중복확인" onclick="winopen()"><br>
 			</div>
 			<div class="열2">비밀번호 : </div><div class="열2"><input type="password" name="user_pass" id="user_pass"> </div>
