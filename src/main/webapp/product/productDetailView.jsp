@@ -10,7 +10,21 @@
 <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://assets4.cre.ma/widgets/assets/pc-c9334d1331a67b88a5bbb28c4c16b01ef5184ab1c165983eb0e8207debdf3b2d.css" rel="stylesheet" type="text/css">
+
 <style>
+
+/* cdn import */
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
+@import url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+body {
+    font-family: 'Godo';
+}
 #prdtBtmAcdn {
     margin: 50px auto;
     padding: 0 10px;
@@ -54,7 +68,8 @@ ul {
     padding-inline-start: 40px;
 }
 .imgsize{
-	width: 80%;
+	width: 70%;
+	
 }
 </style>
 </head>
@@ -93,7 +108,7 @@ ul {
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="text-align: center;">
                 <!-- 상품이미지2(설명용)넣기 -->
                 <img src="${pageContext.request.contextPath }/images/${product.p_image2 }" id="p_image2" class="img-fluid rounded shadow my-5 imgsize">
             </div>
