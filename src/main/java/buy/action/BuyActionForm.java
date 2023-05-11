@@ -22,13 +22,13 @@ public class BuyActionForm implements Action {
    @Override//액션에서는
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
       ActionForward forward = null;//널처리해주고
-      String id = null;//파라미터처리해주고 //아이디
+      String id = (String)request.getSession().getAttribute("id");//파라미터처리해주고 //아이디
       String[] p_num = {};//상품번호
       String[] buy_qty = {};//구매수량
       String[] p_price = {};//상품금액
       int lastTotalMoney=0;//완전토탈
-      System.out.println("이거 뭐야"+request.getParameterValues("remove"));
-      if(request.getSession().getAttribute("id") == null) {//세션아이디가 null일때
+      
+      if( id == null) {//세션아이디가 null일때
     	  Cookie[] cookies = request.getCookies();//쿠키정보가져와서
     	  String uuid = null;
     	  if (cookies != null) {
@@ -44,7 +44,6 @@ public class BuyActionForm implements Action {
     	  if(request.getParameterValues("remove") == null){//장바구니널일때,
         	  p_num = request.getParameterValues("p_num");
         	  if(p_num.length == 1) {//p_num이 한개일때
-        		  id = uuid;//파라미터처리해주고 //아이디
                   p_num = request.getParameterValues("p_num");//상품번호
                   buy_qty = request.getParameterValues("buy_qty");//구매수량
                   p_price = request.getParameterValues("p_price");//상품금액
@@ -80,10 +79,10 @@ public class BuyActionForm implements Action {
         	  }
         	  
           }else {//장바구니가 널아닐때,
+        	  
         	  String[] cartList=request.getParameterValues("remove");//장바구니없애기용 cart번호
         	  System.out.println("카트넘버"+Arrays.toString(cartList));
         	  //카트넘버랑 아이디 받아와서,카트에 있는 상품번호구매수량, 상품금액 가져오기
-              id = uuid;//파라미터처리해주고 //아이디
               ArrayList<Cart> cartSet = new ArrayList<Cart>();
               CartListService cartListService = new CartListService();
               cartSet = cartListService.selectNonCartList(cartList);//
@@ -120,11 +119,12 @@ public class BuyActionForm implements Action {
           }
     	  /***************************여기까지가 비회원구매일때*************************************/
       }else {//세션아이디가 null아닐때
-    	  id=(String)request.getSession().getAttribute("id");
+    	  
+    	  //id=(String)request.getSession().getAttribute("id");
     	  if(request.getParameterValues("remove") == null){//장바구니널일때,
+    		  
         	  p_num = request.getParameterValues("p_num");
         	  if(p_num.length == 1) {//p_num이 한개일때
-        		  id = request.getParameter("id");//파라미터처리해주고 //아이디
                   p_num = request.getParameterValues("p_num");//상품번호
                   buy_qty = request.getParameterValues("buy_qty");//구매수량
                   p_price = request.getParameterValues("p_price");//상품금액
@@ -164,6 +164,7 @@ public class BuyActionForm implements Action {
         	  System.out.println("카트넘버"+Arrays.toString(cartList));
         	  //카트넘버랑 아이디 받아와서,카트에 있는 상품번호구매수량, 상품금액 가져오기
               id = request.getParameter("id");//파라미터처리해주고 //아이디
+              
               ArrayList<Cart> cartSet = new ArrayList<Cart>();
               CartListService cartListService = new CartListService();
               cartSet = cartListService.selectCartList(cartList);//

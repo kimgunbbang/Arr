@@ -25,8 +25,8 @@ public class BuyAction implements Action {
       ActionForward forward = null;//포워드 널처리하고
       //리퀘스트값 다 불러와서 저장 한 후,
       HttpSession session = request.getSession();
-      String id = null;
-      if(request.getSession().getAttribute(id) == null) {//리퀘스트 세션아이디가 널일때(비회원일때)
+      String id = (String)request.getSession().getAttribute("id");
+      if( id == null) {//리퀘스트 세션아이디가 널일때(비회원일때)
     	  Cookie[] cookies = request.getCookies();//쿠키정보가져와서
     	  String uuid = null;
     	  if (cookies != null) {
@@ -106,6 +106,7 @@ public class BuyAction implements Action {
           }
       }else {//세션아이디 있을때(회원일때)
     	  id=(String)session.getAttribute("id");         //아이디 가져오고
+    	  System.out.println("여기 아이디 뭐야"+id);
           String[] p_num=request.getParameterValues("p_num");   //p_num들 가져오고
           String[] buy_qty=request.getParameterValues("buy_qty");//주문수량들
           String[] buy_totalmoney=request.getParameterValues("buy_totalmoney");//상품별 총금액들
