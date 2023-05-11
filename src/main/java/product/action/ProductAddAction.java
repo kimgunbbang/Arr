@@ -21,7 +21,7 @@ public class ProductAddAction implements Action {
 		
 		String saveFolder = "/images";//저장될 폴더경로
 		String encoding = "utf-8";//인코딩
-		int maxSize = 5*1024*1024;//이미지 최대사이즈 5메가임
+		int maxSize = 10*1024*1024;//이미지 최대사이즈 10메가임
 		String realFolder = 
 				request.getServletContext().getRealPath(saveFolder); //실제 받아오는 경로+폴더경로
 		

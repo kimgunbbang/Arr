@@ -23,6 +23,7 @@
 <body>
 <jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
+<h3><a href="productAddForm.p">상품등록</a></h3>
 	<c:if test="${empty productList }">
 	<h1>상품 없음</h1>
 	</c:if>

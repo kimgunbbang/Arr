@@ -31,7 +31,7 @@ public class ProductDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		int num;
-		String sql = "insert into product values(?,?,?,?,?,?,?,0,false)";
+		String sql = "insert into product values(?,?,?,?,?,?,?,0,false,0)";
 		try {
 			pstmt = conn.prepareStatement("select max(p_num) from product");
 			rs = pstmt.executeQuery();
@@ -54,7 +54,7 @@ public class ProductDAO {
 			insertCount=pstmt.executeUpdate();
 			
 		}catch(Exception e) {
-			System.out.println("DAO insertProduct 에러임"+e);
+			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
