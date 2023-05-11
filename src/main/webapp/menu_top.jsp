@@ -104,7 +104,7 @@
              <c:otherwise><!-- 로그인 됬을때 -->
                 <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
                 <div class="input-group" align="right" style="padding-left: 100px">
-                <a href="userViewAction.u" class="text-decoration-none me-2" >
+                <a href="userViewAction.u?id=${sessionScope.id }" class="text-decoration-none me-2" >
                   ${sessionScope.id }님
                 </a>
                   <a class="btn btn-outline-primary me-2" href="userLogout.u">LOGOUT</a>
