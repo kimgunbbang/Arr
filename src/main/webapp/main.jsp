@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.img{
+		height:296px;
+		width:1440px;
+	}
+</style>
 <body>
 <div class="container">
     <div class="row">
@@ -17,25 +23,25 @@
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${pageContext.request.contextPath}/images/slidebanner1.jpg" class="d-block w-100" alt="banner1">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner1.jpg" class="d-block w-100" alt="banner1">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner2.jpg" class="d-block w-100" alt="banner2">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner2.jpg" class="d-block w-100" alt="banner2">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner3.jpg" class="d-block w-100" alt="banner3">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner3.jpg" class="d-block w-100" alt="banner3">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner4.jpg" class="d-block w-100" alt="banner4">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner4.jpg" class="d-block w-100" alt="banner4">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner5.jpg" class="d-block w-100" alt="banner5">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner5.jpg" class="d-block w-100" alt="banner5">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner6.jpg" class="d-block w-100" alt="banner6">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner6.jpg" class="d-block w-100" alt="banner6">
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/images/slidebanner7.jpg" class="d-block w-100" alt="banner7">
+      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner7.jpg" class="d-block w-100" alt="banner7">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
