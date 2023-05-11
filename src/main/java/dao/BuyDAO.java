@@ -299,6 +299,7 @@ public class BuyDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
 			changeCount = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
