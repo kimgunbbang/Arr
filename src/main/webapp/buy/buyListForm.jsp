@@ -18,6 +18,15 @@
   	height:100px;
   }
 </style>
+<script>
+function cancel(buy_num, event) {
+	  event.preventDefault(); // 이벤트의 기본 동작을 취소
+
+	  if (confirm("정말 취소하시겠습니까?")) {
+	    location.href = "buyCancel.buy?buy_num=" + buy_num;
+	  }
+	}
+</script>
 <body>
 <div class="container">
 <h1>구매목록</h1><hr>
@@ -36,13 +45,22 @@
 		        <!-- 첫 번째 buy 객체이면 날짜 등 정보를 출력 -->
 		        <c:if test="${first}">
 		          <h3>${buy.buy_date }</h3>
-		          ${buy.buy_state } &nbsp;
-		          <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
-		          <a href="#">배송조회</a> &nbsp;
-		          <c:if test="${buy.buy_state eq 'ready'}">
-		            <a href="buyCancel.buy">주문취소</a><br> 
-		          </c:if>
+		          ${buy.buy_state } 확인용&nbsp;
+		          <c:set var="state" value="${buy.buy_state }"/>
+		          <c:choose>
+			          <c:when test="${buy.buy_state eq 'ready'}">
+				        <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	<a href="#">배송조회</a> &nbsp;
+			            <a href="buyCancel.buy?buy_num=${buy.buy_num}" onclick="cancel('${buy.buy_num}' ,event)">주문취소</a><br> 
+			          </c:when>
+			          <c:when test="${buy.buy_state eq 'cancel' }">
+			          	취소완료
+			          </c:when>
+			          <c:otherwise>
+			          </c:otherwise>
+		          </c:choose>
 		          <c:set var="first" value="false" />
+		          
 		        </c:if>
 		        <!-- buy 객체 정보 출력 -->
 		        <a href="productDetailView.p?p_num=${buy.p_num }"><img class="img" src="${pageContext.request.contextPath}/images/${buy.p_image}"></a> &nbsp;
@@ -52,7 +70,14 @@
 		        <c:set var="lastTotalMoney" value="${lastTotalMoney+buy.buy_totalmoney }"/>
 		      </c:if>
 		    </c:forEach>
-		    <b>총 금액 : ${lastTotalMoney }원</b>
+		    <c:choose>
+			    <c:when test="${state eq 'cancel' }">
+			    <b style="text-decoration: line-through;">총 금액 : ${lastTotalMoney}원</b>
+			    </c:when>
+			    <c:otherwise>
+			    <b>총 금액 : ${lastTotalMoney }원</b>
+			    </c:otherwise>
+			</c:choose>
 		  </form>
 		</c:forEach>
 	

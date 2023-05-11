@@ -273,5 +273,22 @@ public class BuyDAO {
 		
 		return success;
 	}
+
+	public int deleteBuyInfo(int buy_num) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from buyinfo where buy_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			deleteCount = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
 	
 }//BuyDAO클래스끝
