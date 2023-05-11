@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +17,6 @@ import product.action.ProductDetailViewAction;
 import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
 import product.action.ProductSelectListAction;
-import product.action.productRecentAction;
 import vo.ActionForward;
 
 /**
@@ -118,12 +117,8 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/productRecent.p")) {
-			action = new productRecentAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			request.setAttribute("pagefile", "/product/productRecentForm.jsp");//보일경로만적어주고
+			forward=new ActionForward("/index.jsp",false);//포워드는 요로케하기
 		}
 		
 		

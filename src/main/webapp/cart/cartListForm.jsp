@@ -129,7 +129,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
       <div class="col" style="display: none;"><input type="hidden" name="p_num" value="${cart.p_num }"> ${cart.p_num }</div>
       <div class="col"><input type="checkbox"id="remove" name="remove" value="${cart.cart_num }"></div>
       <div class="col"><%=++num %></div>
-      <div class="col">${cart.p_image }</div>
+      <div class="col"><img src="${pageContext.request.contextPath }/images/${cart.p_image }" id="cart_image" class="img-fluid rounded shadow"></div>
       <div class="col">${cart.p_name }</div>
       <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"> ${cart.p_price }</div>
       <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }">

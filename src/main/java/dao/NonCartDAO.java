@@ -96,7 +96,7 @@ public class NonCartDAO {
 			pstmt.setString(6, noncart2.getId());
 			
 			Timestamp cre_date = new Timestamp(System.currentTimeMillis());
-	        Timestamp exp_date = new Timestamp(System.currentTimeMillis() + (24 * 60 * 60 * 1000)); // 임의로 하루 설정
+	        Timestamp exp_date = new Timestamp(System.currentTimeMillis() + (3 * 24 * 60 * 60 * 1000)); // 임의로 하루 설정
 	        pstmt.setTimestamp(7, cre_date);
 	        pstmt.setTimestamp(8, exp_date);
 			int insertCount = pstmt.executeUpdate();
