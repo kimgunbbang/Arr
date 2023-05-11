@@ -13,6 +13,8 @@ public class Product {
 	private int p_readcount;//조회수8
 	private boolean p_hide;//상품삭제(숨기기)
 	
+	private long viewTime; //최근 본 상품 유지시간을 위해 추가했습니다.
+	
 	public Product() {}
 	
 	public Product(int p_num, String p_name, int p_price, String p_detail, String p_image, String p_image2,
@@ -83,6 +85,14 @@ public class Product {
 	}
 	public void setP_hide(boolean p_hide) {
 		this.p_hide = p_hide;
+	}
+
+	public long getViewTime() {
+		return viewTime;
+	}
+
+	public void setViewTime(long viewTime) {
+		this.viewTime = viewTime;
 	}
 	
 	
