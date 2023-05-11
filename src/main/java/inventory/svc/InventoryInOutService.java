@@ -62,4 +62,30 @@ public class InventoryInOutService {
 		return success;
 	}
 
+	public boolean cancelinOutQty(ArrayList<Buy> productList) {
+		boolean success = false;
+		Connection conn=null;
+		
+		try {
+			conn = getConnection();
+			InventoryDAO inventoryDAO = InventoryDAO.getInstance();
+			inventoryDAO.setConnection(conn);
+			int result = inventoryDAO.inserCancelInOutQty(productList);
+			
+			if(result>0) {
+				success = true;
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}catch(Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return success;
+	}
+
 }

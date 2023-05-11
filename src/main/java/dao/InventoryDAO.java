@@ -353,6 +353,60 @@ public class InventoryDAO {
 	    return insertcount;
 	}
 
+	public int inserCancelInOutQty(ArrayList<Buy> productList) {
+		int insertcount=0;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int orgQty=0;//현재재고
+	    int num;//다음순번
+	    String sql = "insert into inventory values(?,?,?,?,?,default)";//순번,상품번호,현재재고량,입고량,출고량,
+	    try {
+	    	for (Buy buy : productList) {//insert반복해야하니까,,얼마만큼?ArrayList사이즈만큼
+	    		//다음순번정하기
+	    		pstmt = conn.prepareStatement("select max(inven_num) from inventory");
+		        rs = pstmt.executeQuery();
+		        if(!rs.next()) {
+		           num=1;
+		        }else {
+		           num=rs.getInt(1)+1;
+		        }
+		        close(rs);
+		        close(pstmt);
+		        //저장되어 있는 p_num의 현재재고 가져오기
+		        pstmt = conn.prepareStatement("SELECT * FROM inventory WHERE inven_num = (SELECT MAX(inven_num) FROM inventory WHERE p_num='"
+	                    +buy.getP_num() +"')");
+		        rs=pstmt.executeQuery();
+		        if(rs.next()) {//현재재고있는거 가져와서 확인먼저 한다음
+	            	orgQty=rs.getInt("inven_qty");//현재재고따로 저장하고
+	            	if(orgQty-buy.getBuy_qty()<0) {//출고량이 재고량보다 많을수 없으니까 처리해주고..
+	            		System.out.println("출고량이 재고량보다 많을 수 없습니다.");
+		        		return 0;
+	            	}
+		        }//아니면 추가가능
+		        close(rs);
+		        close(pstmt);
+		        
+		        pstmt = conn.prepareStatement(sql);//추가하자
+		        pstmt.setInt(1, num);       //순번
+	            pstmt.setInt(2, buy.getP_num());       //상품번호
+	            pstmt.setInt(3, orgQty + buy.getBuy_qty());   //현재재고        
+	            pstmt.setInt(4, buy.getBuy_qty());       //입고
+	            pstmt.setInt(5, 0);//출고
+	            insertcount = pstmt.executeUpdate();//실행!!
+	            if(!(insertcount>0)) {
+	            	return 0;
+	            }
+		    }//반복끝
+	    
+	    }catch(Exception e) {
+	        System.out.println("inventoryDAO inserCancelInOutQty에러임"+e);
+	    }finally {
+	    	close(rs);
+	        close(pstmt);
+	    }
+	    return insertcount;
+	}
+
 	
 	
 	

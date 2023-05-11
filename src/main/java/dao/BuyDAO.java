@@ -8,6 +8,7 @@ import static db.JdbcUtil.*;
 import vo.Buy;
 import vo.BuyInfo;
 import vo.BuyList;
+import vo.Product;
 
 public class BuyDAO {
 	private static BuyDAO buyDAO;//싱글톤1 : 선언
@@ -289,6 +290,50 @@ public class BuyDAO {
 			close(pstmt);
 		}
 		return deleteCount;
+	}
+
+	public int buyChangeState(int buy_num) {
+		int changeCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update buy set buy_state = 'cancel' where buy_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			changeCount = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return changeCount;
+	}
+
+	public ArrayList<Buy> selectCancelProduct(int buy_num) {
+		ArrayList<Buy> productList = new ArrayList<Buy>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from buy where buy_num=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Buy buy = new Buy();
+					buy.setP_num(rs.getInt("p_num"));
+					buy.setBuy_qty(rs.getInt("buy_qty"));
+					productList.add(buy);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return productList;
 	}
 	
 }//BuyDAO클래스끝
