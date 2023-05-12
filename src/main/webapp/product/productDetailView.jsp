@@ -71,6 +71,7 @@ ul {
 	width: 70%;
 	
 }
+
 </style>
 </head>
 <body>
@@ -169,6 +170,21 @@ ul {
                         </div>
                     </li>
                 </ul>
+                <!-- 리뷰 게시판 -->
+<div class="review">
+  <div class="col-md-12">
+    <h3>리뷰 게시판</h3>
+    <!-- 리뷰 게시판 내용을 여기에 추가 -->
+  </div>
+</div>
+
+<!-- 문의 게시판 -->
+<div class="qna">
+  <div class="col-md-12">
+    <h3>문의 게시판</h3>
+    <!-- 문의 게시판 내용을 여기에 추가 -->
+  </div>
+</div>
     </div>
 
 </body>

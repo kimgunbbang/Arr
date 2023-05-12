@@ -13,6 +13,8 @@ import action.Action;
 import product.action.MainAction;
 import product.action.ProductAddAction;
 import product.action.ProductAllListAction;
+import product.action.ProductBestReadListAction;
+import product.action.ProductBestSaleListAction;
 import product.action.ProductDetailViewAction;
 import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
@@ -119,6 +121,23 @@ public class ProductFrontController extends HttpServlet {
 		}else if(command.equals("/productRecent.p")) {
 			request.setAttribute("pagefile", "/product/productRecentForm.jsp");//보일경로만적어주고
 			forward=new ActionForward("/index.jsp",false);//포워드는 요로케하기
+		}else if(command.equals("/productBest.p")) {
+			request.setAttribute("pagefile", "/product/productBest.jsp");//보일경로만적어주고
+			forward=new ActionForward("/index.jsp",false);//포워드는 요로케하기
+		}else if(command.equals("/productBestReadList.p")) {
+			action = new ProductBestReadListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/productBestSaleList.p")) {
+			action = new ProductBestSaleListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

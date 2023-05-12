@@ -295,7 +295,76 @@ public class ProductDAO {
 		
 		return product;
 	}
-	
-	
+
+	public ArrayList<Product> selectProductBestReadList() {
+		ArrayList<Product> productList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from product order by p_readcount desc limit 4";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				productList = new ArrayList<Product>();
+				do {
+					productList.add(new Product(
+							rs.getInt("p_num"),
+							rs.getString("p_name"),
+							rs.getInt("p_price"),
+							rs.getString("p_detail"),
+							rs.getString("p_image"),
+							rs.getString("p_image2"),
+							rs.getString("category_name"),
+							rs.getInt("p_readcount"),
+							rs.getBoolean("p_hide")
+							));
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("DAO selectProductAllList 에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return productList;
+	}
+
+	public ArrayList<Product> selectProductBestSaleList() {
+		  ArrayList<Product> productList = new ArrayList<>();
+		    PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = "SELECT p.p_num, p.p_name, p.p_price, p.p_detail, p.p_image, p.p_image2, p.category_name, p.p_readcount, p.p_hide "
+		            + "FROM inventory i "
+		            + "JOIN product p ON i.p_num = p.p_num "
+		            + "ORDER BY i.inven_out DESC "
+		            + "LIMIT 4";
+		    try {
+		        pstmt = conn.prepareStatement(sql);
+		        rs = pstmt.executeQuery();
+		        while (rs.next()) {
+		            Product product = new Product(
+		                    rs.getInt("p_num"),
+		                    rs.getString("p_name"),
+		                    rs.getInt("p_price"),
+		                    rs.getString("p_detail"),
+		                    rs.getString("p_image"),
+		                    rs.getString("p_image2"),
+		                    rs.getString("category_name"),
+		                    rs.getInt("p_readcount"),
+		                    rs.getBoolean("p_hide")
+		            );
+		            productList.add(product);
+		        }
+		    } catch (Exception e) {
+		        System.out.println("DAO selectProductBestSaleList 에러: " + e);
+		    } finally {
+		        close(rs);
+		        close(pstmt);
+		    }
+		    return productList;
+		}
+
 	
 }

@@ -66,6 +66,44 @@ public class ProductListService {
 		}
 		return product;
 	}
+
+	public ArrayList<Product> getProductBestReadList() {
+		ArrayList<Product> productList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			productList = productDAO.selectProductBestReadList();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return productList;
+	}
+
+	public ArrayList<Product> getProductBestSaleList() {
+		ArrayList<Product> productList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			productList = productDAO.selectProductBestSaleList();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return productList;
+	}
 	
 
 }

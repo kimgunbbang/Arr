@@ -35,19 +35,34 @@ body {
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner1.jpg" class="d-block w-100" alt="banner1">
+	    <a href="productDetailView.p?p_num=1">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner1.jpg" class="d-block w-100" alt="banner1">
+	    </a>
     </div>
     <div class="carousel-item">
-      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner2.jpg" class="d-block w-100" alt="banner2">
+	    <a href="#">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner2.jpg" class="d-block w-100" alt="banner2">
+	    </a>
     </div>
     <div class="carousel-item">
-      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner3.jpg" class="d-block w-100" alt="banner3">
+	    <a href="productDetailView.p?p_num=2">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner3.jpg" class="d-block w-100" alt="banner3">
+	    </a>
     </div>
     <div class="carousel-item">
-      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner4.jpg" class="d-block w-100" alt="banner4">
+	    <a href="productDetailView.p?p_num=3">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner4.jpg" class="d-block w-100" alt="banner4">
+	    </a>
     </div>
     <div class="carousel-item">
-      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner5.jpg" class="d-block w-100" alt="banner5">
+	    <a href="#">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner5.jpg" class="d-block w-100" alt="banner5">
+	    </a>
+    </div>
+    <div class="carousel-item">
+	    <a href="productDetailView.p?p_num=4">
+	      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner6.jpg" class="d-block w-100" alt="banner6">
+	    </a>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

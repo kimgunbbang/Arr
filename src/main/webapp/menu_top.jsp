@@ -23,6 +23,7 @@
 @import url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
 body {
     font-family: 'Godo';
+    
 }
 </style>
 <meta charset="UTF-8">
@@ -52,8 +53,12 @@ body {
             <li><a class="dropdown-item" href="productSelectList.p?category_name=potty">배변/위생</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="productBest.p" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="productBestReadList.p">조회순</a></li>
+					<li><a class="dropdown-item" href="productBestSaleList.p">구매순</a></li>
+			</ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" style="color: black;" href="#" id="navbarDropdown" role="button"  aria-expanded="false">
