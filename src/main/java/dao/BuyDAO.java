@@ -336,5 +336,60 @@ public class BuyDAO {
 		
 		return productList;
 	}
+
+	public ArrayList<BuyList> getBuyAllList() {
+		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from buy natural join product";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					BuyList buy = new BuyList();
+					buy.setBuy_date(rs.getDate("buy_date"));
+					buy.setBuy_num(rs.getInt("buy_num"));
+					buy.setBuy_qty(rs.getInt("buy_qty"));
+					buy.setBuy_state(rs.getString("buy_state"));
+					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
+					buy.setId(rs.getString("id"));
+					buy.setP_name(rs.getString("p_name"));
+					buy.setP_num(rs.getInt("p_num"));
+					buyList.add(buy);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return buyList;
+	}
+
+	public ArrayList<Integer> getBuyNumAllList() {
+		ArrayList<Integer> buyNumList = new ArrayList<Integer>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select distinct buy_num from buy";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					buyNumList.add(rs.getInt("buy_num"));
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return buyNumList;
+	}
 	
 }//BuyDAO클래스끝

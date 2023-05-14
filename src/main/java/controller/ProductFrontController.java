@@ -15,6 +15,7 @@ import product.action.ProductAddAction;
 import product.action.ProductAllListAction;
 import product.action.ProductBestReadListAction;
 import product.action.ProductBestSaleListAction;
+import product.action.ProductDeleteAction;
 import product.action.ProductDetailViewAction;
 import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
@@ -133,6 +134,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/productBestSaleList.p")) {
 			action = new ProductBestSaleListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/deleteProduct.p")) {
+			action = new ProductDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

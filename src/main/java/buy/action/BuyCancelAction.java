@@ -21,9 +21,10 @@ public class BuyCancelAction implements Action {
 		ActionForward forward = null;//포워드처리하고
 		int buy_num = Integer.parseInt(request.getParameter("buy_num"));//request처리하자
 		System.out.println("구매번호는?"+buy_num);
-		
-		BuyInfoDeleteService buyInfoDeleteService = new BuyInfoDeleteService();//구매정보부터 삭제
-		boolean isCancel = buyInfoDeleteService.deleteBuyInfo(buy_num);//구매번호로 삭제하기
+		//함부로삭제하지말자...
+		//BuyInfoDeleteService buyInfoDeleteService = new BuyInfoDeleteService();//구매정보부터 삭제
+		//boolean isCancel = buyInfoDeleteService.deleteBuyInfo(buy_num);//구매번호로 삭제하기
+		boolean isCancel = true;
 		
 		if(isCancel) {//구매정보 삭제됬을때,
 			//인벤토리에 재고 다시 넣어놓고,,
@@ -42,7 +43,7 @@ public class BuyCancelAction implements Action {
 				response.setContentType("text/html; charset=utf-8");
 	            PrintWriter out = response.getWriter();
 	            out.println("<script>");
-	            out.println("alert('구매정보 삭제성공.')");
+	            out.println("alert('주문취소 성.공.적.')");
 	            out.println("location.href='buyListForm.buy'");
 	            out.println("</script>");
 			}

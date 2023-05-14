@@ -37,8 +37,9 @@ body {
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>
 	<c:forEach var="productList" items="${productList}" varStatus="status">
+	<c:if test="${productList.p_hide=='0' }">
 	<c:choose>
-		<c:when test="${productList.p_hide == '1'}"><!-- 품절아닐때 -->
+		<c:when test="${productList.p_qty > 0}"><!-- 품절아닐때 -->
 			<div id="product">
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
@@ -57,6 +58,7 @@ body {
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
 					조회수: ${productList.p_readcount}<br>
+					상품명: ${productList.p_name}<br>
 					품절입니다.
 			</div>
 			<c:if test="${status.count % 4 == 0}">
@@ -64,6 +66,7 @@ body {
 			</c:if>
 		</c:otherwise>
 	</c:choose>
+	</c:if>
 </c:forEach>
 </div>
 </body>

@@ -17,8 +17,9 @@ public class Product {
 	
 	public Product() {}
 	
+
 	public Product(int p_num, String p_name, int p_price, String p_detail, String p_image, String p_image2,
-			String category_name, int p_readcount, boolean p_hide) {
+			String category_name, int p_readcount, boolean p_hide, int p_qty) {
 		super();
 		this.p_num = p_num;
 		this.p_name = p_name;
@@ -29,8 +30,11 @@ public class Product {
 		this.category_name = category_name;
 		this.p_readcount = p_readcount;
 		this.p_hide = p_hide;
+		this.p_qty = p_qty;
 	}
 
+
+	
 
 	public int getP_qty() {
 		return p_qty;

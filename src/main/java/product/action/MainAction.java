@@ -19,9 +19,9 @@ public class MainAction implements Action {
 		
 		ProductListService productListService = new ProductListService();
 		ArrayList<Product> productList = productListService.getProductAllList();
-		ProductInventoryCheckService productInventoryCheckService=new ProductInventoryCheckService();//전체상품가져와서 재고확인후 재고가 없으면 false처리
-		productList = productInventoryCheckService.productInventoryCheck(productList);
-		productList = productListService.getProductAllList();
+//		ProductInventoryCheckService productInventoryCheckService=new ProductInventoryCheckService();//전체상품가져와서 재고확인후 재고가 없으면 false처리
+//		productList = productInventoryCheckService.productInventoryCheck(productList);
+//		productList = productListService.getProductAllList();
 		
 		
 		request.setAttribute("productList", productList);

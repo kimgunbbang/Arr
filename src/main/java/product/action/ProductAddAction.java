@@ -9,7 +9,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
+import inventory.svc.InventoryInOutService;
 import product.svc.ProductAddService;
+import product.svc.ProductListService;
 import vo.ActionForward;
 import vo.Product;
 
@@ -40,13 +42,17 @@ public class ProductAddAction implements Action {
 				multi.getFilesystemName("p_image"),
 				multi.getFilesystemName("p_image2"),
 				multi.getParameter("category_name"),
-				0,false);
+				0,false,0);
 		
 		ProductAddService productAddService = new ProductAddService();
-		boolean addSuccess = productAddService.productAdd(product);
-		if(addSuccess) {//등록이 됬으면
+		boolean addSuccess = productAddService.productAdd(product);//등록이 됬으면
+		
+		ProductListService productListService = new ProductListService();
+		int productNum = productListService.getProductMaxP_num();//방금등록한 상품번호 가져오기 13
+		InventoryInOutService inventoryInOutService = new InventoryInOutService();
+		boolean isadd = inventoryInOutService.inOutQty(productNum);
+		if(addSuccess&&isadd) {//둘다 등록이 됬으면
 			forward = new ActionForward("productAllList.p",true);
-			
 		}else{
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();

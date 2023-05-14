@@ -104,6 +104,22 @@ public class ProductListService {
 		}
 		return productList;
 	}
+
+	public int getProductMaxP_num() {
+		int maxP_num=0;
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			maxP_num = productDAO.getProductMaxP_num();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return maxP_num;
+	}
 	
 
 }

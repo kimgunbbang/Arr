@@ -40,7 +40,8 @@ public class ProductModifyAction implements Action {
 						multi.getFilesystemName("p_image2"),
 						multi.getParameter("category_name"),
 						Integer.parseInt(multi.getParameter("p_readcount")),
-						Boolean.parseBoolean(multi.getParameter("p_hide"))
+						Boolean.parseBoolean(multi.getParameter("p_hide")),
+						0//재고수량임의로넣음..
 						);
 				
 				ProductModifyService productModifyService = new ProductModifyService();

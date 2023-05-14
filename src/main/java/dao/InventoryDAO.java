@@ -407,6 +407,35 @@ public class InventoryDAO {
 	    return insertcount;
 	}
 
+	public int inserInOutQty(int productNum) {
+		int addcount=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		String sql = "insert into inventory values(?,?,0,0,0,default)";//순번,상품번호,현재재고량,입고량,출고량
+		int num=0;
+		try {
+			 pstmt = conn.prepareStatement("select max(inven_num) from inventory");
+	         rs = pstmt.executeQuery();
+	         if(!rs.next()) {
+	            num=1;
+	         }else {
+	            num=rs.getInt(1)+1;
+	         }
+	         close(rs);
+	         close(pstmt);
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, productNum);
+	         addcount=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+	        close(pstmt);
+		}
+		return addcount;
+	}
+
 	
 	
 	

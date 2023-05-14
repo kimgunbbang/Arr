@@ -1,6 +1,7 @@
 package product.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +21,9 @@ public class ProductAllListAction implements Action {
 		
 		ProductListService productListService = new ProductListService();
 		ArrayList<Product> productList = productListService.getProductAllList();
-		ProductInventoryCheckService productInventoryCheckService=new ProductInventoryCheckService();//전체상품가져와서 재고확인후 재고가 없으면 false처리
-		productList = productInventoryCheckService.productInventoryCheck(productList);
-		productList = productListService.getProductAllList();
+		//ProductInventoryCheckService productInventoryCheckService=new ProductInventoryCheckService();//전체상품가져와서 재고확인후 재고가 없으면 false처리
+		//productList = productInventoryCheckService.productInventoryCheck(productList);
+		//productList = productListService.getProductAllList();
 		
 		
 		request.setAttribute("productList", productList);

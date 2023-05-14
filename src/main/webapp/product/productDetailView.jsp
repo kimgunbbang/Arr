@@ -7,7 +7,7 @@
     <title>상품 상세 정보</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-<!-- Bootstrap JS -->
+	<!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://assets4.cre.ma/widgets/assets/pc-c9334d1331a67b88a5bbb28c4c16b01ef5184ab1c165983eb0e8207debdf3b2d.css" rel="stylesheet" type="text/css">
 
@@ -88,22 +88,25 @@ ul {
                 <h2>${product.p_name }</h2>
                 <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly>${product.p_price }
                     <div class="form-group my-3">
-                        <label for="buy_qty">구매수량 :</label>
+                        <label for="buy_qty">구매수량(재고수량${product.p_qty }) :</label>
                         <input type="number" name="buy_qty" class="form-control" value="1" min="1">
                     </div>
                     <div class="form-group my-3">
                         <label for="p_detail">상세설명 :</label>
                         <p>${product.p_detail }</p>
                     </div>
-                    <c:if test="${product.p_hide=='0' }">
+                    <c:choose>
+                    <c:when test="${product.p_qty>0 }">
                     <button type="submit" class="btn btn-primary my-3">구매하기</button>
 
                     <button type="button" class="btn btn-secondary my-3" 
                    onclick="location.href = 'cartAddAction.ct?p_num=${product.p_num}'">
                     장바구니</button>
-
-                    </c:if>
-
+                    </c:when>
+                    <c:otherwise>
+                    <button>입고시알림신청</button>
+                    </c:otherwise>
+					</c:choose>
                     
                 </form>
             </div>

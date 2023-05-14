@@ -65,7 +65,9 @@ public class ProductDAO {
 		ArrayList<Product> productList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from product";
+		
+		String sql = "select * from product natural join inventory where "+
+				"inven_num in(select max(inven_num) from inventory group by p_num) order by p_num";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -81,7 +83,8 @@ public class ProductDAO {
 							rs.getString("p_image2"),
 							rs.getString("category_name"),
 							rs.getInt("p_readcount"),
-							rs.getBoolean("p_hide")
+							rs.getBoolean("p_hide"),
+							rs.getInt("inven_qty")
 							));
 				}while(rs.next());
 			}
@@ -100,7 +103,8 @@ public class ProductDAO {
 		ArrayList<Product> productList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from product where category_name = '"+category_name+"'";
+		String sql = "select * from product natural join inventory where category_name = '"+category_name+"' and "+
+				"inven_num in(select max(inven_num) from inventory group by p_num)";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -116,7 +120,8 @@ public class ProductDAO {
 							rs.getString("p_image2"),
 							rs.getString("category_name"),
 							rs.getInt("p_readcount"),
-							rs.getBoolean("p_hide")
+							rs.getBoolean("p_hide"),
+							rs.getInt("p_qty")
 							));
 				}while(rs.next());
 			}
@@ -147,9 +152,13 @@ public class ProductDAO {
 			}finally {
 				close(pstmt);
 			}
-	    	
-	    	String sql = "select * from product where p_num='"+p_num+"'";
+	    	String sql = 
+	    	"select * from inventory natural join product where p_num=? and "+
+	    	"inven_num=(select inven_num from inventory where inven_num="+
+	    			"(select max(inven_num) from inventory where p_num=?))";
 	    	pstmt=conn.prepareStatement(sql);
+	    	pstmt.setInt(1, p_num);
+	    	pstmt.setInt(2, p_num);
 	        rs = pstmt.executeQuery();
 
 	        if(rs.next()) {
@@ -163,7 +172,7 @@ public class ProductDAO {
 	            product.setCategory_name(rs.getString("category_name"));
 	            product.setP_readcount(rs.getInt("p_readcount"));
 	            product.setP_hide(rs.getBoolean("p_hide"));
-
+	            product.setP_qty(rs.getInt("inven_qty"));
 	        }
 	    } catch (Exception e) {
 	        System.out.println("DAO getProduct 에러임"+e);
@@ -316,7 +325,8 @@ public class ProductDAO {
 							rs.getString("p_image2"),
 							rs.getString("category_name"),
 							rs.getInt("p_readcount"),
-							rs.getBoolean("p_hide")
+							rs.getBoolean("p_hide"),
+							0//재고 임의로 넣어놓음...
 							));
 				}while(rs.next());
 			}
@@ -353,7 +363,8 @@ public class ProductDAO {
 		                    rs.getString("p_image2"),
 		                    rs.getString("category_name"),
 		                    rs.getInt("p_readcount"),
-		                    rs.getBoolean("p_hide")
+		                    rs.getBoolean("p_hide"),
+		                    0//재고 임의로 넣어놓음..
 		            );
 		            productList.add(product);
 		        }
@@ -365,6 +376,43 @@ public class ProductDAO {
 		    }
 		    return productList;
 		}
+
+	public int productDelete(int p_num) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update product set p_hide='1' where p_num=?";
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, p_num);
+			deleteCount=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
+
+	public int getProductMaxP_num() {
+		int productMaxNum = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select max(p_num) from product";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				productMaxNum=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productMaxNum;
+	}
 
 	
 }
