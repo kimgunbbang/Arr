@@ -31,7 +31,7 @@ public class BuyDAO {
 		int insertcount=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
-		String sql = "insert into buy values (?,?,now(),?,'ready',?,?,?)";//1구매순번, 2id, (구매날짜), 3구매시메모
+		String sql = "insert into buy values (?,?,now(),?,'ready',?,?,?,default,default)";//1구매순번, 2id, (구매날짜), 3구매시메모
 																//(구매상태), 4구매상품의금액, 5상품번호, 6구매수량
 		int num;
 		try {
@@ -46,8 +46,6 @@ public class BuyDAO {
 	        close(rs);
 	        close(pstmt);
 			for(Buy buy : inventoryCheck) {
-				
-		        
 		        //insert하기
 		        pstmt=conn.prepareStatement(sql);
 		        pstmt.setInt(1, num);
@@ -139,11 +137,10 @@ public class BuyDAO {
 					buy.setP_num(rs.getInt("p_num"));
 					buy.setBuy_qty(rs.getInt("buy_qty"));
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
-					
 					buy.setId(rs.getString("id"));
 					buy.setP_name(rs.getString("product.p_name"));
 					buy.setBuy_state(rs.getString("buy_state"));
-					buy.setP_image(rs.getString("p_image"));
+					buy.setP_image(rs.getString("product.p_image"));
 					
 					buyList.add(buy);
 				}while(rs.next());
@@ -356,6 +353,7 @@ public class BuyDAO {
 					buy.setId(rs.getString("id"));
 					buy.setP_name(rs.getString("product.p_name"));
 					buy.setP_num(rs.getInt("p_num"));
+					buy.setP_image(rs.getString("product.p_image"));
 					buyList.add(buy);
 				}while(rs.next());
 			}
@@ -431,6 +429,7 @@ public class BuyDAO {
 					buy.setId(rs.getString("id"));
 					buy.setP_name(rs.getString("product.p_name"));
 					buy.setP_num(rs.getInt("p_num"));
+					buy.setP_image(rs.getString("product.p_image"));
 					buyList.add(buy);
 				}while(rs.next());
 			}
@@ -486,12 +485,10 @@ public class BuyDAO {
 					buy.setP_num(rs.getInt("p_num"));
 					buy.setBuy_qty(rs.getInt("buy_qty"));
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
-					
+					buy.setP_image(rs.getString("product.p_image"));
 					buy.setId(rs.getString("id"));
 					buy.setP_name(rs.getString("product.p_name"));
 					buy.setBuy_state(rs.getString("buy_state"));
-					buy.setP_image(rs.getString("p_image"));
-					
 					buyList.add(buy);
 				}while(rs.next());
 			}

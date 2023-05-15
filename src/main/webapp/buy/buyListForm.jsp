@@ -52,9 +52,25 @@ function cancel(buy_num, event) {
 				        <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
 			          	<a href="#">배송조회</a> &nbsp;
 			            <a href="buyCancel.buy?buy_num=${buy.buy_num}" onclick="cancel('${buy.buy_num}' ,event)">주문취소</a><br> 
+			          	배송준비
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'cancel' }">
+			            <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
 			          	취소완료
+			          </c:when>
+			          <c:when test="${buy.buy_state eq 'completion' }">
+			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	<a href="" >구매확정</a>
+			          	배송완료
+			          </c:when>
+			          <c:when test="${buy.buy_state eq 'finish' }">
+			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	<a href="" >후기작성</a>
+			          	구매확정
+			          </c:when>
+			          <c:when test="${buy.buy_state eq 'deliver' }">
+			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	배송중
 			          </c:when>
 			          <c:otherwise>
 			          </c:otherwise>

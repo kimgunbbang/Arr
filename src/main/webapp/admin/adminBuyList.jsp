@@ -33,7 +33,8 @@ function onChange(selectElement) {
 	var buy_state = selectElement.form.getElementID("buy_state");
 	this.value = selectElement.value;
 }
-function openModal(buy_num){
+function openModal(buy_num, event){
+	event.preventDefault(); // 기본 이벤트 막기
 	window.open('buyInfoDetail.buy?buy_num='+buy_num, 'popup', 'width=500, height=500');
 
 }
@@ -86,10 +87,10 @@ function openModal(buy_num){
 			<c:forEach var="buy" items="${buyList }" varStatus="i">
 			<c:if test="${buyNum eq buy.buy_num}">
 				<c:if test="${first}">
-				<div class="col-1"><a href="" onclick="openModal(${buy.buy_num })"><input type="text" name="buy_num" value="${buy.buy_num }"  readonly></a></div>
-				<div class="col-2"><a href="" onclick="openModal(${buy.buy_num })"><input type="text" name="buy_date" value="${buy.buy_date }" readonly></a></div>
-				<div class="col-1"><a href="" onclick="openModal(${buy.buy_num })"><input type="text" name="id" value="${buy.id }" readonly></a></div>
-				<div class="col-3"><a href="" onclick="openModal(${buy.buy_num })"><input type="text" name="p_name" value="${buy.p_name }" readonly></a>
+				<div class="col-1"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="buy_num" value="${buy.buy_num }"  readonly></a></div>
+				<div class="col-2"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="buy_date" value="${buy.buy_date }" readonly></a></div>
+				<div class="col-1"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="id" value="${buy.id }" readonly></a></div>
+				<div class="col-3"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="p_name" value="${buy.p_name }" readonly></a>
 					<c:if test="${!i.last && buyList[i.index + 1].buy_num eq buy.buy_num}">
 					외
 					</c:if>
