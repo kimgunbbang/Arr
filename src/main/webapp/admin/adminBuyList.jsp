@@ -92,7 +92,7 @@ function openModal(buy_num, event){
 				<div class="col-1"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="id" value="${buy.id }" readonly></a></div>
 				<div class="col-3"><a href="" onclick="openModal(${buy.buy_num },event)"><input type="text" name="p_name" value="${buy.p_name }" readonly></a>
 					<c:if test="${!i.last && buyList[i.index + 1].buy_num eq buy.buy_num}">
-					외
+					외 
 					</c:if>
 				</div>
 				<div class="col-1"><input type="text" name="buy_qty" value="${buy.buy_qty }" readonly></div>

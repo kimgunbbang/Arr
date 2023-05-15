@@ -10,7 +10,7 @@ public class Review {
 	private String r_title;
 	private String r_detail;
 	private String r_image;
-	private Date r_date;
+	private String r_date;
 	
 	public int getR_num() {
 		return r_num;
@@ -54,11 +54,12 @@ public class Review {
 	public void setR_image(String r_image) {
 		this.r_image = r_image;
 	}
-	public Date getR_date() {
+	public String getR_date() {
 		return r_date;
 	}
-	public void setR_date(Date r_date) {
+	public void setR_date(String r_date) {
 		this.r_date = r_date;
 	}
+
 	
 }

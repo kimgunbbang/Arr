@@ -195,22 +195,6 @@ text-align: center;
 
   <div class="col-md-12">
     <h3>리뷰 게시판</h3>
-    <!-- 리뷰 작성 버튼 -->
-    <button id="writeReviewBtn">리뷰 작성</button>
-    
-    <!-- 리뷰 작성 폼 -->
-    <div id="writeReviewForm" style="display: none;">
-    	<form action=""
-        <label for="title">제목:</label>
-        <input type="text" id="review_subject" name="review_subject" required><br>
-        <label for="writer">작성자:</label>
-        <input type="text" id="writer" name="writer" required><br>
-        <label for="content">내용:</label><br>
-        <input type="text" id="review_subject" name="review_subject" required><br>
- 		<label for="rating">평점:</label>
-    	<input type="number" id="rating" name="rating" min="0" max="5" step="0.5" required><br>
-    	<input type="submit" value="리뷰 작성" >
-    </div>
     
     <div>
         <!-- 게시판 목록 -->
@@ -241,15 +225,7 @@ text-align: center;
         </table>
     </div>
 
-    <script>
-        // 리뷰 작성 버튼 클릭 시 폼 토글
-        const writeReviewBtn = document.getElementById('writeReviewBtn');
-        const writeReviewForm = document.getElementById('writeReviewForm');
 
-        writeReviewBtn.addEventListener('click', () => {
-            writeReviewForm.style.display = writeReviewForm.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
   </div>
 </div>
 <!-- 문의 게시판 -->

@@ -65,7 +65,6 @@ function cancel(buy_num, event) {
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'finish' }">
 			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
-			          	<a href="" >후기작성</a>
 			          	구매확정
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'deliver' }">
@@ -77,12 +76,16 @@ function cancel(buy_num, event) {
 		          </c:choose>
 		          <c:set var="first" value="false" />
 		          
-		        </c:if>
+		        </c:if><br>
 		        <!-- buy 객체 정보 출력 -->
 		        <a href="productDetailView.p?p_num=${buy.p_num }"><img class="img" src="${pageContext.request.contextPath}/images/${buy.p_image}"></a> &nbsp;
 		        ${buy.p_name } &nbsp;
 		        ${buy.buy_qty }개 &nbsp;
-		        ${buy.buy_totalmoney }원 &nbsp;<br>
+		        ${buy.buy_totalmoney }원 &nbsp;
+		        <c:if test="${buy.buy_state eq 'finish'  }">
+		         <a href="reviewWriteAction.r?p_num=${buy.p_num }" >후기작성</a><br>
+		        </c:if>
+		       
 		        <c:set var="lastTotalMoney" value="${lastTotalMoney+buy.buy_totalmoney }"/>
 		      </c:if>
 		    </c:forEach>
