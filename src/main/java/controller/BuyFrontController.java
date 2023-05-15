@@ -13,6 +13,7 @@ import action.Action;
 import buy.action.BuyAction;
 import buy.action.BuyActionForm;
 import buy.action.BuyCancelAction;
+import buy.action.BuyInfoDetailAction;
 import buy.action.BuyInfoFormAction;
 import buy.action.BuyListFormAction;
 import vo.ActionForward;
@@ -78,6 +79,13 @@ public class BuyFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/buyCancel.buy")) {
 			action = new BuyCancelAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/buyInfoDetail.buy")) {
+			action = new BuyInfoDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

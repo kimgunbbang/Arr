@@ -128,4 +128,23 @@ public class BuyService {
 		return buyNumList;
 	}
 
+	public ArrayList<Buy> getbuyList(int buy_num) {
+		ArrayList<Buy> buyList = new ArrayList<Buy>();
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			
+			buyList = buyDAO.getBuyList(buy_num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return buyList;
+	}
+	
+
 }

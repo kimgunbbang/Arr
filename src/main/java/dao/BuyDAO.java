@@ -125,7 +125,7 @@ public class BuyDAO {
 		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from buy natural join product where id=?";
+		String sql = "select * from buy join product using (p_num) where id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -141,7 +141,7 @@ public class BuyDAO {
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
 					
 					buy.setId(rs.getString("id"));
-					buy.setP_name(rs.getString("p_name"));
+					buy.setP_name(rs.getString("product.p_name"));
 					buy.setBuy_state(rs.getString("buy_state"));
 					buy.setP_image(rs.getString("p_image"));
 					
@@ -341,7 +341,7 @@ public class BuyDAO {
 		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from buy natural join product";
+		String sql = "select * from buy join product using (p_num)";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -354,7 +354,7 @@ public class BuyDAO {
 					buy.setBuy_state(rs.getString("buy_state"));
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
 					buy.setId(rs.getString("id"));
-					buy.setP_name(rs.getString("p_name"));
+					buy.setP_name(rs.getString("product.p_name"));
 					buy.setP_num(rs.getInt("p_num"));
 					buyList.add(buy);
 				}while(rs.next());
@@ -414,10 +414,11 @@ public class BuyDAO {
 		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from buy natural join product where buy_state=?";
+		String sql = "select * from buy join product using (p_num) where buy_state=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, buy_state);
+			System.out.println(pstmt);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				do {
@@ -428,7 +429,7 @@ public class BuyDAO {
 					buy.setBuy_state(rs.getString("buy_state"));
 					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
 					buy.setId(rs.getString("id"));
-					buy.setP_name(rs.getString("p_name"));
+					buy.setP_name(rs.getString("product.p_name"));
 					buy.setP_num(rs.getInt("p_num"));
 					buyList.add(buy);
 				}while(rs.next());
@@ -465,6 +466,43 @@ public class BuyDAO {
 		}
 		
 		return buyNumList;
+	}
+
+	public ArrayList<Buy> getBuyList(int buy_num) {
+		ArrayList<Buy> buyList = new ArrayList<Buy>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from buy join product using (p_num) where buy_num=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Buy buy = new Buy();
+					buy.setBuy_date(rs.getDate("buy_date"));
+					buy.setBuy_num(rs.getInt("buy_num"));
+					buy.setP_num(rs.getInt("p_num"));
+					buy.setBuy_qty(rs.getInt("buy_qty"));
+					buy.setBuy_totalmoney(rs.getInt("buy_totalmoney"));
+					
+					buy.setId(rs.getString("id"));
+					buy.setP_name(rs.getString("product.p_name"));
+					buy.setBuy_state(rs.getString("buy_state"));
+					buy.setP_image(rs.getString("p_image"));
+					
+					buyList.add(buy);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("buyDAO getBuyList메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return buyList;
 	}
 	
 }//BuyDAO클래스끝
