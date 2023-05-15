@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import admin.action.AdminBuyAllList;
+import admin.action.AdminBuySelectList;
+import admin.action.AdminBuyStateChange;
 import admin.action.AdminProductAllList;
 import product.action.ProductAllListAction;
 import vo.ActionForward;
@@ -60,6 +62,20 @@ public class AdminFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/adminBuyList.ad")) {
 			action = new AdminBuyAllList();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/stateChange.ad")) {
+			action = new AdminBuyStateChange();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/adminBuySelectList.ad")) {
+			action = new AdminBuySelectList();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

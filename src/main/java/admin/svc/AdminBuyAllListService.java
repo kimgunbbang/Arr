@@ -28,4 +28,21 @@ public class AdminBuyAllListService {
 		return buyList;
 	}
 
+	public ArrayList<BuyList> getBuySelectList(String buy_state) {
+		ArrayList<BuyList> buyList = new ArrayList<BuyList>();
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			buyList = buyDAO.getBuySelectList(buy_state);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return buyList;
+	}
+
 }
