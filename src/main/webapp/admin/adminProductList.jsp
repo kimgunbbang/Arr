@@ -45,6 +45,7 @@ body {
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
+					조회수: ${productList.p_readcount}<br>
 					현재재고: ${productList.p_qty}<br>
 					상품명: ${productList.p_name}<br>
 					<button onclick="javascript:location.href='productModifyForm.p?p_num=${productList.p_num}'">상품수정</button>

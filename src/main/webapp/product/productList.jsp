@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -31,6 +32,9 @@ body {
 		width: 80%;
 	}
 </style>
+<script>
+
+</script>
 <body>
 <div class="컨테이너">
 	<c:if test="${empty productList }">
@@ -44,9 +48,10 @@ body {
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
-					조회수: ${productList.p_readcount}<br>
-					상품명: ${productList.p_name}<br>
-					금액: ${productList.p_price}<br>
+					 <h4>${productList.p_name}</h4><br>
+					<i class="fa-solid fa-won-sign"></i>
+					<fmt:formatNumber value="${productList.p_price}" pattern="#,###" />
+					<br>
 			</div>
 			<c:if test="${status.count % 4 == 0}">
 				<div style="clear: both;"></div>
@@ -57,8 +62,8 @@ body {
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
-					조회수: ${productList.p_readcount}<br>
-					상품명: ${productList.p_name}<br>
+					
+					${productList.p_name}<br>
 					품절입니다.
 			</div>
 			<c:if test="${status.count % 4 == 0}">
