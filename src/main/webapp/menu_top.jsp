@@ -54,11 +54,9 @@ body {
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="productBest.p" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="productBestReadList.p">조회순</a></li>
-					<li><a class="dropdown-item" href="productBestSaleList.p">구매순</a></li>
-			</ul>
+          <a class="nav-link" href="productBestList.p" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
+
+
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" style="color: black;" href="#" id="navbarDropdown" role="button"  aria-expanded="false">
