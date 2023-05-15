@@ -190,7 +190,7 @@ text-align: center;
                         </div>
                     </li>
                 </ul>
-                <!-- 리뷰 게시판 -->
+<!-- 리뷰 게시판 -->
 <div class="review">
 
   <div class="col-md-12">
@@ -200,6 +200,7 @@ text-align: center;
     
     <!-- 리뷰 작성 폼 -->
     <div id="writeReviewForm" style="display: none;">
+    	<form action=""
         <label for="title">제목:</label>
         <input type="text" id="review_subject" name="review_subject" required><br>
         <label for="writer">작성자:</label>
@@ -208,7 +209,7 @@ text-align: center;
         <input type="text" id="review_subject" name="review_subject" required><br>
  		<label for="rating">평점:</label>
     	<input type="number" id="rating" name="rating" min="0" max="5" step="0.5" required><br>
-    	<input type="submit" value="리뷰 작성">
+    	<input type="submit" value="리뷰 작성" >
     </div>
     
     <div>
@@ -218,7 +219,9 @@ text-align: center;
                 <tr>
                     <th>평점</th>
                     <th>작성자</th>
-                    <
+                    <th>제목</th> 
+                    <th>내용</th>
+                    <th>이미지</th>
                     <th>작성일</th>
                 </tr>
             </thead>
@@ -226,11 +229,12 @@ text-align: center;
                 <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
                 <c:forEach var="review" items="${reviewList}">
                     <tr>
-                        <td>${review.review_num}</td>
-                        <td>${review.grade }</td>
-                        <td><a href="reviewDetail.rev?review_num=${review.review_num}">${review.review_subject}</a></td>
-                        <td>${review.review_id}</td>
-                        <td>${review.review_date}</td>
+                        <td>${review.r_rating }</td>
+                        <td>${review.id }</td>
+                        <td><a href="reviewDetail.rev?r_num=${review.r_num}">${review.r_title}</a></td>
+                        <td>${review.r_detail}</td>
+                        <td>${review.r_image}</td>
+                        <td>${review.r_date}</td>
                     </tr>
                 </c:forEach>
             </tbody>
