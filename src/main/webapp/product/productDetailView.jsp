@@ -10,6 +10,7 @@
 	<!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://assets4.cre.ma/widgets/assets/pc-c9334d1331a67b88a5bbb28c4c16b01ef5184ab1c165983eb0e8207debdf3b2d.css" rel="stylesheet" type="text/css">
+	
 
 <style>
 
@@ -71,7 +72,9 @@ ul {
 	width: 70%;
 	
 }
-
+.nav nav-tabs{
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -107,12 +110,26 @@ ul {
                     <button>입고시알림신청</button>
                     </c:otherwise>
 					</c:choose>
-                    
+                    <!-- 탭 -->
+
                 </form>
+            </div>
+            <div>
+                  <ul class="nav nav-tabs nav-fill">
+			        <li class="nav-item">
+			          <a class="nav-link active" aria-current="page" href="#detailProduct">상품상세</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link" href="#reviewForm">리뷰</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link" href="#reviewForm">문의</a>
+			        </li>
+    			  </ul>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" style="text-align: center;">
+            <div class="col-md-12" style="text-align: center;" id="detailProduct">
                 <!-- 상품이미지2(설명용)넣기 -->
                 <img src="${pageContext.request.contextPath }/images/${product.p_image2 }" id="p_image2" class="img-fluid rounded shadow my-5 imgsize">
             </div>
@@ -175,12 +192,62 @@ ul {
                 </ul>
                 <!-- 리뷰 게시판 -->
 <div class="review">
+
   <div class="col-md-12">
     <h3>리뷰 게시판</h3>
-    <!-- 리뷰 게시판 내용을 여기에 추가 -->
+    <!-- 리뷰 작성 버튼 -->
+    <button id="writeReviewBtn">리뷰 작성</button>
+    
+    <!-- 리뷰 작성 폼 -->
+    <div id="writeReviewForm" style="display: none;">
+        <label for="title">제목:</label>
+        <input type="text" id="review_subject" name="review_subject" required><br>
+        <label for="writer">작성자:</label>
+        <input type="text" id="writer" name="writer" required><br>
+        <label for="content">내용:</label><br>
+        <input type="text" id="review_subject" name="review_subject" required><br>
+ 		<label for="rating">평점:</label>
+    	<input type="number" id="rating" name="rating" min="0" max="5" step="0.5" required><br>
+    	<input type="submit" value="리뷰 작성">
+    </div>
+    
+    <div>
+        <!-- 게시판 목록 -->
+        <table id="reviewForm">
+            <thead>
+                <tr>
+                    <th>평점</th>
+                    <th>작성자</th>
+                    <
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
+                <c:forEach var="review" items="${reviewList}">
+                    <tr>
+                        <td>${review.review_num}</td>
+                        <td>${review.grade }</td>
+                        <td><a href="reviewDetail.rev?review_num=${review.review_num}">${review.review_subject}</a></td>
+                        <td>${review.review_id}</td>
+                        <td>${review.review_date}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 리뷰 작성 버튼 클릭 시 폼 토글
+        const writeReviewBtn = document.getElementById('writeReviewBtn');
+        const writeReviewForm = document.getElementById('writeReviewForm');
+
+        writeReviewBtn.addEventListener('click', () => {
+            writeReviewForm.style.display = writeReviewForm.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
   </div>
 </div>
-
 <!-- 문의 게시판 -->
 <div class="qna">
   <div class="col-md-12">

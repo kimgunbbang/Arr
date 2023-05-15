@@ -32,7 +32,7 @@ body {
 	}
 </style>
 <body>
-<h3>조회수 순	</h3>
+<h2>가장 많이 본 상품</h2>
 <div class="컨테이너">
 	<c:if test="${empty productReadList }">
 	<h1>상품을 준비 중입니다.</h1>
@@ -69,7 +69,8 @@ body {
 	</c:choose>
 </c:forEach>
 </div>
-<h3>판매량 순</h3>
+
+<h2>가장 많이 구매한 상품</h2>
 <div class="컨테이너">
 	<c:if test="${empty productSaleList }">
 	<h1>상품을 준비 중입니다.</h1>

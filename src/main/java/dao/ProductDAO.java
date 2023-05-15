@@ -346,9 +346,11 @@ public class ProductDAO {
 		    PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 		    String sql = "SELECT p.p_num, p.p_name, p.p_price, p.p_detail, p.p_image, p.p_image2, p.category_name, p.p_readcount, p.p_hide "
-		            + "FROM inventory i "
-		            + "JOIN product p ON i.p_num = p.p_num "
-		            + "ORDER BY i.inven_out DESC "
+		            + "FROM product p "
+		            + "JOIN (SELECT i.p_num, SUM(i.inven_out) as total_out "
+		            +       "FROM inventory i "
+		            +       "GROUP BY i.p_num) i ON p.p_num = i.p_num "
+		            + "ORDER BY i.total_out DESC "
 		            + "LIMIT 4";
 		    try {
 		        pstmt = conn.prepareStatement(sql);
