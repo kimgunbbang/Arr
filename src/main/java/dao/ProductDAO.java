@@ -349,7 +349,7 @@ public class ProductDAO {
 		            + "FROM product p "
 		            + "JOIN (SELECT i.p_num, SUM(i.inven_out) as total_out "
 		            +       "FROM inventory i "
-		            +       "GROUP BY i.p_num) i ON p.p_num = i.p_num "
+		            +       "GROUP BY i.p_num) i ON p.p_num = i.p_num where p_hide !='1' "
 		            + "ORDER BY i.total_out DESC "
 		            + "LIMIT 4";
 		    try {
