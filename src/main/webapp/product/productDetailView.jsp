@@ -75,6 +75,15 @@ ul {
 .nav nav-tabs{
 text-align: center;
 }
+  .review-image{
+  	width:200px;
+  	height:200px;
+  }
+  .review-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
 </style>
 </head>
 <body>
@@ -114,19 +123,19 @@ text-align: center;
 
                 </form>
             </div>
-            <div>
-                  <ul class="nav nav-tabs nav-fill">
-			        <li class="nav-item">
-			          <a class="nav-link active" aria-current="page" href="#detailProduct">상품상세</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link" href="#reviewForm">리뷰</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link" href="#reviewForm">문의</a>
-			        </li>
-    			  </ul>
-            </div>
+      <div>
+  <ul class="nav nav-tabs nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#detailProduct">상품상세</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#reviewSection">리뷰</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#qnaSection">문의</a>
+    </li>
+  </ul>
+</div>
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center;" id="detailProduct">
@@ -190,54 +199,62 @@ text-align: center;
                         </div>
                     </li>
                 </ul>
-<!-- 리뷰 게시판 -->
-<div class="review">
+                
+      <div>
+  <ul class="nav nav-tabs nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#detailProduct">상품상세</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#reviewSection">리뷰</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#qnaSection">문의</a>
+    </li>
+  </ul>
+</div>
 
+<!-- 리뷰 게시판 -->
+<div class="review" id="reviewSection">
   <div class="col-md-12">
     <h3>리뷰 게시판</h3>
     
-    <div>
-        <!-- 게시판 목록 -->
-        <table id="reviewForm">
-            <thead>
-                <tr>
-                    <th>평점</th>
-                    <th>작성자</th>
-                    <th>제목</th> 
-                    <th>내용</th>
-                    <th>이미지</th>
-                    <th>작성일</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
-                <c:forEach var="review" items="${reviewList}">
-           			<c:if test="${review.p_num eq param.p_num}">
-                    <tr>
-                        <td>${review.r_rating }</td>
-                        <td>${review.id }</td>
-                        <td>${review.r_title}</td>
-                        <td>${review.r_detail}</td>
-                        <td><img src="${pageContext.request.contextPath }/images/${review.r_image }" id="cart_image" class="img-fluid rounded shadow"></td>
-                        <td>${review.r_date}</td>
-                    </tr>
-                   </c:if>
-                </c:forEach>
-            </tbody>
-        </table>
+    <div class="reviewForm">
+      <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
+      <c:forEach var="review" items="${reviewList}">
+        <c:if test="${review.p_num eq param.p_num}">
+          <div class="review-item">
+            <table>
+              <tr>
+                <td>작성자: ${review.id}</td>
+                <td>작성일: ${review.r_date}</td>
+              </tr>
+              <tr>
+                <td>평점: ${review.r_rating}</td>
+                <td>제목: ${review.r_title}</td>
+              </tr>
+              <tr>
+                <td colspan="2">내용: ${review.r_detail}</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="review-image"><img src="${pageContext.request.contextPath}/images/${review.r_image}" class="review-image img-fluid rounded shadow"></td>
+              </tr>
+            </table>
+          </div>
+        </c:if>
+      </c:forEach>
     </div>
-
 
   </div>
 </div>
+
 <!-- 문의 게시판 -->
-<div class="qna">
+<div class="qna" id="qnaSection">
   <div class="col-md-12">
     <h3>문의 게시판</h3>
     <!-- 문의 게시판 내용을 여기에 추가 -->
   </div>
 </div>
-    </div>
 
 </body>
 </html>
