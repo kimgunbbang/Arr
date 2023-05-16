@@ -34,9 +34,8 @@ public class UserLoginAction implements Action{
 		if (loginSuccess && user != null && user.isUser_bye() == false) { 
 		    HttpSession session = request.getSession();
 		    session.setAttribute("id", user.getId());
-		    forward = new ActionForward();
-		    request.setAttribute("pagefile", "main.jsp");
-		    forward.setPath("/index.jsp");
+		    forward = new ActionForward("main.p",true);
+
 		} else if(user.isUser_bye() == true){
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();

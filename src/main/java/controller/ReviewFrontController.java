@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import inventory.action.InventoryListAction;
 import product.action.ProductSelectListAction;
 import review.action.ReviewWriteAction;
+import review.action.ReviewWriteFormAction;
 import vo.ActionForward;
 
 /**
@@ -49,8 +51,14 @@ public class ReviewFrontController extends HttpServlet {
 		ActionForward forward=null;
 		
 		if(command.equals("/reviewWriteForm.r")) {
-			request.setAttribute("pagefile", "/review/reviewWriteForm.jsp");
-			forward = new ActionForward("/index.jsp",false);
+			action = new ReviewWriteFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 		}else if(command.equals("/reviewWriteAction.r")) {
 			action = new ReviewWriteAction();
 			try {

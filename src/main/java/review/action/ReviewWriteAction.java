@@ -23,10 +23,10 @@ public class ReviewWriteAction implements Action {
 		
 		String id = (String) session.getAttribute("id");
 		
-		String numParam = request.getParameter("p_num");
-		int num = numParam == null ? 0 : Integer.parseInt(numParam);
+		//String numParam = request.getParameter("p_num");
+		//int num = numParam == null ? 0 : Integer.parseInt(numParam);
 		
-
+		
 		
 		review.setId(id);
 		review.setP_num(request.getParameter("p_num"));
@@ -41,6 +41,7 @@ public class ReviewWriteAction implements Action {
 		writeResult = reviewWriteService.writeReview(review);
 		
 		if(writeResult) {
+			request.setAttribute("p_num", request.getParameter("p_num"));
 			forward = new ActionForward("productAllList.p",true);
 		}else {
 			response.setContentType("text/html; charset=utf-8");

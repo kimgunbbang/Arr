@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;  
+import java.io.IOException;   
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -92,6 +92,7 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/productDetailView.p")) {
 			action = new ProductDetailViewAction();
+			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

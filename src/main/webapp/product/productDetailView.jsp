@@ -212,14 +212,16 @@ text-align: center;
             <tbody>
                 <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
                 <c:forEach var="review" items="${reviewList}">
+           			<c:if test="${review.p_num eq param.p_num}">
                     <tr>
                         <td>${review.r_rating }</td>
                         <td>${review.id }</td>
-                        <td><a href="reviewDetail.rev?r_num=${review.r_num}">${review.r_title}</a></td>
+                        <td>${review.r_title}</td>
                         <td>${review.r_detail}</td>
-                        <td>${review.r_image}</td>
+                        <td><img src="${pageContext.request.contextPath }/images/${review.r_image }" id="cart_image" class="img-fluid rounded shadow"></td>
                         <td>${review.r_date}</td>
                     </tr>
+                   </c:if>
                 </c:forEach>
             </tbody>
         </table>

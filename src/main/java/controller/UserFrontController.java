@@ -98,7 +98,7 @@ public class UserFrontController extends HttpServlet {
 			request.getSession().invalidate();
 	
 			
-			forward=new ActionForward("productAllList.p",true);
+			forward=new ActionForward("main.p",true);
 		}else if(command.equals("/userModifyAction.u")) {
 			action = new UserModifyAction();
 			try {

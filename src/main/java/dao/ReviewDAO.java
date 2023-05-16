@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;   
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import vo.Review;
 
@@ -42,13 +43,13 @@ public class ReviewDAO {
 	        }else {
 	           num=rs.getInt(1)+1;
 	        }
-	        
+	        System.out.println(review.getP_num());
 	        String rnum = Integer.toString(num);
 	        
 	        close(rs);
 	        close(pstmt);
 			pstmt = conn.prepareStatement(sql);
-			
+			System.out.println(review.getP_num());
 			pstmt.setString(1, rnum);
 			pstmt.setString(2, review.getP_num());
 			pstmt.setString(3, review.getId());
@@ -60,13 +61,47 @@ public class ReviewDAO {
 			writeCount = pstmt.executeUpdate();
 		
 		}catch (Exception e) {
-			System.out.println("reviewWrite에러"+e);
+			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
 		
 		
 		return writeCount;
+	}
+
+	public ArrayList<Review> reviewAllList() {
+		ArrayList<Review> reviewList = new ArrayList<Review>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from review";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Review review = new Review();
+					review.setR_num(rs.getString("r_num"));
+					review.setP_num(rs.getString("p_num"));
+					review.setId(rs.getString("id"));
+					review.setR_title(rs.getString("r_title"));
+					review.setR_detail(rs.getString("r_detail"));
+					review.setR_image(rs.getString("r_image"));
+					review.setR_date(rs.getString("r_date"));
+					
+					reviewList.add(review);
+				}while(rs.next());
+			}
+			
+		}catch (Exception e) {
+			System.out.println("reviewDAO reviewAllList에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reviewList;
 	}
     
     
