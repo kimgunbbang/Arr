@@ -63,7 +63,7 @@ body {
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
 					
-					${productList.p_name}<br>
+					<h4>${productList.p_name}</h4><br>
 					품절입니다.
 			</div>
 			<c:if test="${status.count % 4 == 0}">

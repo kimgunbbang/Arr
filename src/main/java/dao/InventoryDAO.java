@@ -436,6 +436,36 @@ public class InventoryDAO {
 		return addcount;
 	}
 
+	public ArrayList<Inventory> inventoryProductList() {
+		ArrayList<Inventory> inventoryList = new ArrayList<Inventory>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select p_num, sum(inven_in) as '총입고' , sum(inven_out) as '총출고' "+
+				", sum(inven_in)-sum(inven_out) as '현재재고' from inventory group by p_num";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Inventory inventory = new Inventory();
+					inventory.setP_num(rs.getInt("p_num"));
+					inventory.setInven_qty(rs.getInt("현재재고"));
+					inventory.setInven_in(rs.getInt("총입고"));
+					inventory.setInven_out(rs.getInt("총출고"));
+					inventoryList.add(inventory);
+				}while(rs.next());
+			}
+			
+		}catch(Exception e) {
+			System.out.println("inventoryDAO inventoryProductList에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return inventoryList;
+	}
+
 	
 	
 	

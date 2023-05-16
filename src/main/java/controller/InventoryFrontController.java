@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import inventory.action.InventoryInOutAction;
 import inventory.action.InventoryListAction;
+import inventory.action.InventoryProductListAction;
 import inventory.action.InventorySearchListAction;
 import product.action.ProductAddAction;
 import product.action.ProductAllListAction;
@@ -81,6 +82,13 @@ public class InventoryFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/invenSearchList.in")) {
 			action = new InventorySearchListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/inventoryProductList.in")) {
+			action = new InventoryProductListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

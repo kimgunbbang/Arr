@@ -65,5 +65,23 @@ public class InventoryListService {
 		return inventoryList;
 	}
 
+	public ArrayList<Inventory> inventoryProductList() {
+		ArrayList<Inventory> inventoryList = new ArrayList<Inventory>();
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			InventoryDAO inventoryDAO = InventoryDAO.getInstance();
+			inventoryDAO.setConnection(conn);
+			
+			inventoryList=inventoryDAO.inventoryProductList();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(conn);
+		}
+		return inventoryList;
+	}
+
 
 }

@@ -14,6 +14,9 @@
 #datePick {
   display: inline;
 }
+.img{
+	width: 50%;
+}
 </style>
 <script>
 function optionChange(e) {
@@ -42,6 +45,21 @@ function dateChk() {
 <body>
 <jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class="container">
+<div class="row">
+		<!-- 탭 -->
+		<ul class="nav nav-tabs nav-fill">
+		 <li class="nav-item">
+		    <a class="nav-link" href="inventoryInOutForm.in">입출고등록</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link ${state == '' || state eq null? 'active':'' }" href="inventoryList.in">전체목록</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link ${state eq 'invenStatus'? 'active':'' }" href="inventoryProductList.in">상품별재고현황</a>
+		  </li>
+		  
+		</ul>
+	</div>
 <form action="invenSearchList.in"  onsubmit="return dateChk()">
 			<select name="invenSearchOption" onchange="optionChange(event)">
 				<option value="p_num" ${invenSearchOption == 'p_num' ? 'selected' : ''}>상품번호</option>
@@ -58,15 +76,13 @@ function dateChk() {
 				<input type="date" id="endDate" name="invenSearchValueEndDate" onchange="dateChk()">
 			</div>
 			<input type="submit" value="검색" >
-			<a href="inventoryInOutForm.in">입출고등록</a>&nbsp;&nbsp;&nbsp;
-			<a href="inventoryList.in">입출고목록</a>
 </form>
 
 <c:choose>
 	<c:when test="${empty inventoryList }">
 	입출고내역이 없습니다.
 	</c:when>
-	<c:otherwise>
+	<c:when test="${not empty inventoryList  && (state eq '' || state eq null)}">
 		<div class="table">
 			<div class="row">
 				<div class="col">순번</div>
@@ -76,7 +92,7 @@ function dateChk() {
 				<div class="col">출고량</div>
 				<div class="col">재고량</div>
 				<div class="col">입출고날짜</div>
-			</div>
+			</div><hr>
 			<c:forEach var="inventory" items="${inventoryList }">
 				<div class="row">
 					<div class="col">${inventory.inven_num }</div>
@@ -93,7 +109,34 @@ function dateChk() {
 				</div>
 			</c:forEach>
 		</div>
-		
+	</c:when>
+	<c:when test="${not empty inventoryList  && state eq 'invenStatus'}">
+		<div class="table">
+			<div class="row">
+				<div class="col">상품번호</div>
+				<div class="col">상품사진</div>
+				<div class="col">상품명</div>
+				<div class="col">총입고량</div>
+				<div class="col">총출고량</div>
+				<div class="col">현재고량</div>
+			</div><hr>
+			<c:forEach var="inventory" items="${inventoryList }">
+				<div class="row">
+					<div class="col">${inventory.p_num }</div>
+					<c:forEach var="product" items="${productList }">
+						<c:if test="${inventory.p_num eq product.p_num }">
+							<div class="col"><img class="img" src="${pageContext.request.contextPath}/images/${product.p_image }"></div>
+							<div class="col">${product.p_name }</div>
+						</c:if>
+					</c:forEach>
+					<div class="col">${inventory.inven_in }</div>
+					<div class="col">${inventory.inven_out }</div>
+					<div class="col">${inventory.inven_qty }</div>
+				</div>
+			</c:forEach>
+		</div>
+	</c:when>
+	<c:otherwise>
 	</c:otherwise>
 </c:choose>
 </div>
