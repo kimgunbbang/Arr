@@ -39,6 +39,14 @@ public class CartAddAction implements Action {
 			            break;
 			        }
 			    }
+			}else {
+				// UUID 생성
+				uuid = UUID.randomUUID().toString();
+
+				// 생성된 UUID를 문자열로 변환하여 쿠키에 저장
+				Cookie uuidCookie = new Cookie("uuid", uuid.toString());
+				uuidCookie.setMaxAge(24 * 60 * 60); // 쿠키 유효기간 1일 설정
+				response.addCookie(uuidCookie);	
 			}
 
 			// UUID가 존재하지 않는 경우 예외 처리 또는 기본값 설정

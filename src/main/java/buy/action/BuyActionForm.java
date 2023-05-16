@@ -3,6 +3,7 @@ package buy.action;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,18 +28,36 @@ public class BuyActionForm implements Action {
       String[] buy_qty = {};//구매수량
       String[] p_price = {};//상품금액
       int lastTotalMoney=0;//완전토탈
-      
+      System.out.println("sessionid알려줘 : "+id);
       if( id == null) {//세션아이디가 null일때
     	  Cookie[] cookies = request.getCookies();//쿠키정보가져와서
     	  String uuid = null;
     	  if (cookies != null) {
     	      for (Cookie cookie : cookies) {
     	          if (cookie.getName().equals("uuid")) {//비회원아이디가져온담에
-    	              uuid = cookie.getValue();//값지정하고
+    	              uuid = cookie.getValue();//있으면값지정하고
     	              break;
     	          }
     	      }
+    	  }else {
+    		  	uuid = UUID.randomUUID().toString();
+    			
+				// 생성된 UUID를 문자열로 변환하여 쿠키에 저장
+				Cookie uuidCookie = new Cookie("uuid", uuid.toString());
+				uuidCookie.setMaxAge(24 * 60 * 60); // 쿠키 유효기간 1일 설정
+				response.addCookie(uuidCookie);
     	  }
+    	  // UUID가 존재하지 않는 경우 예외 처리 또는 기본값 설정
+    	  if (uuid == null) {
+		  // UUID 생성
+				uuid = UUID.randomUUID().toString();
+	
+				// 생성된 UUID를 문자열로 변환하여 쿠키에 저장
+				Cookie uuidCookie = new Cookie("uuid", uuid.toString());
+				uuidCookie.setMaxAge(24 * 60 * 60); // 쿠키 유효기간 1일 설정
+				response.addCookie(uuidCookie);
+    	  }
+    	  
     	  id=uuid;
     	  System.out.println("uuid알려줘 : "+id);
     	  if(request.getParameterValues("remove") == null){//장바구니널일때,
