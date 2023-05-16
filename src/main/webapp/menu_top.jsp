@@ -56,8 +56,6 @@ body {
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" href="productBestList.p" style="color: #FE2E2E;" ><b>BEST</b></a><!-- 베스트 상품 보이게하기 -->
-
-
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" style="color: black;" href="#" id="navbarDropdown" role="button"  aria-expanded="false">
@@ -68,6 +66,7 @@ body {
             <li><a class="dropdown-item" href="#">게시판 목록 보기</a></li>  
           </ul>
         </li>
+        
         <%
 			  String userId = (String)session.getAttribute("id");
 			%>
@@ -94,7 +93,11 @@ body {
 					<li><a class="dropdown-item" href="">서브메뉴4</a></li>
 				</ul>
 			</li>
-			<% } %>
+			<% } else{%>
+			<li class="nav-item dropdown">
+	          <a class="nav-link" href="nonUserBuyListForm.buy"><b>비회원주문조회</b></a>
+	        </li>
+			<%} %>
     </ul>
     
 </div>

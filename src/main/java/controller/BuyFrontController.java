@@ -16,6 +16,7 @@ import buy.action.BuyCancelAction;
 import buy.action.BuyInfoDetailAction;
 import buy.action.BuyInfoFormAction;
 import buy.action.BuyListFormAction;
+import buy.action.BuyNonUserListAction;
 import vo.ActionForward;
 
 /**
@@ -86,6 +87,16 @@ public class BuyFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/buyInfoDetail.buy")) {
 			action = new BuyInfoDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/nonUserBuyListForm.buy")) {
+			request.setAttribute("pagefile", "/buy/buyNonUserListForm.jsp");//보일경로만적어주고
+			forward=new ActionForward("/index.jsp",false);//포워드는 요로케하기
+		}else if(command.equals("/nonUserBuyListAction.buy")) {
+			action = new BuyNonUserListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

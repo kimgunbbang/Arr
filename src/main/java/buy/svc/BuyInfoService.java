@@ -50,4 +50,22 @@ public class BuyInfoService {
 		return buyInfo;
 	}
 
+	public boolean isBuyer(int buy_num, String buy_phone) {
+		boolean isBuyer = false;
+		Connection conn = null;
+		
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			isBuyer = buyDAO.isBuyer(buy_num,buy_phone);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return isBuyer;
+	}
+
 }

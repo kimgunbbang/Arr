@@ -93,6 +93,7 @@ public class BuyAction implements Action {
     	            }
                 //구매완료창보여주기
                 request.setAttribute("pagefile", "/buy/buySuccess.jsp");
+                request.setAttribute("buy_num", buy_num);
                 forward = new ActionForward("index.jsp",false);
              }
           }else {//재고부터안되면 '구매수량을 다시 확인해주세요.'

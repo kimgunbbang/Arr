@@ -501,5 +501,27 @@ public class BuyDAO {
 		}
 		return buyList;
 	}
+
+	public boolean isBuyer(int buy_num, String buy_phone) {
+		boolean isBuyer=false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from buyinfo where buy_num=? and buy_phone=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			pstmt.setString(2, buy_phone);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				isBuyer=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return isBuyer;
+	}
 	
 }//BuyDAO클래스끝
