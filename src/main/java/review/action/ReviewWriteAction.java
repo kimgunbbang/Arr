@@ -36,6 +36,7 @@ public class ReviewWriteAction implements Action {
 		review.setR_detail(request.getParameter("r_detail"));
 		review.setR_image(request.getParameter("r_image"));
 		review.setR_date(request.getParameter("r_date"));
+		review.setBuy_num(request.getParameter("buy_num"));
 		
 		ReviewWriteService reviewWriteService = new ReviewWriteService();
 		writeResult = reviewWriteService.writeReview(review);

@@ -83,7 +83,16 @@ function cancel(buy_num, event) {
 		        ${buy.buy_qty }개 &nbsp;
 		        ${buy.buy_totalmoney }원 &nbsp;
 		        <c:if test="${buy.buy_state eq 'finish'  }">
-		         <a href="reviewWriteForm.r?p_num=${buy.p_num }" >후기작성</a><br>
+		        	<c:choose>
+		        	<c:when test="${reviewCheckList[j.index] eq false }">
+		        		<a href="reviewWriteForm.r?p_num=${buy.p_num }&buy_num=${buy.buy_num}" >후기작성</a><br>
+		        	</c:when>
+		        	<c:otherwise>
+		        	후기작성완료<br>
+		        	</c:otherwise>
+		        	</c:choose>
+		        
+		         
 		        </c:if>
 		       
 		        <c:set var="lastTotalMoney" value="${lastTotalMoney+buy.buy_totalmoney }"/>

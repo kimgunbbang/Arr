@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import buy.svc.BuyService;
+import review.svc.ReviewListService;
 import vo.ActionForward;
 import vo.Buy;
 import vo.BuyList;
@@ -26,8 +27,17 @@ public class BuyListFormAction implements Action {
 		BuyService buyService = new BuyService();
 		buyList = buyService.getbuyList(id);
 		ArrayList<Integer> buyNumList = buyService.getBuyNumList(id);
-		Collections.reverse(buyNumList);//최근구매내역이 먼저 나오게 역순처리
+		ArrayList<Boolean> reviewCheckList = new ArrayList<Boolean>();
+		ReviewListService reviewListService = new ReviewListService();
+		reviewCheckList = reviewListService.isReviewCheckList(buyNumList,buyList);
+		//Collections.reverse(reviewCheckList);
+		//Collections.reverse(buyNumList);//최근구매내역이 먼저 나오게 역순처리 22/21/12
+		System.out.println("buyList"+buyList.toString());
 		
+		System.out.println("불린배열"+reviewCheckList);
+		
+		
+		request.setAttribute("reviewCheckList", reviewCheckList);
 		request.setAttribute("buyNumList", buyNumList);//17,18,19,20,21,22
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("pagefile", "/buy/buyListForm.jsp");

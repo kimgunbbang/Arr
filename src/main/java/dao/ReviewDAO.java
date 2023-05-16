@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import vo.BuyList;
 import vo.Review;
 
 import static db.JdbcUtil.*;
@@ -32,7 +33,7 @@ public class ReviewDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "insert into review values(?,?,?,?,?,?,?,now())";
+		String sql = "insert into review values(?,?,?,?,?,?,?,now(),?)";
 		int num;
         
 		try {
@@ -57,6 +58,7 @@ public class ReviewDAO {
 			pstmt.setString(5, review.getR_title());
 			pstmt.setString(6, review.getR_detail());
 			pstmt.setString(7, review.getR_image());
+			pstmt.setString(8, review.getBuy_num());
 			
 			writeCount = pstmt.executeUpdate();
 		
@@ -102,6 +104,45 @@ public class ReviewDAO {
 		}
 		
 		return reviewList;
+	}
+
+	public ArrayList<Boolean> reviewCheckList(ArrayList<Integer> buyNumList, ArrayList<BuyList> buyList) {
+		ArrayList<Boolean> reviewCheck = new ArrayList<Boolean>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from review where buy_num = ? and p_num = ?";
+		
+
+		try {
+	        for (int i = 0; i < buyList.size(); i++) {
+	            boolean check = false;
+	            for (int j = 0; j < buyNumList.size(); j++) {
+	                pstmt = conn.prepareStatement(sql);
+	                pstmt.setInt(1, buyNumList.get(j));
+	                pstmt.setInt(2, buyList.get(i).getP_num());
+	                System.out.println(pstmt);
+	                rs = pstmt.executeQuery();
+	                if (rs.next()) {
+	                    // 같은 p_num인 상품에 대해 buy_num이 같은 경우에만 true로 설정
+	                    if (buyNumList.get(j) == buyList.get(i).getBuy_num()) {
+	                        check = true;
+	                        break; // 이미 true로 설정되었으므로 더 이상 확인할 필요 없음
+	                    }
+	                }
+	                close(rs);
+	                close(pstmt);
+	            }
+	            reviewCheck.add(check);
+	        }
+
+		}catch (Exception e) {
+			System.out.println("reviewDAO reviewCheckList에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reviewCheck;
 	}
     
     

@@ -49,6 +49,7 @@ function convertRating() {
   <input type="hidden" id="r_num" name="r_num">
   <input type="hidden" id="id" name="id">
   <input type="hidden" id="p_num" name="p_num" value="${p_num }">
+  <input type="hidden" id="buy_num" name="buy_num" value="${buy_num }" > 
   <label for="r_title">제목:</label>
   <input type="text" id="r_title" name="r_title" required><br>
 

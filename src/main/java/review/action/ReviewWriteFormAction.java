@@ -13,8 +13,10 @@ public class ReviewWriteFormAction implements Action {
 		ActionForward forward = null;
 		
 		String p_num = request.getParameter("p_num");
+		String buy_num = request.getParameter("buy_num");
 		
 		request.setAttribute("p_num", p_num);
+		request.setAttribute("buy_num", buy_num);
 		request.setAttribute("pagefile", "/review/reviewWriteForm.jsp");
 		
 		forward = new ActionForward("index.jsp",false);

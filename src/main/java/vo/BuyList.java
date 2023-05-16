@@ -68,6 +68,13 @@ public class BuyList {
 	public void setP_image(String p_image) {
 		this.p_image = p_image;
 	}
+	@Override
+	public String toString() {
+		return "BuyList [buy_num=" + buy_num + ", p_num=" + p_num + ", p_name=" + p_name + "]";
+	}
+	
+	
+	
 	
 	
 }

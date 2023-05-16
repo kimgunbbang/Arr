@@ -11,8 +11,16 @@ public class Review {
 	private String r_detail;
 	private String r_image;
 	private String r_date;
+	private String buy_num;
 	
 	
+
+	public String getBuy_num() {
+		return buy_num;
+	}
+	public void setBuy_num(String buy_num) {
+		this.buy_num = buy_num;
+	}
 	public String getR_num() {
 		return r_num;
 	}
