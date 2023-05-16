@@ -1,33 +1,34 @@
 package vo;
 
-import java.sql.Date;
+
 
 public class Review {
-	private int r_num;
-	private int p_num;
-	private int r_rating;
+	private String r_num;
+	private String p_num;
+	private String r_rating;
 	private String id;
 	private String r_title;
 	private String r_detail;
 	private String r_image;
 	private String r_date;
 	
-	public int getR_num() {
+	
+	public String getR_num() {
 		return r_num;
 	}
-	public void setR_num(int r_num) {
+	public void setR_num(String r_num) {
 		this.r_num = r_num;
 	}
-	public int getP_num() {
+	public String getP_num() {
 		return p_num;
 	}
-	public void setP_num(int p_num) {
+	public void setP_num(String p_num) {
 		this.p_num = p_num;
 	}
-	public int getR_rating() {
+	public String getR_rating() {
 		return r_rating;
 	}
-	public void setR_rating(int r_rating) {
+	public void setR_rating(String r_rating) {
 		this.r_rating = r_rating;
 	}
 	public String getId() {

@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,7 +48,10 @@ public class ReviewFrontController extends HttpServlet {
 		Action action=null;//액션초기화
 		ActionForward forward=null;
 		
-		if(command.equals("/reviewWriteAction.r")) {
+		if(command.equals("/reviewWriteForm.r")) {
+			request.setAttribute("pagefile", "/review/reviewWriteForm.jsp");
+			forward = new ActionForward("/index.jsp",false);
+		}else if(command.equals("/reviewWriteAction.r")) {
 			action = new ReviewWriteAction();
 			try {
 				forward = action.execute(request, response);
@@ -56,6 +60,22 @@ public class ReviewFrontController extends HttpServlet {
 			}
 		}
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		if(forward != null) {
+			if(forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			}else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
+		}
 		
 	}
 }
