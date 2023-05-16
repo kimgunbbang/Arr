@@ -41,6 +41,7 @@ function openModal(buy_num, event){
 </script>
 </head>
 <body>
+<jsp:include page="/adminCheck.jsp"></jsp:include>
 <div class = "container">
 	<div class="row">
 		<!-- 탭 -->

@@ -53,6 +53,7 @@ img{
 		전화번호 : ${buyInfo.buy_phone } <br>
 		주소 : ${buyInfo.buy_addr } <br>
 		상세주소 : ${buyInfo.buy_addr2 } <br>
+		배송메모 : ${buyInfo.deli_memo } <br>
 	</div>
 </div>
 </body>

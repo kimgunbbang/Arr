@@ -121,7 +121,7 @@ public class ProductDAO {
 							rs.getString("category_name"),
 							rs.getInt("p_readcount"),
 							rs.getBoolean("p_hide"),
-							rs.getInt("p_qty")
+							rs.getInt("inven_qty")
 							));
 				}while(rs.next());
 			}
