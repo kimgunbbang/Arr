@@ -255,7 +255,7 @@ text-align: center;
               </tr>
               <c:if test="${sessionScope.id eq review.id }">
               <tr>
-               <td>리뷰삭제기능을 추가해볼것이에여♥</td>
+               <td><a href="reviewDeleteAction.r?id=${user.id}" onclick="confirmDelete('${user.id}', event)">삭제</a></td>
               </tr>
               </c:if>
             </table>
@@ -265,6 +265,18 @@ text-align: center;
     </div>
   </div>
 </div>
+
+
+
+<script>
+function confirmDelete(userId, event) {
+	  event.preventDefault(); // 이벤트의 기본 동작을 취소
+
+	  if (confirm("정말 삭제하시겠습니까?")) {
+	    location.href = "reviewDeleteAction.r?id=" + userId;
+	  }
+	}
+</script>
 <!-- 문의 게시판 -->
 <div class="qna" id="qnaSection">
   <div class="col-md-12">

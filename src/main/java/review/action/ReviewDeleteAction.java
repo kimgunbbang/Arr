@@ -17,8 +17,9 @@ public class ReviewDeleteAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		String r_num = request.getParameter("r_num");
-		
+		//String r_num = request.getParameter("r_num");
+		System.out.println(r_num);
+		System.out.println(id);
 		ReviewDeleteService reviewDeleteService = new ReviewDeleteService();
 		boolean deleteResult = reviewDeleteService.deleteReview(id,r_num);
 		if(deleteResult){

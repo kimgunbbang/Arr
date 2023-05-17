@@ -153,9 +153,10 @@ public class ReviewDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setString(2, r_num);
 			deleteCount = pstmt.executeUpdate();
 		}catch (Exception e) {
-			System.out.println("deleteDelivery에러 : "+e);
+			System.out.println("deleteReview에러 : "+e);
 		}finally {
 			close(pstmt);
 		}

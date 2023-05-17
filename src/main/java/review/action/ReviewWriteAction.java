@@ -43,7 +43,7 @@ public class ReviewWriteAction implements Action {
 		
 		if(writeResult) {
 			request.setAttribute("p_num", request.getParameter("p_num"));
-			forward = new ActionForward("productAllList.p",true);
+			forward = new ActionForward("productDetailView.p?p_num="+request.getParameter("p_num")+"#reviewSection",true);
 		}else {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
