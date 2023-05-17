@@ -99,13 +99,14 @@ text-align: center;
         <div class="row">
             <div class="col-md-6">
                 <!-- 제품사진 -->
-                <input type="hidden" name="p_image" value="${product.p_image }">
+                
                 <img src="${pageContext.request.contextPath }/images/${product.p_image }" id="p_image" class="img-fluid rounded shadow imgsize">
             </div>
             <div class="col-md-6 my-4">
                 <!-- 상품명,가격,구매수량,구매버튼,장바구니버튼 -->
                 
                 <form action="buyActionForm.buy?id=${id }&p_num=${product.p_num}" method="post">
+                <input type="hidden" name="p_image" value="${product.p_image }">
                 <h2>${product.p_name }</h2>
                 <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly>${product.p_price }
                     <div class="form-group my-3">

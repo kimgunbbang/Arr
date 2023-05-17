@@ -29,7 +29,7 @@ public class BuyActionForm implements Action {
       String[] p_price = {};//상품금액
       String[] p_image = {};//상품이미지
       int lastTotalMoney=0;//완전토탈
-      System.out.println("sessionid알려줘 : "+id);
+      System.out.println("p_image알려줘 : "+request.getParameter("p_image"));
       if( id == null) {//세션아이디가 null일때
     	  Cookie[] cookies = request.getCookies();//쿠키정보가져와서
     	  String uuid = null;
@@ -77,6 +77,7 @@ public class BuyActionForm implements Action {
                      buy.setP_num(Integer.parseInt(p_num[i])); //상품번호 set
                      buy.setBuy_qty(Integer.parseInt(buy_qty[i])); //수량 set
                      buy.setBuy_totalmoney(Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i])); //총금액set
+                     buy.setP_image(p_image[i]);//이미지 set
                      buyList.add(buy);
                      lastTotalMoney+=Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i]);
                      
@@ -159,6 +160,7 @@ public class BuyActionForm implements Action {
                      buy.setP_num(Integer.parseInt(p_num[i])); //상품번호 set
                      buy.setBuy_qty(Integer.parseInt(buy_qty[i])); //수량 set
                      buy.setBuy_totalmoney(Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i])); //총금액set
+                     buy.setP_image(p_image[i]);//이미지set
                      buyList.add(buy);
                      lastTotalMoney+=Integer.parseInt(buy_qty[i])*Integer.parseInt(p_price[i]);
                      
