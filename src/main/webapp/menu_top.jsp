@@ -12,6 +12,10 @@
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+.custom-container {
+    padding-left: 0;
+    padding-right: 0;
+}
 /* cdn import */
 @font-face {
   font-family: 'Godo';
@@ -31,14 +35,15 @@ body {
 <title>Insert title here</title>
 
 </head>
-<div class="container" style="height:200px; background-color: #FFF" >
+<body>
+<div class="container custom-container" style="height:200px; background-color: #FFF" >
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
-    <div class="col-lg-4">
+    <div class="col-2">
     <a href="main.p">
       <img src="${pageContext.request.contextPath}/images/logo4.png" alt="로고" width="150" height="150"/>
     </a>
     </div>
-    <div class="col-lg-4">
+    <div class="col-5">
       <ul class="nav nav-pills">
         <li class="nav-item dropdown">
           <a class="nav-link" style="color: black;" href="productAllList.p" id="navbarDropdown" role="button"  aria-expanded="false">
@@ -101,7 +106,7 @@ body {
     </ul>
     
 </div>
-       <div class="col-lg-4">
+       <div class="col-5">
            <c:choose>
               <c:when test="${empty sessionScope.id  }"><!-- 로그인 안됬을때 -->
               <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
