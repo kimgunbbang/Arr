@@ -16,41 +16,41 @@
 <c:if test="${pagefile == null }">
 <jsp:forward page="main.p"></jsp:forward>
 </c:if>
-	<div class="container">
-		<!-- 사이트 상단 부분 -->
-		<div class="row" >
-			<div class="col">
-				<!-- 메뉴바자리 -->
-				<jsp:include page="menu_top.jsp"></jsp:include>
-			</div>
-		</div>
-		
-		<!-- 사이트 본문 부분 -->
-		<div class="row">
-			<div class="cols">
-			<c:choose>
-				<c:when test="${pagefile != null }">
-					<jsp:include page="${pagefile}"></jsp:include>
-				</c:when>
-			</c:choose>
-			</div>
-		</div>
-		
-		<!-- 사이트 하단 부분 -->
-		<div class="row">
-			<div class="cols"> 
-			
-			</div>
-			
-			<div class="cols"> 
-			
-			</div>
-			
-			<div class="cols"> 
-			
-			</div>
-		</div>
-		
-	</div>
+   <div class="container">
+      <!-- 사이트 상단 부분 -->
+      <div class="row" >
+         <div class="col">
+            <!-- 메뉴바자리 -->
+            <jsp:include page="menu_top.jsp"></jsp:include>
+         </div>
+      </div>
+      
+      <!-- 사이트 본문 부분 -->
+      <div class="row">
+         <div class="cols">
+         <c:choose>
+            <c:when test="${pagefile != null }">
+               <jsp:include page="${pagefile}"></jsp:include>
+            </c:when>
+         </c:choose>
+         </div>
+      </div>
+      
+      <!-- 사이트 하단 부분 -->
+      <div class="row">
+         <div class="cols"> 
+         
+         </div>
+         
+         <div class="cols"> 
+         
+         </div>
+         
+         <div class="cols"> 
+         
+         </div>
+      </div>
+      
+   </div>
 </body>
 </html>

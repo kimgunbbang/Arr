@@ -73,36 +73,36 @@ body {
         </li>
         
         <%
-			  String userId = (String)session.getAttribute("id");
-			%>
-			
-			<% if (userId != null && userId.equals("admin")) { %>
-			 <li class="nav-item dropdown">
-				<a href="" class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false">
-            	<b>관리자모드</b></a>
-            	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
-					<li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
-					<li><a class="dropdown-item" href="adminBuyList.ad">주문관리</a></li>
-					<li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
-				</ul>
-			</li>
-			<% } else if(userId != null){ %>
-			<li class="nav-item dropdown">
-				<a class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false"href="#">
-				<b>마이페이지</b></a>
-				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="userViewAction.u?id=${sessionScope.id }">내정보보기</a></li>
-					<li><a class="dropdown-item" href="buyListForm.buy">구매목록</a></li>
-					<li><a class="dropdown-item" href="">서브메뉴3</a></li>
-					<li><a class="dropdown-item" href="">서브메뉴4</a></li>
-				</ul>
-			</li>
-			<% } else{%>
-			<li class="nav-item dropdown">
-	          <a class="nav-link" href="nonUserBuyListForm.buy"><b>비회원주문조회</b></a>
-	        </li>
-			<%} %>
+           String userId = (String)session.getAttribute("id");
+         %>
+         
+         <% if (userId != null && userId.equals("admin")) { %>
+          <li class="nav-item dropdown">
+            <a href="" class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false">
+               <b>관리자모드</b></a>
+               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <li><a class="dropdown-item" href="inventoryList.in">재고관리</a></li>
+               <li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
+               <li><a class="dropdown-item" href="adminBuyList.ad">주문관리</a></li>
+               <li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
+            </ul>
+         </li>
+         <% } else if(userId != null){ %>
+         <li class="nav-item dropdown">
+            <a class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false"href="#">
+            <b>마이페이지</b></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <li><a class="dropdown-item" href="userViewAction.u?id=${sessionScope.id }">내정보보기</a></li>
+               <li><a class="dropdown-item" href="buyListForm.buy">구매목록</a></li>
+               <li><a class="dropdown-item" href="">서브메뉴3</a></li>
+               <li><a class="dropdown-item" href="">서브메뉴4</a></li>
+            </ul>
+         </li>
+         <% } else{%>
+         <li class="nav-item dropdown">
+             <a class="nav-link" href="nonUserBuyListForm.buy"><b>비회원주문조회</b></a>
+           </li>
+         <%} %>
     </ul>
     
 </div>
@@ -141,7 +141,7 @@ body {
              </c:otherwise>
          </c:choose>
       </div>
-</div>  	
+</div>     
 </div>
 </body>
 </html>

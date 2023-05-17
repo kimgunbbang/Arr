@@ -18,9 +18,11 @@
         <div class="col">
             <select name="p_num">
                 <c:forEach var="productList" items="${productList}">
+                	<c:if test="${productList.p_hide eq '0' }">
                     <option value="${productList.p_num}" ${param.p_num == productList.p_num ? 'selected' : ''}>
                         ${productList.p_num}:${productList.p_name}
                     </option>
+                    </c:if>
                 </c:forEach>
             </select>
         </div>
