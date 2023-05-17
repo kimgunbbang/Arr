@@ -92,7 +92,7 @@ body {
 				<a class="nav-link" style="color: black;" id="navbarDropdown" role="button"  aria-expanded="false"href="#">
 				<b>마이페이지</b></a>
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="userViewAction.u">내정보보기</a></li>
+					<li><a class="dropdown-item" href="userViewAction.u?id=${sessionScope.id }">내정보보기</a></li>
 					<li><a class="dropdown-item" href="buyListForm.buy">구매목록</a></li>
 					<li><a class="dropdown-item" href="">서브메뉴3</a></li>
 					<li><a class="dropdown-item" href="">서브메뉴4</a></li>
