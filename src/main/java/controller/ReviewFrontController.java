@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import inventory.action.InventoryListAction;
 import product.action.ProductSelectListAction;
+import review.action.ReviewDeleteAction;
 import review.action.ReviewWriteAction;
 import review.action.ReviewWriteFormAction;
 import vo.ActionForward;
@@ -61,6 +62,13 @@ public class ReviewFrontController extends HttpServlet {
 		
 		}else if(command.equals("/reviewWriteAction.r")) {
 			action = new ReviewWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/reviewDeleteAction.r")) {
+			action = new ReviewDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

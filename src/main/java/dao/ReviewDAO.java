@@ -144,6 +144,24 @@ public class ReviewDAO {
 		
 		return reviewCheck;
 	}
+
+	public int deleteReview(String id, String r_num) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from review where id = ? and r_num = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			deleteCount = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("deleteDelivery에러 : "+e);
+		}finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
+	}
     
     
 }

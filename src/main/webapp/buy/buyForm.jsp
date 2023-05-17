@@ -77,7 +77,7 @@ function setDeliveryInfo(selectBox) {
 		총금액 : ${lastTotalMoney }<br>
 		
 		
-		<c:if test="${sessionScope ne null and not empty deliveryList}">
+<c:if test="${sessionScope ne null and not empty deliveryList}">
 		배송지선택 : 
 			<select name="deli_num" onchange="setDeliveryInfo(this)">
 				<option value="newDelivery">신규배송지

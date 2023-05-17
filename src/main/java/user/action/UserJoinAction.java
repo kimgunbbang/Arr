@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import delivery.svc.DeliveryAddService;
 import user.svc.UserJoinService;
 import vo.ActionForward;
 import vo.User;
@@ -26,6 +27,9 @@ public class UserJoinAction implements Action{
 		
 		UserJoinService userJoinService = new UserJoinService();
 		joinResult = userJoinService.joinUser(user);
+		
+		DeliveryAddService deliveryAddService = new DeliveryAddService();
+		joinResult = deliveryAddService.addDeli(user);
 		
 		if(joinResult) {
 			forward = new ActionForward("productAllList.p",true);

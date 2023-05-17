@@ -84,6 +84,14 @@ text-align: center;
     padding: 20px;
     background-color: #f7f7f7;
   }
+  .review-item td.review-info {
+  	text-align: right;
+ 
+  }
+  .star-icon {
+  color: gold; /* 별 아이콘의 색상 */
+  font-size: 20px; /* 별 아이콘의 크기 */
+}
 </style>
 </head>
 <body>
@@ -217,37 +225,46 @@ text-align: center;
 <!-- 리뷰 게시판 -->
 <div class="review" id="reviewSection">
   <div class="col-md-12">
-    <h3>리뷰 게시판</h3>
+    <h3><b>REVIEW</b></h3>
     
     <div class="reviewForm">
       <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
       <c:forEach var="review" items="${reviewList}">
         <c:if test="${review.p_num eq param.p_num}">
-          <div class="review-item">
+          <div class="review-item" style="height: auto; width: 800px; margin: auto;">
             <table>
               <tr>
-                <td>작성자: ${review.id}</td>
-                <td>작성일: ${review.r_date}</td>
+                <td class="review-rating">
+                  별점:
+                  <%-- 별점을 표시하는 부분 --%>
+                  <c:forEach var="i" begin="1" end="${review.r_rating}">
+                    <span class="star-icon">&#9733;</span>
+                  </c:forEach>
+                </td>
               </tr>
               <tr>
-                <td>평점: ${review.r_rating}</td>
-                <td>제목: ${review.r_title}</td>
+                <td><b>${review.r_title}</b></td>
+                <td class="review-info">작성자: ${review.id}</td>
+                <td class="review-info">작성일: ${review.r_date}</td>
               </tr>
               <tr>
-                <td colspan="2">내용: ${review.r_detail}</td>
+                <td colspan="3">${review.r_detail}</td>
               </tr>
               <tr>
-                <td colspan="2" class="review-image"><img src="${pageContext.request.contextPath}/images/${review.r_image}" class="review-image img-fluid rounded shadow"></td>
+                <td colspan="3" class="review-image"><img src="${pageContext.request.contextPath}/images/${review.r_image}" class="review-image img-fluid rounded shadow"></td>
               </tr>
+              <c:if test="${sessionScope.id eq review.id }">
+              <tr>
+               <td>리뷰삭제기능을 추가해볼것이에여♥</td>
+              </tr>
+              </c:if>
             </table>
           </div>
         </c:if>
       </c:forEach>
     </div>
-
   </div>
 </div>
-
 <!-- 문의 게시판 -->
 <div class="qna" id="qnaSection">
   <div class="col-md-12">
@@ -255,6 +272,6 @@ text-align: center;
     <!-- 문의 게시판 내용을 여기에 추가 -->
   </div>
 </div>
-
+</div>
 </body>
 </html>

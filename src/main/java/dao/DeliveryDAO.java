@@ -203,4 +203,43 @@ public class DeliveryDAO {
 		
 		return delivery;
 	}
+
+	public int addDelivery(User user) {
+int addCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "insert into delivery values(?,?,'기본 주소',?,?,?,?,?)";
+		int num;
+        
+		try {
+			pstmt = conn.prepareStatement("select max(deli_num) from delivery");
+	        rs = pstmt.executeQuery();
+	        if(!rs.next()) {
+	           num=1;
+	        }else {
+	           num=rs.getInt(1)+1;
+	        }
+	        close(rs);
+	        close(pstmt);
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			pstmt.setString(2, user.getId());
+			pstmt.setString(3, user.getUser_zipcode());
+			pstmt.setString(4, user.getUser_addr());
+			pstmt.setString(5, user.getUser_addr2());
+			pstmt.setString(6, user.getUser_name());
+			pstmt.setString(7, user.getUser_phone());
+			
+			addCount = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("deliveryAdd에러"+e);
+		}finally {
+			close(pstmt);
+		}
+		
+		return addCount;
+	}
 }
