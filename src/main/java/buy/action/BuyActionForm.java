@@ -27,6 +27,7 @@ public class BuyActionForm implements Action {
       String[] p_num = {};//상품번호
       String[] buy_qty = {};//구매수량
       String[] p_price = {};//상품금액
+      String[] p_image = {};//상품이미지
       int lastTotalMoney=0;//완전토탈
       System.out.println("sessionid알려줘 : "+id);
       if( id == null) {//세션아이디가 null일때
@@ -66,7 +67,7 @@ public class BuyActionForm implements Action {
                   p_num = request.getParameterValues("p_num");//상품번호
                   buy_qty = request.getParameterValues("buy_qty");//구매수량
                   p_price = request.getParameterValues("p_price");//상품금액
-                  
+                  p_image = request.getParameterValues("p_image");//상품이미지
                   lastTotalMoney=0;
                   
                   ArrayList<Buy> buyList = new ArrayList<Buy>();
@@ -120,6 +121,7 @@ public class BuyActionForm implements Action {
                  buy.setP_num(cartSet.get(i).getP_num()); //상품번호 set
                  buy.setBuy_qty(cartSet.get(i).getCart_qty()); //수량 set
                  buy.setBuy_totalmoney(cartSet.get(i).getCart_qty()*cartSet.get(i).getP_price()); //총금액set
+                 buy.setP_image(cartSet.get(i).getP_image());//이미지 set
                  buyList.add(buy);
                  lastTotalMoney+=cartSet.get(i).getCart_qty()*cartSet.get(i).getP_price();
                  
@@ -147,7 +149,7 @@ public class BuyActionForm implements Action {
                   p_num = request.getParameterValues("p_num");//상품번호
                   buy_qty = request.getParameterValues("buy_qty");//구매수량
                   p_price = request.getParameterValues("p_price");//상품금액
-                  
+                  p_image = request.getParameterValues("p_image");//상품이미지
                   lastTotalMoney=0;
                   
                   ArrayList<Buy> buyList = new ArrayList<Buy>();
@@ -197,6 +199,7 @@ public class BuyActionForm implements Action {
                  buy.setP_num(cartSet.get(i).getP_num()); //상품번호 set
                  buy.setBuy_qty(cartSet.get(i).getCart_qty()); //수량 set
                  buy.setBuy_totalmoney(cartSet.get(i).getCart_qty()*cartSet.get(i).getP_price()); //총금액set
+                 buy.setP_image(cartSet.get(i).getP_image());//이미지 set
                  buyList.add(buy);
                  lastTotalMoney+=cartSet.get(i).getCart_qty()*cartSet.get(i).getP_price();
                  

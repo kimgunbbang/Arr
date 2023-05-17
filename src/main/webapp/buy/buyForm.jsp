@@ -36,17 +36,8 @@ function setDeliveryInfo(selectBox) {
 	  document.getElementById('deli_zipcode').value = zipcode;
 	  document.getElementById('deli_addr').value = addr;
 	  document.getElementById('deli_addr2').value = addr2;
-	}
-/* function qtychage(event) {
-	var buy_qty=document.getElementById('buy_qty').value;
-	var p_price=document.getElementById('p_price').value;
-	var buy_totalmoney=buy_qty*p_price;
-	
-	document.getElementById('buy_qty').innerHTML=buy_qty;
-	document.getElementById('p_price').innerHTML=buy_qty;
-	document.getElementById('buy_totalmoney').innerHTML=buy_qty;
-	  
-} */
+}
+
 </script>
 <%int num=0; %>
 </head>
@@ -64,7 +55,7 @@ function setDeliveryInfo(selectBox) {
 		
 		<c:forEach var="buy" items="${buyList }" varStatus="idx">
 		<%=++num %>.&nbsp;
-		상품번호: ${buy.p_num }
+		상품번호: ${buy.p_image }
 		<input type="hidden" name="p_num" id="p_num" value="${buy.p_num }"> &nbsp;
 		구매수량: ${buy.buy_qty }
 		<input type="hidden" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }" onchange='qtychage(event)'>&nbsp;
@@ -80,26 +71,29 @@ function setDeliveryInfo(selectBox) {
 <c:if test="${sessionScope ne null and not empty deliveryList}">
 		배송지선택 : 
 			<select name="deli_num" onchange="setDeliveryInfo(this)">
-				<option value="newDelivery">신규배송지
+			<c:set var="first" value="true"/>
 				<c:forEach var="delivery" items="${deliveryList }">
 					<option value="${delivery.deli_num}" data-name="${delivery.deli_name}" 
 														data-phone="${delivery.deli_phone}" 
 														data-zipcode="${delivery.deli_zipcode}" 
 														data-addr="${delivery.deli_addr}" 
-														data-addr2="${delivery.deli_addr2}">
+														data-addr2="${delivery.deli_addr2}"
+														${first? 'selected':'' }>
       					${delivery.deli_name}
+      					<c:set var="first" value="false"/>
 				</c:forEach>
+				<option value="newDelivery">신규배송지
 			</select>
 		</c:if>
 
 		<br>
 			
-			수령인 : <input type="text" name = "deli_username" id = "deli_username" required><br>
-			수령인 전화번호 :<input type="text" name = "deli_phone" id = "deli_phone" required><br>
-			우편번호 : <input type="text" name = "deli_zipcode" id = "deli_zipcode" readonly>
+			수령인 : <input type="text" name = "deli_username" id = "deli_username" value = "${not empty deliveryList?deliveryList[0].deli_name:''} " required><br>
+			수령인 전화번호 :<input type="text" name = "deli_phone" id = "deli_phone" value = "${not empty deliveryList?deliveryList[0].deli_phone:''} " required><br>
+			우편번호 : <input type="text" name = "deli_zipcode" id = "deli_zipcode" value = "${not empty deliveryList?deliveryList[0].deli_zipcode:''}" readonly>
 			<input type="button" name="zipSearch" value="주소검색"  id="zipSearch" ><br>
-			배송지 : <input type="text" name = "deli_addr" id = "deli_addr" readonly required><br>
-			상세주소 : <input type="text" name = "deli_addr2" id = "deli_addr2" ><br>
+			배송지 : <input type="text" name = "deli_addr" id = "deli_addr" value = "${not empty deliveryList?deliveryList[0].deli_addr:''}" readonly required><br>
+			상세주소 : <input type="text" name = "deli_addr2" id = "deli_addr2" value = "${not empty deliveryList?deliveryList[0].deli_addr2:''}"><br>
 			배송시요청사항<br><textarea rows="20" cols="20" name="deli_memo"></textarea>
 		
 		<input type="submit" value="구매하기">
