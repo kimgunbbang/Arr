@@ -256,7 +256,7 @@ text-align: center;
               </tr>
               <c:if test="${sessionScope.id eq review.id }">
               <tr>
-               <td><a href="reviewDeleteAction.r?id=${user.id}" onclick="confirmDelete('${user.id}', event)">삭제</a></td>
+               <td><a href="reviewDeleteAction.r?r_num=${review.r_num}" onclick="confirmDelete('${review.r_num}', event)">삭제</a></td>
               </tr>
               </c:if>
             </table>
@@ -274,7 +274,7 @@ function confirmDelete(userId, event) {
 	  event.preventDefault(); // 이벤트의 기본 동작을 취소
 
 	  if (confirm("정말 삭제하시겠습니까?")) {
-	    location.href = "reviewDeleteAction.r?id=" + userId;
+	    location.href = "reviewDeleteAction.r?r_num=" + userId;
 	  }
 	}
 </script>

@@ -8,11 +8,12 @@ import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 
 import dao.ReviewDAO;
+import vo.Review;
 
 
 public class ReviewDeleteService {
 
-	public boolean deleteReview(String id, String r_num) {
+	public boolean deleteReview(Review review) {
 		boolean deleteReview = false;
 		Connection conn = null;
 		int deleteCount = 0;
@@ -22,7 +23,7 @@ public class ReviewDeleteService {
 			conn = getConnection();
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();
 			reviewDAO.setConnection(conn);
-			deleteCount = reviewDAO.deleteReview(id,r_num);
+			deleteCount = reviewDAO.deleteReview(review);
 			
 			if(deleteCount>0) {
 				commit(conn);
