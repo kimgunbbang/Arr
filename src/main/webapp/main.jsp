@@ -34,7 +34,7 @@ body {
     	<div class="col">
 			<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
 			  <div class="carousel-inner">
-			    <div class="carousel-item active">
+			    <div class="carousel-item">
 				    <a href="productDetailView.p?p_num=1">
 				      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner1.jpg" class="d-block w-100" alt="banner1">
 				    </a>
@@ -62,6 +62,11 @@ body {
 			    <div class="carousel-item">
 				    <a href="productDetailView.p?p_num=4">
 				      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner6.jpg" class="d-block w-100" alt="banner6">
+				    </a>
+			    </div>
+			    <div class="carousel-item active">
+				    <a href="#">
+				      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner7.jpg" class="d-block w-100" alt="banner6">
 				    </a>
 			    </div>
 			  </div>
