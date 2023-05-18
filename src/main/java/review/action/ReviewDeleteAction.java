@@ -17,8 +17,7 @@ public class ReviewDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-		HttpSession session = request.getSession();
-		Review review = new Review();
+		String p_num = request.getParameter("p_num");
 		String r_num = request.getParameter("r_num");
 		
 
@@ -26,7 +25,7 @@ public class ReviewDeleteAction implements Action {
 		ReviewDeleteService reviewDeleteService = new ReviewDeleteService();
 		boolean deleteResult = reviewDeleteService.deleteReview(r_num);
 		if(deleteResult){
-			forward = new ActionForward("productDetailView.p",true);
+			forward = new ActionForward("main.p",true);
 			
 			
 		}else {

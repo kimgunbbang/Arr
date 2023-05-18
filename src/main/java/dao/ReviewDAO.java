@@ -84,6 +84,7 @@ public class ReviewDAO {
 			if(rs.next()) {
 				do {
 					Review review = new Review();
+					review.setR_rating(rs.getString("r_rating"));
 					review.setR_num(rs.getString("r_num"));
 					review.setP_num(rs.getString("p_num"));
 					review.setId(rs.getString("id"));

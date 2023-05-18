@@ -92,6 +92,29 @@ text-align: center;
   color: gold; /* 별 아이콘의 색상 */
   font-size: 20px; /* 별 아이콘의 크기 */
 }
+
+
+.rating {
+  display: inline-block;
+}
+
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  color: #ddd;
+  float: right;
+}
+
+.rating label:before {
+  content: "\2605";
+  margin-right: 5px;
+}
+
+.rating input[type="radio"]:checked ~ label {
+  color: #ffdd00;
+}
 </style>
 </head>
 <body>
@@ -236,13 +259,14 @@ text-align: center;
           <div class="review-item" style="height: auto; width: 800px; margin: auto;">
             <table>
               <tr>
-                <td class="review-rating">
-                  별점:
-                  <%-- 별점을 표시하는 부분 --%>
+              
+                <td class="rating">
+               
                   <c:forEach var="i" begin="1" end="${review.r_rating}">
                     <span class="star-icon">&#9733;</span>
-                  </c:forEach>
+                  </c:forEach> 
                 </td>
+                </div>
               </tr>
               <tr>
                 <td><b>${review.r_title}</b></td>
@@ -257,7 +281,7 @@ text-align: center;
               </tr>
               <c:if test="${sessionScope.id eq review.id }">
               <tr>
-               <td><a href="reviewDeleteAction.r?r_num=${review.r_num}" onclick="confirmDelete('${review.r_num}', event)">삭제</a></td>
+               <td><a href="reviewDeleteAction.r?r_num=${review.r_num}&p_num=${review.p_num}" onclick="confirmDelete('${review.r_num}', event)">삭제</a></td>
               </tr>
               </c:if>
             </table>
@@ -269,7 +293,21 @@ text-align: center;
 </div>
 
 
-
+<script>
+function convertRating() {
+  var stars = document.getElementsByName("r_ratingValue");
+  var ratingValue = 0;
+  
+  for (var i = 0; i < stars.length; i++) {
+    if (stars[i].checked) {
+      ratingValue = stars[i].value;
+      break;
+    }
+  }
+  
+  document.getElementById("r_rating").value = ratingValue;
+}
+</script>
 <script>
 function confirmDelete(userId, event) {
 	  event.preventDefault(); // 이벤트의 기본 동작을 취소
@@ -283,7 +321,7 @@ function confirmDelete(userId, event) {
 <div class="qna" id="qnaSection">
   <div class="col-md-12">
     <h3>문의 게시판</h3>
-    <!-- 문의 게시판 내용을 여기에 추가 -->
+    고객님 문의는 DM으로 부탁드려요~
   </div>
 </div>
 </div>
