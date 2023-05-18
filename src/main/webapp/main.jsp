@@ -65,7 +65,7 @@ body {
 				    </a>
 			    </div>
 			    <div class="carousel-item active">
-				    <a href="#">
+				    <a href="productDetailView.p?p_num=16">
 				      <img class="img" src="${pageContext.request.contextPath}/images/slidebanner7.jpg" class="d-block w-100" alt="banner6">
 				    </a>
 			    </div>

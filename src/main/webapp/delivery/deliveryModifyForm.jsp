@@ -20,8 +20,12 @@
 <form name="deliform" action="deliveryModifyAction.del" method="post">
 	<div class="table">
 		<div class="row">
-			<h2>배송지 관리</h2>
-			<div class="열1"></div><div class="열4"><input type="hidden" name="id" id="id" value="${user.id }" readonly> </div>
+			<h2>배송지 수정</h2>
+			<div class="열1"></div><div class="열4">
+			<input type="hidden" name="id" id="id" value="${user.id }" readonly>
+			<input type="hidden" name="deli_num" id="deli_num" value="${delivery.deli_num }"> 
+			</div>
+			
 			<div class="열1">배송지명 : </div><div class="열4"><input type="text" name="deli_name" id="deli_name" value="${delivery.deli_name }"> </div>
 			<div class="열2">우편번호 : </div><div class="열5"><input type="text" name="deli_zipcode" id="deli_zipcode" size="6" value="${delivery.deli_zipcode }" readonly></div>
 			<div class="열2"><input type="button" name="zipSearch" value="주소검색"  id="zipSearch" /> </div>

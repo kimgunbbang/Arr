@@ -17,7 +17,9 @@ public class DeliveryViewAction implements Action {
 	    ActionForward forward = null;
 	    HttpSession session = request.getSession();
 	    String id = (String) session.getAttribute("id");
-	    int deli_num = Integer.parseInt(request.getParameter("deli_num"));
+	    String deli_num = request.getParameter("deli_num");
+	    
+	    System.out.println(deli_num);
 	    if (id == null) {
 	        forward = new ActionForward("productAllList.p", true);
 	    } else {

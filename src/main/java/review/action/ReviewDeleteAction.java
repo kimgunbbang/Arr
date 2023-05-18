@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import review.svc.ReviewDeleteService;
 import vo.ActionForward;
+import vo.Product;
 import vo.Review;
 
 public class ReviewDeleteAction implements Action {
@@ -18,12 +19,14 @@ public class ReviewDeleteAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		Review review = new Review();
+		String r_num = request.getParameter("r_num");
+		
 
 	
 		ReviewDeleteService reviewDeleteService = new ReviewDeleteService();
-		boolean deleteResult = reviewDeleteService.deleteReview(review);
+		boolean deleteResult = reviewDeleteService.deleteReview(r_num);
 		if(deleteResult){
-			forward = new ActionForward("productDetailViewAction.p",true);
+			forward = new ActionForward("productDetailView.p",true);
 			
 			
 		}else {

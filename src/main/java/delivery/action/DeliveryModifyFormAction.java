@@ -18,11 +18,13 @@ public class DeliveryModifyFormAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
+		String deli_num = request.getParameter("deli_num");
+		
 		if(id==null) {
 			forward = new ActionForward("productAllList.p",true);
 		}else {
 			DeliveryViewService deliveryViewService = new DeliveryViewService();
-			Delivery delivery = deliveryViewService.selectDelivery(request.getParameter("id"));
+			Delivery delivery = deliveryViewService.selectDelivery(id,deli_num);
 			request.setAttribute("delivery", delivery);
 			request.setAttribute("pagefile", "/delivery/deliveryModifyForm.jsp");
 			forward=new ActionForward("/index.jsp",false);

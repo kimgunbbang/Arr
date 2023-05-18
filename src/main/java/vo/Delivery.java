@@ -1,7 +1,7 @@
 package vo;
 
 public class Delivery {
-	private int deli_num;
+	private String deli_num;
 	private String id;
 	private String deli_name;
 	private String deli_zipcode;
@@ -11,10 +11,11 @@ public class Delivery {
 	private String deli_phone;
 	
 	
-	public int getDeli_num() {
+
+	public String getDeli_num() {
 		return deli_num;
 	}
-	public void setDeli_num(int deli_num) {
+	public void setDeli_num(String deli_num) {
 		this.deli_num = deli_num;
 	}
 	public String getId() {

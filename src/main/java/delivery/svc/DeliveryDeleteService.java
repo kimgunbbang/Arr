@@ -8,10 +8,11 @@ import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 
 import dao.DeliveryDAO;
+import vo.Delivery;
 
 public class DeliveryDeleteService {
 
-	public boolean deleteDelivery(String id) {
+	public boolean deleteDelivery(Delivery delivery) {
 		boolean deleteDelivery = false;
 		Connection conn = null;
 		int deleteCount = 0;
@@ -21,7 +22,7 @@ public class DeliveryDeleteService {
 			conn = getConnection();
 			DeliveryDAO deliveryDAO = DeliveryDAO.getInstance();
 			deliveryDAO.setConnection(conn);
-			deleteCount = deliveryDAO.deleteDelivery(id);
+			deleteCount = deliveryDAO.deleteDelivery(delivery);
 			
 			if(deleteCount>0) {
 				commit(conn);

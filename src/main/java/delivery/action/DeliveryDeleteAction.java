@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import delivery.svc.DeliveryDeleteService;
 import vo.ActionForward;
+import vo.Delivery;
 
 public class DeliveryDeleteAction implements Action {
 
@@ -17,17 +18,17 @@ public class DeliveryDeleteAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
+		String deli_num = request.getParameter("deli_num");
 		
-
-		if(id==null) {
-		    forward=new ActionForward("productAllList.p",true);
-		} else {
-		    id = request.getParameter("id");
-		}
+		Delivery delivery = new Delivery();
 		
+		delivery.setId(id);
+		delivery.setDeli_num(deli_num);
+		System.out.println(delivery.getId());
+		System.out.println(delivery.getDeli_num());
 		
 		DeliveryDeleteService deliveryDeleteService = new DeliveryDeleteService();
-		boolean deleteResult = deliveryDeleteService.deleteDelivery(id);
+		boolean deleteResult = deliveryDeleteService.deleteDelivery(delivery);
 		if(deleteResult){
 			forward = new ActionForward("deliveryListAction.del",true);
 			

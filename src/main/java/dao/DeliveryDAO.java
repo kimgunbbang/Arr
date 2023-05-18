@@ -81,7 +81,7 @@ public class DeliveryDAO {
 			if(rs.next()) {
 				do {
 					Delivery delivery = new Delivery();
-					delivery.setDeli_num(rs.getInt("deli_num"));
+					delivery.setDeli_num(rs.getString("deli_num"));
 					delivery.setDeli_name(rs.getString("deli_name"));
 					delivery.setDeli_zipcode(rs.getString("deli_zipcode"));
 					delivery.setDeli_addr(rs.getString("deli_addr"));
@@ -101,7 +101,7 @@ public class DeliveryDAO {
 		return deliveryList;
 	}
 
-	public Delivery selectDelivery(String id, int deli_num) {
+	public Delivery selectDelivery(String id, String deli_num) {
 		Delivery delivery = new Delivery();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -109,9 +109,11 @@ public class DeliveryDAO {
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setInt(2, deli_num);
+			pstmt.setString(2, deli_num);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {//결과가 있으면
+				
+				delivery.setDeli_num(deli_num);
 				delivery.setDeli_name(rs.getString("deli_name"));
 				delivery.setDeli_zipcode(rs.getString("deli_zipcode"));
 				delivery.setDeli_addr(rs.getString("deli_addr"));
@@ -130,14 +132,15 @@ public class DeliveryDAO {
 		return delivery;
 	}
 
-	public int deleteDelivery(String id) {
+	public int deleteDelivery(Delivery delivery) {
 		int deleteCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "delete from delivery where id = ?";
+		String sql = "delete from delivery where id = ? and deli_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, delivery.getId());
+			pstmt.setString(2, delivery.getDeli_num());
 			deleteCount = pstmt.executeUpdate();
 		}catch (Exception e) {
 			System.out.println("deleteDelivery에러 : "+e);
@@ -148,11 +151,11 @@ public class DeliveryDAO {
 		return deleteCount;
 	}
 
-	public int updateDelivery(Delivery delivery) {
+	public int updateDelivery(Delivery delivery, String deli_num) {
 		  int updateResult = 0;
 		    PreparedStatement pstmt = null;
 		    
-		    String sql = "UPDATE delivery SET deli_name=?, deli_zipcode=?, deli_addr=?, deli_addr2=?, deli_username=?, deli_phone=? WHERE id=?";
+		    String sql = "UPDATE delivery SET deli_name=?, deli_zipcode=?, deli_addr=?, deli_addr2=?, deli_username=?, deli_phone=? WHERE deli_num=?";
 		    
 		    try {
 		        pstmt = conn.prepareStatement(sql);
@@ -162,7 +165,7 @@ public class DeliveryDAO {
 		        pstmt.setString(4, delivery.getDeli_addr2());
 		        pstmt.setString(5, delivery.getDeli_username());
 		        pstmt.setString(6, delivery.getDeli_phone());
-		        pstmt.setString(7, delivery.getId());
+		        pstmt.setString(7, delivery.getDeli_num());
 		        
 		        updateResult = pstmt.executeUpdate();
 		        
@@ -175,17 +178,18 @@ public class DeliveryDAO {
 		    return updateResult;
 		}
 
-	public Delivery selectDelivery(String id) {
-		Delivery delivery = new Delivery();
+	public Delivery selectDelivery(Delivery delivery) {
+		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql="select * from delivery where id = ?";
 		try{
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, delivery.getId());
 			
 			rs=pstmt.executeQuery();
 			if(rs.next()) {//결과가 있으면
+				delivery.setDeli_num(rs.getString("deli_num"));
 				delivery.setDeli_name(rs.getString("deli_name"));
 				delivery.setDeli_zipcode(rs.getString("deli_zipcode"));
 				delivery.setDeli_addr(rs.getString("deli_addr"));

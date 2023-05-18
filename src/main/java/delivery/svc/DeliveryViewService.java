@@ -10,7 +10,7 @@ import vo.Delivery;
 
 public class DeliveryViewService {
 
-	public Delivery selectDelivery(String id, int deli_num) {
+	public Delivery selectDelivery(String id, String deli_num) {
 		Delivery delivery = new Delivery();
 		Connection conn=getConnection();
 		try {
@@ -26,13 +26,13 @@ public class DeliveryViewService {
 		return delivery;
 	}
 
-	public Delivery selectDelivery(String id) {
-		Delivery delivery = new Delivery();
+	public Delivery selectDelivery(Delivery delivery) {
+		
 		Connection conn=getConnection();
 		try {
 			DeliveryDAO deliveryDAO = DeliveryDAO.getInstance();
 			deliveryDAO.setConnection(conn);
-			delivery = deliveryDAO.selectDelivery(id);
+			delivery = deliveryDAO.selectDelivery(delivery);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

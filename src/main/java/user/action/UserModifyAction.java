@@ -38,7 +38,7 @@ public class UserModifyAction implements Action {
 			boolean userUpdate= userModifyService.updateUser(user);
 			
 			if(userUpdate) {
-				forward=new ActionForward("userViewAction.u",true);
+				forward=new ActionForward("userViewAction.u?id="+request.getParameter("id"),true);
 			}else {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();

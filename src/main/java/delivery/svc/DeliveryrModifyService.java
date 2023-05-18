@@ -12,14 +12,14 @@ import vo.Delivery;
 
 public class DeliveryrModifyService {
 
-	public boolean updateDelivery(Delivery delivery) {
+	public boolean updateDelivery(Delivery delivery, String deli_num) {
 		boolean update = false;
 		Connection conn= getConnection();
 
 		try {
 			DeliveryDAO deliveryDAO = DeliveryDAO.getInstance();
 			deliveryDAO.setConnection(conn);
-			int updateResult= deliveryDAO.updateDelivery(delivery);
+			int updateResult= deliveryDAO.updateDelivery(delivery,deli_num);
 			
 			if(updateResult>0) {
 				update=true;

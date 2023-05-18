@@ -13,7 +13,7 @@ import vo.Review;
 
 public class ReviewDeleteService {
 
-	public boolean deleteReview(Review review) {
+	public boolean deleteReview(String r_num) {
 		boolean deleteReview = false;
 		Connection conn = null;
 		int deleteCount = 0;
@@ -23,7 +23,7 @@ public class ReviewDeleteService {
 			conn = getConnection();
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();
 			reviewDAO.setConnection(conn);
-			deleteCount = reviewDAO.deleteReview(review);
+			deleteCount = reviewDAO.deleteReview(r_num);
 			
 			if(deleteCount>0) {
 				commit(conn);

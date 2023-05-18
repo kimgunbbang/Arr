@@ -18,24 +18,24 @@ public class DeliveryModifyAction implements Action {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
+		String deli_num = request.getParameter("deli_num");
 		if(id==null) {
 			forward = new ActionForward("productAllList.p",true);
 		}else {//아니면
 			Delivery delivery = new Delivery();
 			delivery.setId(request.getParameter("id"));
-
+			delivery.setDeli_num(deli_num);
 			delivery.setDeli_name(request.getParameter("deli_name"));
 			delivery.setDeli_zipcode(request.getParameter("deli_zipcode"));
 			delivery.setDeli_addr(request.getParameter("deli_addr"));
 			delivery.setDeli_addr2(request.getParameter("deli_addr2"));
 			delivery.setDeli_username(request.getParameter("deli_username"));
 			delivery.setDeli_phone(request.getParameter("deli_phone"));
-			
 			DeliveryrModifyService deliveryModifyService = new DeliveryrModifyService();
-			boolean deliveryUpdate= deliveryModifyService.updateDelivery(delivery);
+			boolean deliveryUpdate= deliveryModifyService.updateDelivery(delivery,deli_num);
 			
 			if(deliveryUpdate) {
-				forward=new ActionForward("deliveryViewAction.del",true);
+				forward=new ActionForward("deliveryListAction.del",true);
 			}else {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();
