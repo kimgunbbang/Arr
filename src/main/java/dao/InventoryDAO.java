@@ -107,13 +107,17 @@ public class InventoryDAO {
 	    return insertcount;
 	}
 
-	public ArrayList<Inventory> inventoryAllList() {
+	public ArrayList<Inventory> inventoryAllList(int page, int limit) {
 		ArrayList<Inventory> inventoryList = new ArrayList<Inventory>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from inventory";
+		String sql = "select * from inventory order by inven_date desc limit ?,?";
+		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, limit);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				do {
@@ -464,6 +468,27 @@ public class InventoryDAO {
 		}
 		
 		return inventoryList;
+	}
+
+	public int selectListCount() {
+		int listcount=0;//초기화
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement("select count(*) from inventory");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				listcount=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			System.out.println("getListCount에러"+ e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listcount;
 	}
 
 	

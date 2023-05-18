@@ -38,12 +38,12 @@ body {
 <body>
 <div class="container custom-container" style="height:200px; background-color: #FFF" >
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
-    <div class="col-2">
+    <div class="col-3">
     <a href="main.p">
       <img src="${pageContext.request.contextPath}/images/logo4.png" alt="로고" width="150" height="150"/>
     </a>
     </div>
-    <div class="col-5">
+    <div class="col-4">
       <ul class="nav nav-pills">
         <li class="nav-item dropdown">
           <a class="nav-link" style="color: black;" href="productAllList.p" id="navbarDropdown" role="button"  aria-expanded="false">
@@ -106,25 +106,28 @@ body {
     </ul>
     
 </div>
-       <div class="col-5">
+       
            <c:choose>
               <c:when test="${empty sessionScope.id  }"><!-- 로그인 안됬을때 -->
-              <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
-                <div class="input-group">
-                  <input type="text" class="form-control me-2" placeholder="아이디" aria-label="Username" name="id" id="id">
-                  <input type="password" class="form-control me-2" placeholder="비밀번호" aria-label="Password" name="user_pass" id="user_pass">
-                  <button class="btn btn-outline-primary me-2" type="submit">LOGIN</button>
-                </div>
-                <div class="d-flex align-items-center ms-3">
-                  <a href="userJoinForm.u" class="text-decoration-none me-2">JOIN</a>&nbsp;
-                  <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-magnifying-glass"></i></a>
-                  <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
-                  <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
-                </div>
-              </form>
+              <div class="col-5">
+	              <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
+	                <div class="input-group">
+	                  <input type="text" class="form-control me-2" placeholder="아이디" aria-label="Username" name="id" id="id">
+	                  <input type="password" class="form-control me-2" placeholder="비밀번호" aria-label="Password" name="user_pass" id="user_pass">
+	                  <button class="btn btn-outline-primary me-2" type="submit">LOGIN</button>
+	                </div>
+	                <div class="d-flex align-items-center ms-3">
+	                  <a href="userJoinForm.u" class="text-decoration-none me-2">JOIN</a>&nbsp;
+	                  <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-magnifying-glass"></i></a>
+	                  <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
+	                  <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
+	                </div>
+	              </form>
+              </div>
              </c:when>
              
              <c:otherwise><!-- 로그인 됬을때 -->
+             <div class="col-4">
                 <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
                 <div class="input-group" align="right" style="padding-left: 100px">
                 <a href="userViewAction.u?id=${sessionScope.id }" class="text-decoration-none me-2" >
@@ -138,9 +141,10 @@ body {
                   <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </form>
+              </div>
              </c:otherwise>
          </c:choose>
-      </div>
+      
 </div>     
 </div>
 </body>

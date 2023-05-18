@@ -139,6 +139,25 @@ function dateChk() {
 	<c:otherwise>
 	</c:otherwise>
 </c:choose>
+<section id="pageList">
+	<c:choose>
+	<c:when test="${pageinfo.page<=1 }">[이전]&nbsp;</c:when>
+	<c:otherwise>
+	<a href="inventoryList.in?page=${pageinfo.page-1 }">[이전]</a>&nbsp;
+	</c:otherwise>
+	</c:choose>
+	<c:forEach var="a" begin="${pageinfo.startpage }" end="${pageinfo.endpage }" step="1">
+		<c:choose>
+		<c:when test="${a==pageinfo.page }">[${a }]</c:when>
+		<c:otherwise><a href="inventoryList.in?page=${a }">[${a }]</a>&nbsp;</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	
+	<c:choose>
+		<c:when test="${pageinfo.page>=pageinfo.maxpage }">[다음]</c:when>
+		<c:otherwise><a href="inventoryList.in?page=${pageinfo.page+1 }">[다음]</a>&nbsp;</c:otherwise>
+	</c:choose>
+</section>
 </div>
 </body>
 </html>
