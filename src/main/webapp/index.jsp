@@ -27,7 +27,7 @@
       
       <!-- 사이트 본문 부분 -->
       <div class="row">
-         <div class="cols">
+         <div class="col">
          <c:choose>
             <c:when test="${pagefile != null }">
                <jsp:include page="${pagefile}"></jsp:include>
@@ -38,15 +38,15 @@
       
       <!-- 사이트 하단 부분 -->
       <div class="row">
-         <div class="cols"> 
+         <div class="col"> 
          
          </div>
          
-         <div class="cols"> 
+         <div class="col"> 
          
          </div>
          
-         <div class="cols"> 
+         <div class="col"> 
          
          </div>
       </div>
