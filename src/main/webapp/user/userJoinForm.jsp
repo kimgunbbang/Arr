@@ -61,6 +61,107 @@
   cursor: not-allowed;
 }
 </style>
+<script>
+var idChecked = false;
+
+function winopen() {
+   var id = document.getElementById('id');
+   if(document.joinform.id.value =="" || document.joinform.id.value.length < 0){
+      alert("아이디를 먼저 입력하세요.");
+      document.joinform.id.focus();
+   }else{
+      window.open("idCheck.jsp?id="+document.joinform.id.value,"","width=500, height=300");
+      idChecked = true;
+   }
+}
+function checkPasswordFormat(str) {
+     const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 비밀번호 형식을 정규식으로 설정 (8자 이상, 영문과 숫자의 조합)
+     return regex.test(str);
+   }
+   
+
+function chkForm(f) {
+   if (!idChecked) {
+      alert("아이디 중복확인을 해주세요.");
+      return false;
+   }
+   
+   if(f.id.value.trim() =="" || f.id.value.length < 0){
+       alert("아이디를 입력하세요.");
+       f.id.focus();
+       return false;
+   }
+
+   if(f.user_pass.value.trim()==""){
+      alert("비밀번호를 입력하세요.");
+      f.user_pass.focus();
+      return false;
+   }
+   if(f.user_pass.value.trim()!=f.passChk.value.trim()){
+      alert("비밀번호가 일치하지 않습니다.");
+      f.user_pass.value="";
+      f.passChk.value="";
+      f.user_pass.focus();
+      return false;
+   }
+   if(f.passChk.value.trim()==""){
+      alert("비밀번호 확인을 입력하세요.");
+      f.passChk.focus();
+      return false;
+   }
+   if(f.user_pass.value.trim()!=f.passChk.value.trim()){
+      alert("비밀번호가 일치하지 않습니다.");
+      f.user_pass.value="";
+      f.passChk.value="";
+      f.user_pass.focus();
+      return false;
+   }
+   
+   if(!checkPasswordFormat(f.user_pass.value.trim())) { // 비밀번호 형식 체크
+      alert("비밀번호는 영문과 숫자의 조합으로 8자 이상이어야 합니다.");
+      f.user_pass.value = "";
+       f.passChk.value = "";
+      f.user_pass.focus();
+      return false;
+    }
+   if (!checkIdFormat(f.id.value.trim())) { // 아이디 형식 체크
+      alert("아이디는 영문과 숫자의 조합으로 4자 이상이어야 합니다.");
+      f.id.value = "";
+      f.id.focus();
+      return false;
+      }
+   f.submit();
+}
+
+function setIdChecked(checked) {
+   idChecked = checked;
+}
+
+function chkCharCode(event) {
+     const regExp = /[^0-9a-zA-Z]/g;
+     const ele = event.target;
+     if (regExp.test(ele.value)) {
+       ele.value = ele.value.replace(regExp, '');
+     }
+   };
+   
+function chkCharCode2(event) {
+     const keyCode = event.keyCode;
+     const isValidKey = (
+       (keyCode >= 48 && keyCode <= 57) || // Numbers
+       (keyCode >= 97 && keyCode <= 122) || // Numbers, Keypad
+       (keyCode >= 65 && keyCode <= 90) || // Alphabet
+       (keyCode === 32) || // Space
+       (keyCode === 8) || // BackSpace
+       (keyCode === 189) // Dash
+     );
+     if (!isValidKey) {
+       event.preventDefault();
+       return false;
+     }
+   };
+
+</script>
 </head>
 <body>
 <div class="container1">

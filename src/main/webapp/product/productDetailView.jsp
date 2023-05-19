@@ -376,59 +376,64 @@ function confirmDelete(userId, event) {
 	  }
 	}
 </script>
-<div class="qna" id="qnaSection">
-  <div class="col-md-12">
-    <h3>문의 게시판</h3>
-    
-    <div class="qna-board">
-      <c:forEach var="qna" items="${qnaList}">
-              <c:if test="${qna.p_num eq param.p_num}">
-        <div class="qnaForm">
-          <div class="qna-summary" onclick="toggleqnaContent(this)">
-            <div class="qna-summary-info">
-              <div class="qna_num">${qna.qna_num}</div>
-              <div class="qna_subject">${qna.qna_subject}</div>
-              <div class="id">${qna.id}</div>
-              <div class="qna_date">${qna.qna_date}</div>
-              <c:choose>
-             	 <c:when test="${qna.qna_answer == '0'}">
-             		 <div class="qna_answer">답변대기</div>
-            	  </c:when>
-             	 <c:when test="${qna.qna_answer == '1'}">
-            		 <div class="qna_answer">답변완료</div>
-              	  </c:when>
+<div class="qna-board">
+  <c:forEach var="qna" items="${qnaList}">
+    <c:if test="${qna.p_num eq param.p_num}">
+      <div class="qnaForm">
+        <div class="qna-summary" onclick="toggleqnaContent(this)">
+          <div class="qna-summary-info">
+            <div class="qna_num">${qna.qna_num}</div>
+            <div class="qna_subject">${qna.qna_subject}</div>
+            <div class="id">${qna.id}</div>
+            <div class="qna_date">${qna.qna_date}</div>
+            <c:choose>
+              <c:when test="${qna.qna_answer == '0'}">
+                <div class="qna_answer">답변대기</div>
+              </c:when>
+              <c:when test="${qna.qna_answer == '1'}">
+                <div class="qna_answer">답변완료</div>
+              </c:when>
               <c:otherwise>
               </c:otherwise>
-              </c:choose>
-            </div>
-          </div>
-          <div class="qna_content" style="display: none;">
-            <div class="qna-text">문의 내용: ${qna.qna_content}</div>
-            <%-- 답변이 있는 경우에만 답변을 표시 --%>
-            <c:if test="${not empty qna.qna_reply}">
-              <div class="answer">
-                <div class="answer-text">답변: ${qna.qna_reply}</div>
-              </div>
-            </c:if>
-            <%-- 답변을 작성할 수 있는 폼 --%>
-      <%--       <div class="answer-form">
-              <form action="answerAction" method="post">
-                <input type="hidden" name="qnaId" value="${qna.id}">
-                <textarea name="answerText" placeholder="답변을 입력하세요"></textarea>
-                <button type="submit">답변 작성</button>
-              </form>
-            </div> --%>
+            </c:choose>
           </div>
         </div>
-        </c:if>
-      </c:forEach>
-    </div>
-    
-    <div class="qna-form">
-           <a href="qnaWriteForm.q?p_num=${product.p_num }">문의 등록하기</a>
+        <div class="qna_content" style="display: none;">
+          <div class="qna-text">문의 내용: ${qna.qna_content}</div>
+          <%-- 답변이 있는 경우에만 답변을 표시 --%>
+          <c:if test="${not empty qna.qna_reply}">
+            <div class="answer">
+              <div class="answer-text">답변: ${qna.qna_reply}</div>
+            </div>
+          </c:if>
+          <%-- 답변을 작성할 수 있는 폼 --%>
+          <div class="answer-form">
+            <form action="answerAction" method="post">
+              <input type="hidden" name="qnaId" value="${qna.id}">
+              <textarea name="answerText" placeholder="답변을 입력하세요"></textarea>
+              <button type="submit">답변 작성</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <%-- 클릭하면 게시글의 내용과 답글이 보이게끔 설정 --%>
+      <script>
+        function toggleqnaContent(element) {
+          element.classList.toggle("active");
+          var content = element.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        }
+      </script>
+    </c:if>
+  </c:forEach>
+</div>
 
-    </div>
-  </div>
+<div class="qna-form">
+  <a href="qnaWriteForm.q?p_num=${product.p_num}">문의 등록하기</a>
 </div>
 
 
