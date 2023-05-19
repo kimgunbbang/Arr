@@ -50,6 +50,7 @@ public class InventoryListAction implements Action {
 		ProductListService productListService = new ProductListService();
 		ArrayList<Product> productList = productListService.getProductAllList();
 		
+		request.setAttribute("searchinfo", null);
 		request.setAttribute("pageinfo", pageinfo);
 		request.setAttribute("inventoryList", inventoryList);
 		request.setAttribute("productList", productList);

@@ -143,19 +143,44 @@ function dateChk() {
 	<c:choose>
 	<c:when test="${pageinfo.page<=1 }">[이전]&nbsp;</c:when>
 	<c:otherwise>
-	<a href="inventoryList.in?page=${pageinfo.page-1 }">[이전]</a>&nbsp;
+		<c:choose>
+		<c:when test="${searchinfo != null }">
+			<a href="invenSearchList.in?page=${pageinfo.page-1 }&invenSearchOption=${searchinfo[0] }&invenSearchValue=${searchinfo[1] }&invenSearchValueStartDate=${searchinfo[2] }&invenSearchValueEndDate=${searchinfo[3] }">[이전]</a>&nbsp;
+		</c:when>
+		<c:otherwise>
+			<a href="inventoryList.in?page=${pageinfo.page-1 }">[이전]</a>&nbsp;
+		</c:otherwise>
+		</c:choose>
 	</c:otherwise>
 	</c:choose>
 	<c:forEach var="a" begin="${pageinfo.startpage }" end="${pageinfo.endpage }" step="1">
 		<c:choose>
 		<c:when test="${a==pageinfo.page }">[${a }]</c:when>
-		<c:otherwise><a href="inventoryList.in?page=${a }">[${a }]</a>&nbsp;</c:otherwise>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${searchinfo != null }">
+					<a href="invenSearchList.in?page=${a }&invenSearchOption=${searchinfo[0] }&invenSearchValue=${searchinfo[1] }&invenSearchValueStartDate=${searchinfo[2] }&invenSearchValueEndDate=${searchinfo[3] }">[${a }]</a>&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="inventoryList.in?page=${a }">[${a }]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+		</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	
 	<c:choose>
 		<c:when test="${pageinfo.page>=pageinfo.maxpage }">[다음]</c:when>
-		<c:otherwise><a href="inventoryList.in?page=${pageinfo.page+1 }">[다음]</a>&nbsp;</c:otherwise>
+		<c:otherwise>
+			<c:choose>
+			<c:when test="${searchinfo != null }">
+				<a href="invenSearchList.in?page=${pageinfo.page+1 }&invenSearchOption=${searchinfo[0] }&invenSearchValue=${searchinfo[1] }&invenSearchValueStartDate=${searchinfo[2] }&invenSearchValueEndDate=${searchinfo[3] }">[다음]</a>&nbsp;
+			</c:when>
+			<c:otherwise>
+				<a href="inventoryList.in?page=${pageinfo.page+1 }">[다음]</a>&nbsp;
+			</c:otherwise>
+			</c:choose>
+		</c:otherwise>
 	</c:choose>
 </section>
 </div>

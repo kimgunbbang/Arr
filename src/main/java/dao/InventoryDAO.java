@@ -142,18 +142,21 @@ public class InventoryDAO {
 		return inventoryList;
 	}
 
-	public ArrayList<Inventory> inventorySearchList(String invenSearchOption, String invenSearchValue) {
+	public ArrayList<Inventory> inventorySearchList(String invenSearchOption, String invenSearchValue, int page, int limit) {
 		ArrayList<Inventory> inventoryList = new ArrayList<Inventory>();//인벤리스트 생성해주고
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="";
 		
+		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
 		if(invenSearchOption.equals("p_num")) {//검색옵션이p_num일때
 			sql = "select * from inventory where "+invenSearchOption;
-			sql+=" = '"+invenSearchValue+"'";
+			sql+=" = '"+invenSearchValue+"'  order by inven_date desc limit ?,?";
 			
 			try {
 				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, startrow);
+				pstmt.setInt(2, limit);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
 					do {
@@ -176,14 +179,16 @@ public class InventoryDAO {
 			}
 		}
 		if(invenSearchOption.equals("p_name")) {//검색옵션이p_name일때
-			//sql = "select * from inventory where "+invenSearchOption;
-			//sql+=" like '%"+invenSearchValue+ "%'";
+			//String sql = "select * from inventory order by inven_date desc limit ?,?";
+			startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
 			
 			sql="select * from inventory where p_num in (select p_num from product where p_name like '%"
-														+invenSearchValue+"%')";
+														+invenSearchValue+"%')  order by inven_date desc limit ?,?";
 			
 			try {
 				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, startrow);
+				pstmt.setInt(2, limit);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
 					do {
@@ -211,11 +216,13 @@ public class InventoryDAO {
 	}
 
 	public ArrayList<Inventory> inventorySearchList(String invenSearchOption, String invenStartDate,
-			String invenEndDate) {
+			String invenEndDate, int page, int limit) {
 		ArrayList<Inventory> inventoryList = new ArrayList<Inventory>();//인벤리스트 생성해주고
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="";
+		//String sql = "select * from inventory order by inven_date desc limit ?,?";
+		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
 		String start="STR_TO_DATE('"+invenStartDate+" 00:00:00', '%Y-%m-%d %H:%i:%s')";
 		String end="STR_TO_DATE('"+invenEndDate+" 23:59:59', '%Y-%m-%d %H:%i:%s')";
 		System.out.println(start);
@@ -224,10 +231,12 @@ public class InventoryDAO {
 		
 		if(!invenStartDate.equals("") && !invenEndDate.equals("")) {//시작과 끝날짜가 있을때
 			sql = "select * from inventory where inven_date >= "+start;
-			sql+= " and inven_date <= "+end;
+			sql+= " and inven_date <= "+end+" order by inven_date desc limit ?,?";
 			
 			try {
 				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, startrow);
+				pstmt.setInt(2, limit);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
 					do {
@@ -488,6 +497,119 @@ public class InventoryDAO {
 			close(pstmt);
 		}
 		
+		return listcount;
+	}
+
+	public int selectListCount(String invenSearchOption, String invenSearchValue) {
+		int invenSearchCount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		
+		if(invenSearchOption.equals("p_num")) {//검색옵션이p_num일때
+			sql = "select count(*) from inventory where "+invenSearchOption;
+			sql+=" = '"+invenSearchValue+"'";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					invenSearchCount=rs.getInt(1);
+				}
+				System.out.println("검색갯수"+invenSearchCount);
+			}catch(Exception e) {
+				System.out.println("inventoryDAO inventorySearchList에러임"+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+		}
+		if(invenSearchOption.equals("p_name")) {//검색옵션이p_name일때
+			//sql = "select * from inventory where "+invenSearchOption;
+			//sql+=" like '%"+invenSearchValue+ "%'";
+			
+			sql="select count(*) from inventory where p_num in (select p_num from product where p_name like '%"
+														+invenSearchValue+"%')";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					invenSearchCount=rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				System.out.println("inventoryDAO inventorySearchList에러임"+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+		}
+		
+		return invenSearchCount;
+	}
+
+	public int selectListCount(String invenSearchOption, String invenStartDate, String invenEndDate) {
+		int listcount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		String start="STR_TO_DATE('"+invenStartDate+" 00:00:00', '%Y-%m-%d %H:%i:%s')";
+		String end="STR_TO_DATE('"+invenEndDate+" 23:59:59', '%Y-%m-%d %H:%i:%s')";
+		System.out.println(start);
+		System.out.println(end);
+		
+		if(!invenStartDate.equals("") && !invenEndDate.equals("")) {//시작과 끝날짜가 있을때
+			sql = "select count(*) from inventory where inven_date >= "+start;
+			sql+= " and inven_date <= "+end;
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					listcount=rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				System.out.println("inventoryDAO inventorySearchList에러임"+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+		}
+		if(invenStartDate.equals("") && !invenEndDate.equals("")) {//끝날짜만 있을때
+			sql = "select count(*) from inventory where inven_date<="+end;
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					listcount=rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				System.out.println("inventoryDAO inventorySearchList에러임"+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+		}
+		if(!invenStartDate.equals("") && invenEndDate.equals("")) {//시작날짜만 있을때
+			sql = "select count(*) from inventory where inven_date>="+start;
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					listcount=rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+		}
 		return listcount;
 	}
 
