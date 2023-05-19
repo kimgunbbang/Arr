@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -30,9 +31,18 @@ body {
 	#p_image {
 		width: 80%;
 	}
+.right{
+	text-align: right;
+}
+.besthot {
+	background-color: red;
+	color: white;
+	border-radius: 50%;
+}
+
 </style>
 <body>
-<h2>가장 많이 본 상품</h2>
+<h2 style="text-align: center"><b>HOT</b></h2><hr>
 <div class="컨테이너">
 	<c:if test="${empty productReadList }">
 	<h1>상품을 준비 중입니다.</h1>
@@ -45,9 +55,8 @@ body {
 				<a href="productDetailView.p?p_num=${productReadList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productReadList.p_image}" id="p_image">
 				</a><br>
-					조회수: ${productReadList.p_readcount}<br>
-					상품명: ${productReadList.p_name}<br>
-					금액: ${productReadList.p_price}<br>
+					<h4>${productReadList.p_name}</h4><br>
+					<h4 style="text-align: right; margin-right: 70px"><span class="besthot">&nbsp;<small><small>HOT</small></small>&nbsp;</span>&nbsp;<fmt:formatNumber value="${productReadList.p_price}" pattern="#,###" /></h4>
 			</div>
 			<c:if test="${status.count % 4 == 0}">
 				<div style="clear: both;"></div>
@@ -70,7 +79,7 @@ body {
 </c:forEach>
 </div>
 
-<h2>가장 많이 구매한 상품</h2>
+<h2 style="text-align: center"><b>BEST</b></h2><hr>
 <div class="컨테이너">
 	<c:if test="${empty productSaleList }">
 	<h1>상품을 준비 중입니다.</h1>
@@ -83,9 +92,9 @@ body {
 				<a href="productDetailView.p?p_num=${productSaleList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productSaleList.p_image}" id="p_image">
 				</a><br>
-					조회수: ${productSaleList.p_readcount}<br>
-					상품명: ${productSaleList.p_name}<br>
-					금액: ${productSaleList.p_price}<br>
+					<h4>${productSaleList.p_name}</h4><br>
+					<h4 style="text-align: right; margin-right: 70px"><span class="besthot">&nbsp;<small>인기</small>&nbsp;</span>&nbsp;<fmt:formatNumber value="${productSaleList.p_price}" pattern="#,###" /></h4>
+					<br>
 			</div>
 			<c:if test="${status.count % 4 == 0}">
 				<div style="clear: both;"></div>

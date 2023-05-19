@@ -416,5 +416,44 @@ public class ProductDAO {
 		return productMaxNum;
 	}
 
+	public ArrayList<Product> selectProductSearchList(String pSearch) {
+		ArrayList<Product> productList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from product natural join inventory where "+
+				"inven_num in(select max(inven_num) from inventory group by p_num) and product.p_name like ? order by p_num";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+pSearch+"%");
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				productList = new ArrayList<Product>();
+				do {
+					productList.add(new Product(
+							rs.getInt("p_num"),
+							rs.getString("p_name"),
+							rs.getInt("p_price"),
+							rs.getString("p_detail"),
+							rs.getString("p_image"),
+							rs.getString("p_image2"),
+							rs.getString("category_name"),
+							rs.getInt("p_readcount"),
+							rs.getBoolean("p_hide"),
+							rs.getInt("inven_qty")
+							));
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("DAO selectProductAllList 에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return productList;
+	}
+
 	
 }

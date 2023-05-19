@@ -49,8 +49,7 @@ body {
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
 					 <h4>${productList.p_name}</h4><br>
-					<i class="fa-solid fa-won-sign"></i>
-					<fmt:formatNumber value="${productList.p_price}" pattern="#,###" />
+					<h4 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${productList.p_price}" pattern="#,###" /></h4>
 					<br>
 			</div>
 			<c:if test="${status.count % 4 == 0}">

@@ -18,6 +18,7 @@ import product.action.ProductDeleteAction;
 import product.action.ProductDetailViewAction;
 import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
+import product.action.ProductSearchAction;
 import product.action.ProductSelectListAction;
 import vo.ActionForward;
 
@@ -131,6 +132,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/deleteProduct.p")) {
 			action = new ProductDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/pSearch.p")) {
+			action = new ProductSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

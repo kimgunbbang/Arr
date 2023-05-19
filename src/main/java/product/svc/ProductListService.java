@@ -120,6 +120,25 @@ public class ProductListService {
 		}
 		return maxP_num;
 	}
+
+	public ArrayList<Product> getProductSearchList(String pSearch) {
+		ArrayList<Product> productList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			productList = productDAO.selectProductSearchList(pSearch);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return productList;
+	}
 	
 
 }

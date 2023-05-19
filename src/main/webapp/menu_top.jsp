@@ -31,6 +31,17 @@ body {
     
 }
 </style>
+<script>
+function toggleVisibility(event) {
+	 event.preventDefault(); // 기본 동작 막기
+    var toggleDiv = document.getElementById("toggle");
+    if (toggleDiv.style.display === "none") {
+      toggleDiv.style.display = "block";
+    } else {
+      toggleDiv.style.display = "none";
+    }
+  }
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -136,16 +147,26 @@ body {
                   <a class="btn btn-outline-primary me-2" href="userLogout.u">LOGOUT</a>
                 </div>
                 <div class="d-flex align-items-center ms-3">
-                  <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-magnifying-glass"></i></a>
+                  <a href="#" id="btn_toggle" class="text-decoration-none me-2" onclick="toggleVisibility(event)"><i class="fa-solid fa-magnifying-glass"></i></a>
+					
+                  
                   <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
                   <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </form>
+              <div id="toggle" style="display: none; text-align: right">
+				  <form action="pSearch.p">
+				    <input type="text" name="pSearch">
+				    <button type="submit" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+				  </form>
+			  </div> 
               </div>
              </c:otherwise>
          </c:choose>
-      
-</div>     
+     				
+</div>
+
 </div>
 </body>
 </html>
