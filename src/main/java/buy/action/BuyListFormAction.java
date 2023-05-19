@@ -31,7 +31,7 @@ public class BuyListFormAction implements Action {
 		ReviewListService reviewListService = new ReviewListService();
 		reviewCheckList = reviewListService.isReviewCheckList(buyNumList,buyList);
 		//Collections.reverse(reviewCheckList);
-		//Collections.reverse(buyNumList);//최근구매내역이 먼저 나오게 역순처리 22/21/12
+		Collections.reverse(buyNumList);//최근구매내역이 먼저 나오게 역순처리 22/21/12
 		System.out.println("buyList"+buyList.toString());
 		
 		System.out.println("불린배열"+reviewCheckList);
