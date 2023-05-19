@@ -1,27 +1,27 @@
-package review.action;
+package qna.action;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import review.svc.ReviewListService;
+import qna.svc.QnaListService;
 import vo.ActionForward;
-import vo.Review;
+import vo.Qna;
 
-public class ReviewListAction implements Action {
+public class QnaListAction implements Action  {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
 		
-		ReviewListService reviewListService = new ReviewListService();
-		ArrayList<Review> reviewList = reviewListService.reviewAllList();
+		QnaListService qnaListService = new QnaListService();
+		ArrayList<Qna> qnaList = qnaListService.qnaAllList();
 		
-
-		request.setAttribute("reviewList", reviewList);
+		System.out.println(qnaList);
+		request.setAttribute("qnaList", qnaList);
 		request.setAttribute("pagefile", "/product/productDetailView.jsp");
 		forward = new ActionForward("/index.jsp",false);
 		forward.setPath("/index.jsp");

@@ -12,6 +12,8 @@
             display: flex;
             align-items: center;
             margin-bottom: 10px;
+            margin: auto;
+            width: 65%;
         }
         .product img {
             width: 100px;
@@ -39,10 +41,31 @@
         .buttons button {
             margin-right: 5px;
         }
+        .col{
+        text-align: center;
+        }
+        
+        .buttons button {
+        margin-right: 5px;
+        padding: 5px 12px;
+        background-color: #f33;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .buttons button:hover {
+        background-color: #f33;
+    }
     </style>
 </head>
 <body>
-    <h1>최근 본 상품</h1>
+	<div style="margin: auto;">
+	<h1>최근 본 상품</h1>
+	</div>
+    
 
 
     <% ArrayList<Product> recentViewProduct = (ArrayList<Product>) session.getAttribute("recentViewProduct"); %>

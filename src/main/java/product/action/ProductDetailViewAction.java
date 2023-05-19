@@ -10,11 +10,14 @@ import action.Action;
 import inventory.action.InventoryListAction;
 import inventory.svc.InventoryListService;
 import product.svc.ProductDetailViewService;
+import qna.action.QnaListAction;
+import qna.svc.QnaListService;
 import review.action.ReviewListAction;
 import review.svc.ReviewListService;
 import vo.ActionForward;
 import vo.Inventory;
 import vo.Product;
+import vo.Qna;
 import vo.Review;
 
 public class ProductDetailViewAction implements Action {
@@ -60,6 +63,16 @@ public class ProductDetailViewAction implements Action {
 		
 
 		request.setAttribute("reviewList", reviewList);
+		
+		
+		QnaListAction qnaListAction = new QnaListAction();
+		    
+		QnaListService qnaListService = new QnaListService();
+		ArrayList<Qna> qnaList = qnaListService.qnaAllList();
+			
+
+		request.setAttribute("qnaList", qnaList);
+
 
 	    // 최근 본 상품에 현재 상품을 추가하고 시간을 설정
 	    product.setViewTime(currentTime);

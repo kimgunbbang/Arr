@@ -115,6 +115,64 @@ text-align: center;
 .rating input[type="radio"]:checked ~ label {
   color: #ffdd00;
 }
+
+<%-- 문의 게시판 --%>
+
+  .qna-board {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .qna {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .qna-summary {
+    cursor: pointer;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .qna-content {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 10px;
+  }
+  
+  .qna-summary-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .qna-summary-info div {
+    margin-right: 10px;
+  }
+  
+  .answer-form textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    margin-bottom: 5px;
+  }
+  
+  .answer-form button {
+    padding: 5px 10px;
+    background-color: #f33;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .answer-form button:hover {
+    background-color: #d00;
+  }
+  
 </style>
 </head>
 <body>
@@ -308,6 +366,7 @@ function convertRating() {
   document.getElementById("r_rating").value = ratingValue;
 }
 </script>
+
 <script>
 function confirmDelete(userId, event) {
 	  event.preventDefault(); // 이벤트의 기본 동작을 취소
@@ -317,13 +376,69 @@ function confirmDelete(userId, event) {
 	  }
 	}
 </script>
-<!-- 문의 게시판 -->
 <div class="qna" id="qnaSection">
   <div class="col-md-12">
     <h3>문의 게시판</h3>
-    고객님 문의는 DM으로 부탁드려요~
+    
+    <div class="qna-board">
+      <c:forEach var="qna" items="${qnaList}">
+              <c:if test="${qna.p_num eq param.p_num}">
+        <div class="qnaForm">
+          <div class="qna-summary" onclick="toggleqnaContent(this)">
+            <div class="qna-summary-info">
+              <div class="qna_num">${qna.qna_num}</div>
+              <div class="qna_subject">${qna.qna_subject}</div>
+              <div class="id">${qna.id}</div>
+              <div class="qna_date">${qna.qna_date}</div>
+              <c:choose>
+             	 <c:when test="${qna.qna_answer == '0'}">
+             		 <div class="qna_answer">답변대기</div>
+            	  </c:when>
+             	 <c:when test="${qna.qna_answer == '1'}">
+            		 <div class="qna_answer">답변완료</div>
+              	  </c:when>
+              <c:otherwise>
+              </c:otherwise>
+              </c:choose>
+            </div>
+          </div>
+          <div class="qna_content" style="display: none;">
+            <div class="qna-text">문의 내용: ${qna.qna_content}</div>
+            <%-- 답변이 있는 경우에만 답변을 표시 --%>
+            <c:if test="${not empty qna.qna_reply}">
+              <div class="answer">
+                <div class="answer-text">답변: ${qna.qna_reply}</div>
+              </div>
+            </c:if>
+            <%-- 답변을 작성할 수 있는 폼 --%>
+      <%--       <div class="answer-form">
+              <form action="answerAction" method="post">
+                <input type="hidden" name="qnaId" value="${qna.id}">
+                <textarea name="answerText" placeholder="답변을 입력하세요"></textarea>
+                <button type="submit">답변 작성</button>
+              </form>
+            </div> --%>
+          </div>
+        </div>
+        </c:if>
+      </c:forEach>
+    </div>
+    
+    <div class="qna-form">
+           <a href="qnaWriteForm.q?p_num=${product.p_num }">문의 등록하기</a>
+
+    </div>
   </div>
 </div>
+
+
+
+<script>
+  function toggleqnaContent(element) {
+    const content = element.nextElementSibling;
+    content.style.display = (content.style.display === "none") ? "block" : "none";
+  }
+</script>
 </div>
 </body>
 </html>
