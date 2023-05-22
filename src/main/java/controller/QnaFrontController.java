@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import qna.action.QnaAnswerAction;
 import qna.action.QnaWriteAction;
 import qna.action.QnaWriteFormAction;
 import review.action.ReviewWriteAction;
@@ -59,7 +60,15 @@ public class QnaFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/qnaAnswerAction.q")) {
+			action = new QnaAnswerAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		if(forward != null) {
 			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

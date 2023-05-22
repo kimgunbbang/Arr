@@ -82,7 +82,9 @@ text-align: center;
   .review-item {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #f7f7f7;
+    background-color: #ecfdf3;
+    border-radius: 20px;
+    
   }
   .review-item td.review-info {
   	text-align: right;
@@ -131,14 +133,15 @@ text-align: center;
   
   .qna-summary {
     cursor: pointer;
-    background-color: #f9f9f9;
+    background-color: #ecfdf3;
     padding: 10px;
     margin-bottom: 5px;
+    border-radius: 20px;
   }
   
   .qna-content {
     display: none;
-    background-color: #f9f9f9;
+    background-color: #ecfdf3;
     padding: 10px;
   }
   
@@ -308,49 +311,42 @@ text-align: center;
 <!-- 리뷰 게시판 -->
 <div class="review" id="reviewSection">
   <div class="col-md-12">
-    <h3><b>REVIEW</b></h3>
+    <br>  <br>
+    <div style="text-align: center;">
+      <h3><b>REVIEW</b></h3>
+    </div>
     
     <div class="reviewForm">
       <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
       <c:forEach var="review" items="${reviewList}">
         <c:if test="${review.p_num eq param.p_num}">
-          <div class="review-item" style="height: auto; width: 800px; margin: auto;">
-            <table>
-              <tr>
-              
-                <td class="rating">
-               
-                  <c:forEach var="i" begin="1" end="${review.r_rating}">
-                    <span class="star-icon">&#9733;</span>
-                  </c:forEach> 
-                </td>
-                </div>
-              </tr>
-              <tr>
-                <td><b>${review.r_title}</b></td>
-                <td class="review-info">작성자: ${review.id}</td>
-                <td class="review-info">작성일: ${review.r_date}</td>
-              </tr>
-              <tr>
-                <td colspan="3">${review.r_detail}</td>
-              </tr>
-              <tr>
-                <td colspan="3" class="review-image"><img src="${pageContext.request.contextPath}/images/${review.r_image}" class="review-image img-fluid rounded shadow"></td>
-              </tr>
-              <c:if test="${sessionScope.id eq review.id }">
-              <tr>
-               <td><a href="reviewDeleteAction.r?r_num=${review.r_num}&p_num=${review.p_num}" onclick="confirmDelete('${review.r_num}', event)">삭제</a></td>
-              </tr>
-              </c:if>
-            </table>
+          <div class="review-item" style="height: auto; width: 800px; margin: auto; margin-bottom: 20px;">
+            <div class="rating">
+              <c:forEach var="i" begin="1" end="${review.r_rating}">
+                <span class="star-icon">&#9733;</span>
+              </c:forEach> 
+            </div>
+            <div class="review-info" style="display: flex; justify-content: space-between;">
+              <div style="text-align: left;"><b>${review.r_title}</b></div>
+              <div style="text-align: right;">작성자: ${review.id}</div>
+            </div>
+            <div>${review.r_detail}</div>
+            <c:if test="${not empty review.r_image}">
+              <div class="review-image">
+                <img src="${pageContext.request.contextPath}/images/${review.r_image}" class="review-image img-fluid rounded shadow">
+              </div>
+            </c:if>
+            <c:if test="${sessionScope.id eq review.id}">
+              <div style="text-align: right;">
+                <a href="reviewDeleteAction.r?r_num=${review.r_num}&p_num=${review.p_num}" onclick="confirmDelete('${review.r_num}', event)">삭제</a>
+              </div>
+            </c:if>
           </div>
         </c:if>
       </c:forEach>
     </div>
   </div>
 </div>
-
-
 <script>
 function convertRating() {
   var stars = document.getElementsByName("r_ratingValue");
@@ -376,22 +372,26 @@ function confirmDelete(userId, event) {
 	  }
 	}
 </script>
+  <br>
+<hr>
+  <br>
+<div id="qnaSection" style="text-align: center;"> <h3><b>Q&A</b></h3> </div>
 <div class="qna-board">
   <c:forEach var="qna" items="${qnaList}">
     <c:if test="${qna.p_num eq param.p_num}">
-      <div class="qnaForm">
+      <div class="qnaForm" style="width: 800px; margin: auto;">
         <div class="qna-summary" onclick="toggleqnaContent(this)">
           <div class="qna-summary-info">
-            <div class="qna_num">${qna.qna_num}</div>
-            <div class="qna_subject">${qna.qna_subject}</div>
-            <div class="id">${qna.id}</div>
-            <div class="qna_date">${qna.qna_date}</div>
+            <div class="qna_num" style="width: 50px; text-align: center;">${qna.qna_num}</div>
+            <div class="qna_subject" style="width: 400px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${qna.qna_subject}</div>
+            <div class="id" style="width: 100px; text-align: center;">${qna.id}</div>
+            <div class="qna_date" style="width: 100px; text-align: center;">${qna.qna_date}</div>
             <c:choose>
               <c:when test="${qna.qna_answer == '0'}">
-                <div class="qna_answer">답변대기</div>
+                <div class="qna_answer" style="width: 100px; text-align: center;">답변대기</div>
               </c:when>
               <c:when test="${qna.qna_answer == '1'}">
-                <div class="qna_answer">답변완료</div>
+                <div class="qna_answer" style="width: 100px; text-align: center;">답변완료▼</div>
               </c:when>
               <c:otherwise>
               </c:otherwise>
@@ -399,21 +399,31 @@ function confirmDelete(userId, event) {
           </div>
         </div>
         <div class="qna_content" style="display: none;">
-          <div class="qna-text">문의 내용: ${qna.qna_content}</div>
+          <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; ">
+            <small>문의 내용</small><br>
+            ${qna.qna_content}
+          </div>
           <%-- 답변이 있는 경우에만 답변을 표시 --%>
           <c:if test="${not empty qna.qna_reply}">
-            <div class="answer">
-              <div class="answer-text">답변: ${qna.qna_reply}</div>
+            <div class="answer" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; ">
+              <small>답변</small><br>
+              <small>${qna.qna_reply}</small>
             </div>
           </c:if>
           <%-- 답변을 작성할 수 있는 폼 --%>
-          <div class="answer-form">
-            <form action="answerAction" method="post">
-              <input type="hidden" name="qnaId" value="${qna.id}">
-              <textarea name="answerText" placeholder="답변을 입력하세요"></textarea>
-              <button type="submit">답변 작성</button>
-            </form>
-          </div>
+          <c:if test="${sessionScope.id eq 'admin' and empty qna.qna_reply }">
+            <div class="answer-form" style="margin-top: 10px;">
+              <form action="qnaAnswerAction.q" method="post">
+              	<input type="hidden" id="p_num" name="p_num" value="${qna.p_num }"> 
+              	<input type="hidden" id="qna_answer" name="qna_answer" value="${qna.qna_answer }"> 
+              	<input type="hidden" id="qna_num" name="qna_num" value="${qna.qna_num }"> 
+              	
+                <input type="text" id="qna_reply" name="qna_reply" value="${qna.qna_reply}" placeholder="답변을 입력하세요" style="width: 100%; height: 100px; border: 1px solid #ccc;">
+                <!-- <textarea name="answerText" placeholder="답변을 입력하세요" style="width: 100%; height: 100px; border: 1px solid #ccc;"></textarea> -->
+                <button type="submit" style="margin-top: 10px; padding: 5px 10px; border-radius: 5px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">답변 작성</button>
+              </form>
+            </div>
+          </c:if>
         </div>
       </div>
       <%-- 클릭하면 게시글의 내용과 답글이 보이게끔 설정 --%>
@@ -431,11 +441,12 @@ function confirmDelete(userId, event) {
     </c:if>
   </c:forEach>
 </div>
-
-<div class="qna-form">
-  <a href="qnaWriteForm.q?p_num=${product.p_num}">문의 등록하기</a>
+<br><br>
+<div class="qna-form" style="margin: auto; text-align: center;">
+  <a href="qnaWriteForm.q?p_num=${product.p_num}">
+    <button type="button">문의 등록하기</button>
+  </a>
 </div>
-
 
 
 <script>

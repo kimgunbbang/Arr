@@ -29,7 +29,7 @@ public class QnaDAO {
     }
 
 	public int writeQna(Qna qna) {
-int writeCount = 0;
+		int writeCount = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -102,6 +102,28 @@ int writeCount = 0;
 		}
 		
 		return qnaList;
+	}
+
+	public int writeAnswer(Qna qna) {
+		int writeCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update qna set qna_reply = ?, qna_answer = true where qna_num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, qna.getQna_reply());
+			pstmt.setString(2, qna.getQna_num());
+
+			writeCount = pstmt.executeUpdate();
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return writeCount;
 	}
 
 }
