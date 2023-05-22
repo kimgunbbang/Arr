@@ -2,18 +2,27 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vo.Product" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <style>
-	.img{
-		height:100%;
-		width:100%;
-	}
+
+#p_image {
+	width: 80%;
+}
+.img{
+	height:100%;
+	width:100%;
+}
 	/* cdn import */
 @font-face {
   font-family: 'Godo';
@@ -28,7 +37,7 @@ body {
 }
 </style>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
     <!-- 베스트상품 슬라이드형식으로 나오게끔,, -->
     	<div class="col">
@@ -82,11 +91,49 @@ body {
     	</div>
   	</div>
     <br>
-  	<div class="row">
-  	  <!-- 메인상품 나오게끔,, -->
-  	  <h3 align="center">ALL</h3><hr>
-  	  <jsp:include page="/product/productList.jsp"></jsp:include>
-	</div>
 </div>
+  	<div class="container">
+  	  <!-- 메인상품 나오게끔,, -->
+  	  <div class="row">
+  	  <h3 align="center">NEW</h3><hr>
+  	  <c:forEach var="product" items="${productList }" begin="${fn:length(productList)-4}" end="${fn:length(productList)}" varStatus="status">
+  	  	<c:if test="${product.p_hide=='0' }">
+		<c:choose>
+		<c:when test="${product.p_qty > 0}"><!-- 품절아닐때 -->
+			<div id="product" class="position-relative">
+				<a href="productDetailView.p?p_num=${product.p_num}">
+					<img src="${pageContext.request.contextPath}/images/${product.p_image}" id="p_image">
+					<span class="badge bg-danger position-absolute top-0 start-0">NEW</span>
+				</a><br>
+					 <h4>${product.p_name}</h4>
+					<h5 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${product.p_price}" pattern="#,###" /></h5>
+					<br>
+			</div>
+			<c:if test="${status.count % 4 == 0}">
+				<div style="clear: both;"></div>
+			</c:if>
+		</c:when>
+		<c:otherwise><!-- 품절일때 -->
+			<div id="product">
+				<a href="productDetailView.p?p_num=${product.p_num}">
+					<img src="${pageContext.request.contextPath}/images/${product.p_image}" id="p_image">
+				</a><br>
+					
+					<h4>${product.p_name}</h4><br>
+					품절입니다.
+			</div>
+			<c:if test="${status.count % 4 == 0}">
+				<div style="clear: both;"></div>
+			</c:if>
+		</c:otherwise>
+		</c:choose>
+		</c:if>
+  	  </c:forEach>
+  	  </div>
+  	  
+  	  <div class="row">
+  	  <jsp:include page="/product/productList.jsp"></jsp:include>
+  	  </div>
+  	</div>
 </body>
 </html>

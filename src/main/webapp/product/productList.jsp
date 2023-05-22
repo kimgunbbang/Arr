@@ -36,7 +36,8 @@ body {
 
 </script>
 <body>
-<div class="컨테이너">
+<div class="container">
+<h3 align="center">ALL</h3><hr>
 	<c:if test="${empty productList }">
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>
@@ -48,8 +49,8 @@ body {
 				<a href="productDetailView.p?p_num=${productList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productList.p_image}" id="p_image">
 				</a><br>
-					 <h4>${productList.p_name}</h4><br>
-					<h4 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${productList.p_price}" pattern="#,###" /></h4>
+					 <h4>${productList.p_name}</h4>
+					<h5 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${productList.p_price}" pattern="#,###" /></h5>
 					<br>
 			</div>
 			<c:if test="${status.count % 4 == 0}">

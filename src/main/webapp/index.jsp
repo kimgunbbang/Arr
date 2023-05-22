@@ -9,14 +9,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
+.scroll-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    opacity: 50;
+    transition: opacity 0.3s;
+    z-index: 9999;
+}
 </style>
 </head>
 <body>
 <c:if test="${pagefile == null }">
 <jsp:forward page="main.p"></jsp:forward>
 </c:if>
-   <div class="container">
+<div id="scroll-btn" class="scroll-btn">
+  <a href="#top"><i class="fas fa-arrow-up"></i></a>
+</div>
+
+   <div class="container1 top">
       <!-- 사이트 상단 부분 -->
       <div class="row" >
          <div class="col">
@@ -35,22 +54,9 @@
          </c:choose>
          </div>
       </div>
-      
       <!-- 사이트 하단 부분 -->
-      <div class="row">
-         <div class="col"> 
-         
-         </div>
-         
-         <div class="col"> 
-         
-         </div>
-         
-         <div class="col"> 
-         
-         </div>
-      </div>
-      
-   </div>
+	  <div class="row">
+	  </div>
+</div>
 </body>
 </html>

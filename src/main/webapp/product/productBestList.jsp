@@ -31,19 +31,12 @@ body {
 	#p_image {
 		width: 80%;
 	}
-.right{
-	text-align: right;
-}
-.besthot {
-	background-color: red;
-	color: white;
-	border-radius: 50%;
-}
+
 
 </style>
 <body>
 <h2 style="text-align: center"><b>HOT</b></h2><hr>
-<div class="컨테이너">
+<div class="container">
 	<c:if test="${empty productReadList }">
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>
@@ -51,12 +44,13 @@ body {
 	<c:choose>
 		<c:when test="${productReadList.p_hide == '1'}"><!-- 품절아닐때 -->
 		<c:if test="${status.count <= 4}">
-			<div id="product">
+			<div id="product" class="position-relative">
 				<a href="productDetailView.p?p_num=${productReadList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productReadList.p_image}" id="p_image">
+					<span class="badge bg-danger position-absolute top-0 start-0">HOT</span>
 				</a><br>
-					<h4>${productReadList.p_name}</h4><br>
-					<h4 style="text-align: right; margin-right: 70px"><span class="besthot">&nbsp;<small><small>HOT</small></small>&nbsp;</span>&nbsp;<fmt:formatNumber value="${productReadList.p_price}" pattern="#,###" /></h4>
+					<h4>${productReadList.p_name}</h4>
+					<h5 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${productReadList.p_price}" pattern="#,###" /></h5>
 			</div>
 			<c:if test="${status.count % 4 == 0}">
 				<div style="clear: both;"></div>
@@ -78,9 +72,9 @@ body {
 	</c:choose>
 </c:forEach>
 </div>
-
+<br>
 <h2 style="text-align: center"><b>BEST</b></h2><hr>
-<div class="컨테이너">
+<div class="container">
 	<c:if test="${empty productSaleList }">
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>
@@ -88,12 +82,13 @@ body {
 	<c:choose>
 		<c:when test="${productSaleList.p_hide == '1'}"><!-- 품절아닐때 -->
 		<c:if test="${status.count <= 4}">
-			<div id="product">
+			<div id="product" class="position-relative">
 				<a href="productDetailView.p?p_num=${productSaleList.p_num}">
 					<img src="${pageContext.request.contextPath}/images/${productSaleList.p_image}" id="p_image">
+					<span class="badge bg-danger position-absolute top-0 start-0">BEST</span>
 				</a><br>
 					<h4>${productSaleList.p_name}</h4><br>
-					<h4 style="text-align: right; margin-right: 70px"><span class="besthot">&nbsp;<small>인기</small>&nbsp;</span>&nbsp;<fmt:formatNumber value="${productSaleList.p_price}" pattern="#,###" /></h4>
+					<h5 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${productSaleList.p_price}" pattern="#,###" /></h5>
 					<br>
 			</div>
 			<c:if test="${status.count % 4 == 0}">

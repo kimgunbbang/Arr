@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/cb777d7294.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 <html>
 <head>
 
@@ -47,7 +48,7 @@ function toggleVisibility(event) {
 
 </head>
 <body>
-<div class="container custom-container" style="height:200px; background-color: #FFF" >
+<div class="container custom-container" style="height:200px; background-color: #FFF">
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
     <div class="col-3">
     <a href="main.p">
@@ -154,11 +155,10 @@ function toggleVisibility(event) {
                   <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </form>
-              <div id="toggle" style="display: none; text-align: right">
+              <div id="toggle" style="display: none; text-align: right; position: fixed; top:0; left:0; width:100%; height:100px; background:skyblue;">
 				  <form action="pSearch.p">
 				    <input type="text" name="pSearch">
 				    <button type="submit" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></button>
-
 				  </form>
 			  </div> 
               </div>
