@@ -37,7 +37,29 @@ body {
 </script>
 <body>
 <div class="container">
+<c:choose>
+<c:when test="${category_name eq 'food' }">
+<h3 align="center">FOOD</h3><hr>
+</c:when>
+<c:when test="${category_name eq 'care' }">
+<h3 align="center">CARE</h3><hr>
+</c:when>
+<c:when test="${category_name eq 'play' }">
+<h3 align="center">PLAY</h3><hr>
+</c:when>
+<c:when test="${category_name eq 'cloth' }">
+<h3 align="center">CLOTH</h3><hr>
+</c:when>
+<c:when test="${category_name eq 'potty' }">
+<h3 align="center">POTTY</h3><hr>
+</c:when>
+<c:when test="${category_name eq 'health' }">
+<h3 align="center">HEALTH</h3><hr>
+</c:when>
+<c:otherwise>
 <h3 align="center">ALL</h3><hr>
+</c:otherwise>
+</c:choose>
 	<c:if test="${empty productList }">
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>

@@ -19,6 +19,7 @@ public class ProductSelectListAction implements Action {
 		
 		ProductListService productListService = new ProductListService();
 		ArrayList<Product> productList = productListService.getProductSelectList(category_name);
+		request.setAttribute("category_name", category_name);
 		request.setAttribute("productList", productList);
 		request.setAttribute("pagefile", "/product/productList.jsp");
 		

@@ -95,8 +95,8 @@ function toggleVisibility(event) {
             <b>커뮤니티</b>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="userListAction.u">게시판 글쓰기</a></li>
-            <li><a class="dropdown-item" href="#">게시판 목록 보기</a></li>  
+            <li><a class="dropdown-item" href="#">게시판 목록보기</a></li>
+            <li><a class="dropdown-item" href="#">상품전체 리뷰보기</a></li>  
           </ul>
         </li>
         
@@ -113,6 +113,7 @@ function toggleVisibility(event) {
                <li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
                <li><a class="dropdown-item" href="adminBuyList.ad">주문관리</a></li>
                <li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
+               <li><a class="dropdown-item" href="#">게시글관리</a></li>
             </ul>
          </li>
          <% } else if(userId != null){ %>
@@ -122,8 +123,6 @@ function toggleVisibility(event) {
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                <li><a class="dropdown-item" href="userViewAction.u?id=${sessionScope.id }">내정보보기</a></li>
                <li><a class="dropdown-item" href="buyListForm.buy">구매목록</a></li>
-               <li><a class="dropdown-item" href="">서브메뉴3</a></li>
-               <li><a class="dropdown-item" href="">서브메뉴4</a></li>
             </ul>
          </li>
          <% } else{%>
@@ -167,9 +166,8 @@ function toggleVisibility(event) {
 			 <div class="col-1">
                 <div class="d-flex align-items-center ms-3">
                   <a href="#" id="btn_toggle" class="btn btn-primary btn-primary1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-magnifying-glass"></i></a>
-                  
-                  <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
-	              <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
+                  <a href="productRecent.p" class="text-decoration-none btn btn-primary btn-primary1"><i class="fa-solid fa-eye"></i></a>
+	              <a href="cartList.ct" class="text-decoration-none btn btn-primary btn-primary1"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               	<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 	              <div class="offcanvas-header">
