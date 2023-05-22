@@ -31,6 +31,22 @@ body {
     
     
 }
+
+.offcanvas-header {
+  display: flex;
+  justify-content: center;
+}
+  
+.offcanvas-header form {
+  margin: auto;
+}
+.btn.btn-primary {
+    color: blue;
+    background-color: white;
+    border: 0px;
+}
+
+
 </style>
 <script>
 function toggleVisibility(event) {
@@ -148,20 +164,23 @@ function toggleVisibility(event) {
                   <a class="btn btn-outline-primary me-2" href="userLogout.u">LOGOUT</a>
                 </div>
                 <div class="d-flex align-items-center ms-3">
-                  <a href="#" id="btn_toggle" class="text-decoration-none me-2" onclick="toggleVisibility(event)"><i class="fa-solid fa-magnifying-glass"></i></a>
-					
+                  <a href="#" id="btn_toggle" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-magnifying-glass"></i></a>
                   
                   <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
                   <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </form>
-              <div id="toggle" style="display: none; text-align: right; position: fixed; top:0; left:0; width:100%; height:100px; background:skyblue;">
-				  <form action="pSearch.p">
-				    <input type="text" name="pSearch">
-				    <button type="submit" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></button>
-				  </form>
-			  </div> 
-              </div>
+              <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+	              <div class="offcanvas-header">
+					  <form action="pSearch.p" style="text-align: center;">
+					  <h3>SEARCH</h3>
+					    <input type="text" name="pSearch">
+					    <button type="submit" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></button>
+					  	<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					  </form>
+				  </div>
+			  </div>
+             </div>
              </c:otherwise>
          </c:choose>
      				
