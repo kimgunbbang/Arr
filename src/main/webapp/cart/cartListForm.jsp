@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <style>
-.container1 {
+.container_cart {
   text-align: center;
   margin: 50px auto;
   width: 80%;
@@ -15,7 +15,7 @@
   color: #333;
 }
 
-.top {
+.top_cart {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -113,8 +113,8 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
 <body>
 <form action="">
 <input type="hidden" name="id" value="${sessionScope.id }">
-<div class="container1">
-   <div class="top">
+<div class="container_cart">
+   <div class="top_cart">
        <div class="col" style="display: none;"></div>
        <div class="col" style="display: none;"></div>
       <div class="col"><input type="checkbox" id="allCheck" name="allCheck" onclick="checkAll(this.form)"></div>
