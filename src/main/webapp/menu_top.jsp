@@ -40,7 +40,7 @@ body {
 .offcanvas-header form {
   margin: auto;
 }
-.btn.btn-primary {
+.btn.btn-primary1 {
     color: blue;
     background-color: white;
     border: 0px;
@@ -137,7 +137,7 @@ function toggleVisibility(event) {
        
            <c:choose>
               <c:when test="${empty sessionScope.id  }"><!-- 로그인 안됬을때 -->
-              <div class="col-5">
+              <div class="col-3">
 	              <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
 	                <div class="input-group">
 	                  <input type="text" class="form-control me-2" placeholder="아이디" aria-label="Username" name="id" id="id">
@@ -146,16 +146,13 @@ function toggleVisibility(event) {
 	                </div>
 	                <div class="d-flex align-items-center ms-3">
 	                  <a href="userJoinForm.u" class="text-decoration-none me-2">JOIN</a>&nbsp;
-	                  <a href="#" class="text-decoration-none me-2"><i class="fa-solid fa-magnifying-glass"></i></a>
-	                  <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
-	                  <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
 	                </div>
 	              </form>
               </div>
              </c:when>
              
              <c:otherwise><!-- 로그인 됬을때 -->
-             <div class="col-4">
+             <div class="col-3">
                 <form class="d-flex align-items-center justify-content-end" action="userLoginAction.u">
                 <div class="input-group" align="right" style="padding-left: 100px">
                 <a href="userViewAction.u?id=${sessionScope.id }" class="text-decoration-none me-2" >
@@ -163,14 +160,18 @@ function toggleVisibility(event) {
                 </a>
                   <a class="btn btn-outline-primary me-2" href="userLogout.u">LOGOUT</a>
                 </div>
+                </form>
+             </div>
+			 </c:otherwise>
+			 </c:choose>
+			 <div class="col-1">
                 <div class="d-flex align-items-center ms-3">
-                  <a href="#" id="btn_toggle" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-magnifying-glass"></i></a>
+                  <a href="#" id="btn_toggle" class="btn btn-primary btn-primary1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-magnifying-glass"></i></a>
                   
                   <a href="productRecent.p" class="text-decoration-none me-2"><i class="fa-solid fa-eye"></i></a>
-                  <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
+	              <a href="cartList.ct" class="text-decoration-none me-2"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
-              </form>
-              <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+              	<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 	              <div class="offcanvas-header">
 					  <form action="pSearch.p" style="text-align: center;">
 					  <h3>SEARCH</h3>
@@ -179,11 +180,8 @@ function toggleVisibility(event) {
 					  	<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					  </form>
 				  </div>
-			  </div>
-             </div>
-             </c:otherwise>
-         </c:choose>
-     				
+			  	</div>
+             </div>	
 </div>
 
 </div>
