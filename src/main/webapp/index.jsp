@@ -9,6 +9,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+/* cdn import */
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
+@import url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+body {
+    font-family: 'Godo'!important;
+}
+
+
 .scroll-btn {
     position: fixed;
     bottom: 20px;
@@ -46,7 +60,7 @@
       </div>
    </div>
    
-<div class="container" style="text-align: center;">   
+<div class="container">   
       <!-- 사이트 본문 부분 -->
       <div class="row">
          <div class="col">
