@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,7 +135,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
       <div class="col"><%=++num %></div>
       <div class="col"><img src="${pageContext.request.contextPath }/images/${cart.p_image }" id="cart_image" class="img-fluid rounded shadow" width="50%"></div>
       <div class="col">${cart.p_name }</div>
-      <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"> ${cart.p_price }</div>
+      <div class="col"><input type="hidden" name="p_price" value="${cart.p_price }"><fmt:formatNumber value="${cart.p_price }" pattern="#,###" />원 </div>
       <div class="col"><input type="hidden" name="buy_qty" value="${cart.cart_qty }">
        					<a href="cartQtyUp.ct?cart_num=${cart.cart_num }">
 					<img src="${pageContext.request.contextPath }/images/up.jpg"
@@ -146,10 +147,11 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
        </div>
    </div>
    </c:forEach>
-   <div class="money">총 금액 : ${totalMoney }원</div>
-   
-   <div class="buy" style="float: left; margin-left: 450px"><input type="submit" value="구매" formaction="buyActionForm.buy"> </div>
-   <div class="remove" style="float: left; margin-left: 10px;"><input type="submit" value="삭제" formaction="cartRemove.ct" > </div>
+   <div class="money">총 금액 : <fmt:formatNumber value="${totalMoney }" pattern="#,###" />원</div>
+   <div class="button" style="margin: auto;">
+   <input type="submit" class="buy" value="구매" formaction="buyActionForm.buy">
+   <input type="submit" class="remove" value="삭제" formaction="cartRemove.ct" >
+   </div>
    <c:if test="${cartList eq null}">
 		<section class="div_empty">
 		장바구니가 비었습니다.
