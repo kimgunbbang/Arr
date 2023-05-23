@@ -25,6 +25,7 @@
     transition: opacity 0.3s;
     z-index: 9999;
 }
+
 </style>
 </head>
 <body>
@@ -43,7 +44,9 @@
             <jsp:include page="menu_top.jsp"></jsp:include>
          </div>
       </div>
-      
+   </div>
+   
+<div class="container" style="text-align: center;">   
       <!-- 사이트 본문 부분 -->
       <div class="row">
          <div class="col">
@@ -54,6 +57,7 @@
          </c:choose>
          </div>
       </div><br>
+</div>
       <!-- 사이트 하단 부분 -->
 	  <div class="row" style="background-color: #f7f7f7; color: #6E6E6E">
 	  	<div class="col-5" style="margin-left:20px;margin-top:30px;">
@@ -99,6 +103,6 @@
 	  		</div>
 	  	</div>
 	  </div>
-</div>
+
 </body>
 </html>
