@@ -289,7 +289,7 @@ text-align: center;
                     <li>
                         <div class="accordionButton on">서비스문의</div>
                         <div class="accordionContent" >
-                            홈페이지 내 게시판문의로 문의 해주시면 빠르게 답변 드리겠습니다. 
+                            홈페이지 내 게시판문의/고객센터(427-3313)로 문의 해주시면 빠르게 답변 드리겠습니다. 
                         </div>
                     </li>
                 </ul>
@@ -347,6 +347,11 @@ text-align: center;
     </div>
   </div>
 </div>
+<div class="revie-form" style="margin: auto; text-align: center;">
+  <a href="buyListForm.buy?id=${sessionScope.id}">
+    <button type="button">리뷰 작성하기</button>
+  </a>
+</div>
 <script>
 function convertRating() {
   var stars = document.getElementsByName("r_ratingValue");
@@ -400,6 +405,7 @@ function confirmDelete(userId, event) {
         </div>
         <div class="qna_content" style="display: none;">
           <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; ">
+          	<h6><b>${qna.qna_subject}</b></h6>
             <small>문의 내용</small><br>
             ${qna.qna_content}
           </div>
