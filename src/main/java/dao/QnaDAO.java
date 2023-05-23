@@ -126,4 +126,36 @@ public class QnaDAO {
 		return writeCount;
 	}
 
+	public ArrayList<Qna> getQnaMyList(String id) {
+		ArrayList<Qna> qnaMyList = new ArrayList<Qna>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from qna where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Qna qna = new Qna();
+					qna.setQna_num(rs.getString("qna_num"));
+					qna.setId(id);
+					qna.setQna_subject(rs.getString("qna_subject"));
+					qna.setQna_content(rs.getString("qna_content"));
+					qna.setQna_date(rs.getString("qna_date"));
+					qna.setQna_answer(rs.getString("qna_answer"));
+					qna.setQna_reply(rs.getString("qna_reply"));
+					qna.setP_num(rs.getString("p_num"));
+					qnaMyList.add(qna);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return qnaMyList;
+	}
+
 }

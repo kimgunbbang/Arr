@@ -60,6 +60,12 @@ body {
 <h3 align="center">ALL</h3><hr>
 </c:otherwise>
 </c:choose>
+<div style="text-align: right">
+<a href="productSort.p?sort=price&category_name=${category_name }">가격순</a>
+<a href="productSort.p?sort=best&category_name=${category_name }">인기순</a>
+<a href="productSort.p?sort=readcount&category_name=${category_name }">조회순</a>
+</div>
+
 	<c:if test="${empty productList }">
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>

@@ -455,5 +455,100 @@ public class ProductDAO {
 		return productList;
 	}
 
+	public ArrayList<Product> selectProductAllSortList(String sort) {
+		ArrayList<Product> productList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sort_name="";
+		if(sort.equals("price")) {
+			sort_name="product.p_price";
+		}else if(sort.equals("best")){
+			sort_name = "product.p_qty";
+		}else if(sort.equals("readcount")){
+			sort_name = "product.p_readcount";
+		}
+		
+		
+		String sql = "select * from product natural join inventory where "+
+				"inven_num in(select max(inven_num) from inventory group by p_num) order by "+sort_name;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			System.out.println(pstmt);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				productList = new ArrayList<Product>();
+				do {
+					productList.add(new Product(
+							rs.getInt("p_num"),
+							rs.getString("p_name"),
+							rs.getInt("p_price"),
+							rs.getString("p_detail"),
+							rs.getString("p_image"),
+							rs.getString("p_image2"),
+							rs.getString("category_name"),
+							rs.getInt("p_readcount"),
+							rs.getBoolean("p_hide"),
+							rs.getInt("inven_qty")
+							));
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("DAO selectProductAllSortList 에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return productList;
+	}
+
+	public ArrayList<Product> selectProductSelectList(String category_name, String sort) {
+		ArrayList<Product> productList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sort_name="";
+		if(sort.equals("price")) {
+			sort_name="product.p_price";
+		}else if(sort.equals("best")){
+			sort_name = "product.p_qty";
+		}else if(sort.equals("readcount")){
+			sort_name = "product.p_readcount";
+		}
+		
+		String sql = "select * from product natural join inventory where category_name = '"+category_name+"' and "+
+				"inven_num in(select max(inven_num) from inventory group by p_num) order by "+sort_name;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				productList = new ArrayList<Product>();
+				do {
+					productList.add(new Product(
+							rs.getInt("p_num"),
+							rs.getString("p_name"),
+							rs.getInt("p_price"),
+							rs.getString("p_detail"),
+							rs.getString("p_image"),
+							rs.getString("p_image2"),
+							rs.getString("category_name"),
+							rs.getInt("p_readcount"),
+							rs.getBoolean("p_hide"),
+							rs.getInt("inven_qty")
+							));
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			System.out.println("DAO selectProductSelectList 에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return productList;
+	}
+
 	
 }
