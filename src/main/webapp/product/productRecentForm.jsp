@@ -14,12 +14,12 @@
             align-items: center;
             margin-bottom: 10px;
             margin: auto;
-            width: 50%;
+            width: 70%;
         }
         .product img {
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
+            width: 13%;
+            margin-right: 30px;
+            margin-bottom: 5px;
         }
         .product-info {
             flex-grow: 1;
@@ -80,8 +80,10 @@
                 <img src="${pageContext.request.contextPath }/images/${product.p_image }" id="p_image" class="img-fluid rounded shadow">
                 <div class="product-info">
                     <div class="product-name" >${product.p_name}</div>
-                    <div class="product-price"><fmt:formatNumber value="${product.p_price}" pattern="#,###" />원</div>
                 </div>
+                <div>
+                    <div class="product-price" ><fmt:formatNumber value="${product.p_price}" pattern="#,###" />원</div>
+               </div> 
                 <div class="buttons">
                     <button onclick="location.href = 'cartAddAction.ct?p_num=${product.p_num}'">장바구니</button>
                     <button onclick="location.href = 'buyActionForm.buy?id=${sessionScope.id }&p_num=${product.p_num}'">구매하기</button>

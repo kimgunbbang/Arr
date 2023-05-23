@@ -26,6 +26,7 @@
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 20px;
+    border: 1px solid lavender;
   }
   
   .qna-content {
@@ -94,16 +95,17 @@
           </div>
         </div>
         <div class="qna_content" style="display: none;">
-          <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; ">
+          <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
             <small>문의 내용</small><br>
-            ${qna.qna_content}
+            ${qna.qna_content} <a href="productDetailView.p?p_num=${qna.p_num }#qnaSection" style="padding-top: 100px; padding-left: 300px">문의로 이동하기</a>
           </div>
           <%-- 답변이 있는 경우에만 답변을 표시 --%>
           <c:if test="${not empty qna.qna_reply}">
-            <div class="answer" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; ">
+            <div class="answer" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
               <small>답변</small><br>
               <small>${qna.qna_reply}</small>
             </div>
+            <br>
           </c:if>
           <%-- 답변을 작성할 수 있는 폼 --%>
           <c:if test="${sessionScope.id eq 'admin' and empty qna.qna_reply }">

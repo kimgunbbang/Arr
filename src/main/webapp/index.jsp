@@ -60,7 +60,7 @@ body {
       </div>
    </div>
    
-<div class="container">   
+
       <!-- 사이트 본문 부분 -->
       <div class="row">
          <div class="col">
@@ -71,10 +71,10 @@ body {
          </c:choose>
          </div>
       </div><br>
-</div>
+
       <!-- 사이트 하단 부분 -->
 	  <div class="row" style="background-color: #f7f7f7; color: #6E6E6E">
-	  	<div class="col-5" style="margin-left:20px;margin-top:30px;">
+	  	<div class="col-5" style="margin-left:30px;margin-top:30px; margin-right: 20px;">
 	  	<small><small>
 	  		YeongNam Dearfood<br>
 			CEO. KP | TEL. 010-9940-6245 | E-MAIL. kkh6245@gmail.com<br>
@@ -83,7 +83,7 @@ body {
 			© 2023<br>
 		</small></small>
 	  	</div>
-	  	<div class="col-3" style="margin-bottom:10px; margin-top:10px;">
+	  	<div class="col-3" style="margin-bottom:10px; margin-top:10px; margin-right: 30px;">
 	  	
 	  		<div class="row">
 	  		<p style="font-size: medium; color:#3e7453;">BANK INFO</p>
@@ -101,7 +101,7 @@ body {
 	  		</div>
 	  	
 	  	</div>
-	  	<div class="col-3" style="margin-top:30px;">
+	  	<div class="col-3" style="margin-top:30px; margin-left: 30px;" >
 	  		<div class="row">
 	  		<p style="font-size: medium; color:#3e7453;">053-427-3313</p>
 	  		<small><small>

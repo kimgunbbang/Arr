@@ -82,8 +82,9 @@ text-align: center;
   .review-item {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #ecfdf3;
+    background-color: aliceblue;
     border-radius: 20px;
+    border: 1px solid lavender;
     
   }
   .review-item td.review-info {
@@ -137,6 +138,7 @@ text-align: center;
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 20px;
+    border: 1px solid lavender;
   }
   
   .qna-content {
@@ -347,8 +349,8 @@ text-align: center;
     </div>
   </div>
 </div>
-<div class="revie-form" style="margin: auto; text-align: center;">
-  <a href="buyListForm.buy?id=${sessionScope.id}">
+<div class="add-form" style="margin: auto; text-align: center;">
+  <a href="buyListForm.buy?id=${sessionScope.id}" class="a-form">
     <button type="button">리뷰 작성하기</button>
   </a>
 </div>
@@ -404,17 +406,18 @@ function confirmDelete(userId, event) {
           </div>
         </div>
         <div class="qna_content" style="display: none;">
-          <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; ">
+          <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
           	<h6><b>${qna.qna_subject}</b></h6>
             <small>문의 내용</small><br>
             ${qna.qna_content}
           </div>
           <%-- 답변이 있는 경우에만 답변을 표시 --%>
           <c:if test="${not empty qna.qna_reply}">
-            <div class="answer" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; ">
+            <div class="answer" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
               <small>답변</small><br>
               <small>${qna.qna_reply}</small>
             </div>
+            <br>
           </c:if>
           <%-- 답변을 작성할 수 있는 폼 --%>
           <c:if test="${sessionScope.id eq 'admin' and empty qna.qna_reply }">
@@ -448,8 +451,8 @@ function confirmDelete(userId, event) {
   </c:forEach>
 </div>
 <br><br>
-<div class="qna-form" style="margin: auto; text-align: center;">
-  <a href="qnaWriteForm.q?p_num=${product.p_num}">
+<div class="add-form" style="margin: auto; text-align: center;">
+  <a href="qnaWriteForm.q?p_num=${product.p_num}" class="a-form">
     <button type="button">문의 등록하기</button>
   </a>
 </div>

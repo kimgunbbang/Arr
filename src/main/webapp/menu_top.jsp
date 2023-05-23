@@ -64,11 +64,11 @@ function toggleVisibility(event) {
 
 </head>
 <body>
-<div class="container custom-container" style="height:200px; background-color: #FFF">
+<div class="container custom-container" style="height:170px; background-color: #FFF">
   <div class="row" style="height:180px; display: flex; align-items: center; justify-content: center;">
     <div class="col-3">
     <a href="main.p">
-      <img src="${pageContext.request.contextPath}/images/logo4.png" alt="로고" width="150" height="150"/>
+      <img src="${pageContext.request.contextPath}/images/달봉이네1.png" alt="로고" width="150" height="150"/>
     </a>
     </div>
     <div class="col-4">

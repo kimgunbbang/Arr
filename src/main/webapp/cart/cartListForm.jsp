@@ -14,6 +14,9 @@
   width: 80%;
   font-size: 16px;
   color: #333;
+  border: 1px solid lavender;
+  padding-bottom: 15px;
+  border-radius: 20px;
 }
 
 .top_cart {
@@ -21,6 +24,9 @@
   align-items: center;
   margin-bottom: 10px;
   font-weight: bold;
+  background-color: #27737c;
+  color: white;
+  padding: 5px;
 }
 
 .col {

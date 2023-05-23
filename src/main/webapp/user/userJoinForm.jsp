@@ -11,6 +11,7 @@
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+ 
 }
 
 .form-group {
@@ -213,6 +214,7 @@ function chkCharCode2(event) {
 </head>
 <body>
 <div class="containerJoin">
+<div class="JoinS">
   <h2>JOIN</h2>
   <hr>
   <form name="joinform" action="userJoinAction.u" method="post" onsubmit="return chkForm(this);">
@@ -255,6 +257,7 @@ function chkCharCode2(event) {
     <hr>
     <div class="form-group button-container">
        <button type="submit" class="signup-button">회원가입</button>
+    </div>
     </div>
   </form>
 </div>
