@@ -58,7 +58,7 @@
 	  <div class="row" style="background-color: #f7f7f7; color: #6E6E6E">
 	  	<div class="col-5" style="margin-left:20px;margin-top:30px;">
 	  	<small><small>
-	  		Dongwon Dearfood<br>
+	  		YeongNam Dearfood<br>
 			CEO. KP | TEL. 010-9940-6245 | E-MAIL. kkh6245@gmail.com<br>
 			ADDRESS. 6th floor, Igok-dong, Dalseo-gu, Daegu, Republic of Korea, 06775<br>
 			BUSINESS NO. 000-00-00000 | MAIL ORDER LICENSE. 제0000-대구달서-0000호 <br>
@@ -75,7 +75,7 @@
 			</small></small>
 	  		</div><br>
 	  		<div class="row">
-	  		<p style="font-size: medium; color:#3e7453;">아르르 사업 문의</p>
+	  		<p style="font-size: medium; color:#3e7453;">사업 문의</p>
 	  		<small><small>
 			마케팅제휴 문의 : cc88@nate.com<br>
 			해외수출 문의 : cc88@nate.com
