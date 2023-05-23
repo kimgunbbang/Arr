@@ -139,6 +139,44 @@ public class ProductListService {
 		}
 		return productList;
 	}
+
+	public ArrayList<Product> getProductAllSortList(String sort) {
+		ArrayList<Product> productList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			productList = productDAO.selectProductAllSortList(sort);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return productList;
+	}
+
+	public ArrayList<Product> getProductSelectList(String category_name, String sort) {
+		ArrayList<Product> productList = null;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			ProductDAO productDAO = ProductDAO.getInstance();
+			productDAO.setConnection(conn);
+			
+			productList = productDAO.selectProductSelectList(category_name,sort);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return productList;
+	}
 	
 
 }

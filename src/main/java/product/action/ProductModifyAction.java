@@ -48,7 +48,7 @@ public class ProductModifyAction implements Action {
 				boolean modifySuccess = productModifyService.productModify(product);
 				
 				if(modifySuccess) {//수정이 됬으면
-					forward = new ActionForward("productAllList.p",true);
+					forward = new ActionForward("adminProductList.ad",true);
 				}else {//수정이 안됬으면
 					response.setContentType("text/html; charset=utf-8");
 					PrintWriter out = response.getWriter();

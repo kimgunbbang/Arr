@@ -123,6 +123,7 @@ function toggleVisibility(event) {
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                <li><a class="dropdown-item" href="userViewAction.u?id=${sessionScope.id }">내정보보기</a></li>
                <li><a class="dropdown-item" href="buyListForm.buy">구매목록</a></li>
+               <li><a class="dropdown-item" href="qnaMyListAction.q">1:1문의내역</a></li>
             </ul>
          </li>
          <% } else{%>

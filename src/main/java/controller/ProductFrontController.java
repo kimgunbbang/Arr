@@ -20,6 +20,7 @@ import product.action.ProductModifyAction;
 import product.action.ProductModifyFormAction;
 import product.action.ProductSearchAction;
 import product.action.ProductSelectListAction;
+import product.action.ProductSortAction;
 import vo.ActionForward;
 
 /**
@@ -139,6 +140,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/pSearch.p")) {
 			action = new ProductSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/productSort.p")) {
+			action = new ProductSortAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

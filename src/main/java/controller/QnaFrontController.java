@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import qna.action.QnaAnswerAction;
+import qna.action.QnaMyListAction;
 import qna.action.QnaWriteAction;
 import qna.action.QnaWriteFormAction;
 import review.action.ReviewWriteAction;
@@ -62,6 +63,13 @@ public class QnaFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/qnaAnswerAction.q")) {
 			action = new QnaAnswerAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/qnaMyListAction.q")) {
+			action = new QnaMyListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
