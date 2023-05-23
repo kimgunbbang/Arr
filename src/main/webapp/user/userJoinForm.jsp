@@ -213,7 +213,7 @@ function chkCharCode2(event) {
 </head>
 <body>
 <div class="containerJoin">
-  <h2>회원가입</h2>
+  <h2>JOIN</h2>
   <hr>
   <form name="joinform" action="userJoinAction.u" method="post" onsubmit="return chkForm(this);">
     <div class="form-group">
