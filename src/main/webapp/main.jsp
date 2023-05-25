@@ -16,9 +16,16 @@
 </head>
 <style>
 
-#p_image {
-	width: 80%;
-}
+#product {
+		width: 24%;
+		float: left;
+		margin: 0.5%;
+	}
+	#p_image {
+		width: 80%;
+	}
+
+
 .img{
 	height:100%;
 	width:100%;
@@ -133,7 +140,40 @@ body {
   	  </div>
   	  
   	  <div class="row">
-  	  <jsp:include page="/product/productList.jsp"></jsp:include>
+  	  <h3 align="center">ALL</h3><hr>
+  	  	<c:forEach var="product" items="${productList }" begin="1" end="4" varStatus="status">
+  	  	<c:if test="${product.p_hide=='0' }">
+		<c:choose>
+		<c:when test="${product.p_qty > 0}"><!-- 품절아닐때 -->
+			<div id="product" class="position-relative">
+				<a href="productDetailView.p?p_num=${product.p_num}">
+					<img src="${pageContext.request.contextPath}/images/${product.p_image}" id="p_image">
+				</a><br>
+					 <h4>${product.p_name}</h4>
+					<h5 style="text-align: right; margin-right: 70px"><fmt:formatNumber value="${product.p_price}" pattern="#,###" /></h5>
+					<br>
+			</div>
+			<c:if test="${status.count % 4 == 0}">
+				<div style="clear: both;"></div>
+			</c:if>
+		</c:when>
+		<c:otherwise><!-- 품절일때 -->
+			<div id="product">
+				<a href="productDetailView.p?p_num=${product.p_num}">
+					<img src="${pageContext.request.contextPath}/images/${product.p_image}" id="p_image">
+				</a><br>
+					
+					<h4>${product.p_name}</h4><br>
+					품절입니다.
+			</div>
+			<c:if test="${status.count % 4 == 0}">
+				<div style="clear: both;"></div>
+			</c:if>
+		</c:otherwise>
+		</c:choose>
+		</c:if>
+  	  </c:forEach>
+  	  <div style="text-align: center"><a href="productAllList.p">더보기</a></div>
   	  </div>
   	</div>
 </body>

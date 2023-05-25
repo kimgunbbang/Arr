@@ -70,7 +70,10 @@ body {
 	<h1>상품을 준비 중입니다.</h1>
 	</c:if>
 	<c:forEach var="productList" items="${productList}" varStatus="status">
-	<c:if test="${productList.p_hide=='0' }">
+	<c:if test="${productList.p_hide=='0' }"><!-- 삭제한상품 아닐때 -->
+	
+	
+	
 	<c:choose>
 		<c:when test="${productList.p_qty > 0}"><!-- 품절아닐때 -->
 			<div id="product">
