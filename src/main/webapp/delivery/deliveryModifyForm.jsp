@@ -6,40 +6,145 @@
 <meta charset="UTF-8">
 <title>배송지관리</title>
 <style>
-.container{
-	text-align: center;
+.containerJoin {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+ 
 }
-.table{
-	text-align: center;
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group .button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-group .button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group .button-container button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.form-group .button-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-group .button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* 중복확인 버튼 스타일 */
+.duplicate-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.duplicate-button:hover {
+background-color: #1b4e54;
+}
+
+/* 주소검색 버튼 스타일 */
+.zip-search-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.zip-search-button:hover {
+background-color: #1b4e54;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-button {
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+background-color:#27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+width: 100%;
+margin-top: 10px;
+}
+
+.signup-button:hover {
+background-color: #1b4e54;
 }
 </style>
 
 </head>
 <body>
-<div class="containor">
+<div class="containerJoin">
 <form name="deliform" action="deliveryModifyAction.del" method="post">
-	<div class="table">
-		<div class="row">
 			<h2>배송지 수정</h2>
-			<div class="열1"></div><div class="열4">
 			<input type="hidden" name="id" id="id" value="${user.id }" readonly>
 			<input type="hidden" name="deli_num" id="deli_num" value="${delivery.deli_num }"> 
-			</div>
 			
-			<div class="열1">배송지명 : </div><div class="열4"><input type="text" name="deli_name" id="deli_name" value="${delivery.deli_name }"> </div>
-			<div class="열2">우편번호 : </div><div class="열5"><input type="text" name="deli_zipcode" id="deli_zipcode" size="6" value="${delivery.deli_zipcode }" readonly></div>
-			<div class="열2"><input type="button" name="zipSearch" value="주소검색"  id="zipSearch" /> </div>
-			<div class="열3">배송지 주소 : </div><div class="열6"><input type="text" name="deli_addr" id="deli_addr" value="${delivery.deli_addr }" readonly> </div>
-			<div class="열4">배송지 상세 주소 : </div><div class="열7"><input type="text" name="deli_addr2" id="deli_addr2" value="${delivery.deli_addr2 }"></div>
-			<div class="열4">배송인 성함 : </div><div class="열7"><input type="text" name="deli_username" id="deli_username" value="${delivery.deli_username }"></div>
-			<div class="열5">수령인 전화번호 : </div><div class="열8"><input type="text" name="deli_phone" id="deli_phone" value="${delivery.deli_phone }"></div>
-			<div class="열6">
-			<input type="submit" value="배송지 수정">
-			<input type="reset" value="다시작성">&nbsp;
-			<input type="button" value="돌아가기" onclick="history.back()">
+			<div class="form-group">
+			배송지명 <input type="text" name="deli_name" id="deli_name" value="${delivery.deli_name }">
 			</div>
-		</div>	
-	</div>
+			<div class="form-group">
+			우편번호 <input type="text" name="deli_zipcode" id="deli_zipcode" size="6" value="${delivery.deli_zipcode }" readonly>
+			</div>
+			<div class="form-group">
+			<input type="button" name="zipSearch" value="주소검색"  id="zipSearch" class="zip-search-button"/>
+			</div>
+			<div class="form-group">
+			배송지 주소 <input type="text" name="deli_addr" id="deli_addr" value="${delivery.deli_addr }" readonly>
+			</div>
+			<div class="form-group">
+			배송지 상세 주소 <input type="text" name="deli_addr2" id="deli_addr2" value="${delivery.deli_addr2 }">
+			</div>
+			<div class="form-group">
+			배송인 성함 <input type="text" name="deli_username" id="deli_username" value="${delivery.deli_username }">
+			</div>
+			<div class="form-group">
+			수령인 전화번호 : <input type="text" name="deli_phone" id="deli_phone" value="${delivery.deli_phone }">
+			</div>
+			<div class="form-group">
+			<input type="submit" value="배송지 수정" class="zip-search-button">
+			<input type="reset" value="다시작성" class="zip-search-button">&nbsp;
+			<input type="button" value="돌아가기" onclick="history.back()" class="zip-search-button">
+			</div>
 </form>
 </div>
 </body>

@@ -258,8 +258,8 @@ function chkCharCode2(event) {
     <div class="form-group button-container">
        <button type="submit" class="signup-button">회원가입</button>
     </div>
-    </div>
   </form>
+</div>
 </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

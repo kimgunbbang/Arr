@@ -5,109 +5,141 @@
 <meta charset="UTF-8">
 <title>회원 정보</title>
 <style>
-.containerInfo {
+.containerJoin {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
   text-align: center;
+ 
 }
 
-.tableInfo {
-  text-align: center;
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.yst {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.column {
-  margin: 10px;
-}
-
-.label {
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
-.value {
-  margin-left: 5px;
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.link {
-  margin-top: 10px;
+.form-group .button-container {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.link a {
+.form-group .button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group .button-container button:not(:last-child) {
   margin-right: 10px;
 }
 
-.info-table {
-
-  border-radius: 5px;
-  padding: 20px;
+.form-group .button-container button:hover {
+  background-color: #0056b3;
 }
 
-.info-table .label {
-  font-weight: bold;
-  margin-right: 5px;
+.form-group .button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* 중복확인 버튼 스타일 */
+.duplicate-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
 }
 
-.info-table .value {
-  color: #495057;
+.duplicate-button:hover {
+background-color: #1b4e54;
 }
-td{
-border: 1px solid gray;
-padding: 10px;
-border-radius: 10px;
-background-color: aliceblue;
+
+/* 주소검색 버튼 스타일 */
+.zip-search-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.zip-search-button:hover {
+background-color: #1b4e54;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-button {
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+background-color:#27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+width: 100%;
+margin-top: 10px;
+}
+
+.signup-button:hover {
+background-color: #1b4e54;
 }
 </style>
 </head>
 <body>
-<div class="containerInfo">
-  <div class="tableInfo">
-    <div class="yst">
-      <div class="column">
-      <h5>회원 정보</h5>
-        <table class="info-table">
-          <tr>
-            <td><span class="label">아이디</span></td>
-            <td><span class="value">${user.id}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">비밀번호</span></td>
-            <td><span class="value">${user.user_pass}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">이름</span></td>
-            <td><span class="value">${user.user_name}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">우편번호</span></td>
-            <td><span class="value">${user.user_zipcode}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">주소</span></td>
-            <td><span class="value">${user.user_addr}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">상세주소</span></td>
-            <td><span class="value">${user.user_addr2}</span></td>
-          </tr>
-          <tr>
-            <td><span class="label">전화번호</span></td>
-            <td><span class="value">${user.user_phone}</span></td>
-          </tr>
-        </table>
+<div class="containerJoin">
+      <h2>회원 정보</h2><hr>
+        <div class="form-group">
+            아이디 <input type="text" value="${user.id}"readonly>
+        </div>
+        <div class="form-group">
+            비밀번호 <input type="text" value="${user.user_pass}"readonly>
+        </div>
+        <div class="form-group">
+            이름 <input type="text" value="${user.user_name}"readonly>
+        </div> 
+        <div class="form-group">
+            우편번호 <input type="text" value="${user.user_zipcode}" readonly>
+        </div>  
+        <div class="form-group">
+            주소 <input type="text" value="${user.user_addr}" readonly>
+        </div>    
+        <div class="form-group">
+            상세주소 <input type="text" value="${user.user_addr2}" readonly>
+        </div> 
+        <div class="form-group">
+            전화번호 <input type="text" value="${user.user_phone}" readonly>
+        </div>
+        
+      <div class="form-group">
+        <a href="userModifyForm.u?id=${user.id}" class="zip-search-button" style="text-decoration: none;">수정</a>
+        <a href="deliveryListAction.del?id=${user.id}" class="zip-search-button" style="text-decoration: none;">배송지관리</a>
+        <a href="#" class="zip-search-button" onclick="confirmDelete('${user.id}', event)" style="text-decoration: none;">탈퇴</a>
       </div>
-    </div>
-    <div class="yst">
-      <div class="column link">
-        <a href="userModifyForm.u?id=${user.id}" class="btn btn-primary">수정</a>
-        <a href="deliveryListAction.del?id=${user.id}" class="btn btn-primary">배송지관리</a>
-        <a href="#" class="btn btn-danger" onclick="confirmDelete('${user.id}', event)">탈퇴</a>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>

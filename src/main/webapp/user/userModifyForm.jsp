@@ -4,13 +4,110 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원수정</title>
 <style>
-.container{
-	text-align: center;
+.containerJoin {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+ 
 }
-.table{
-	text-align: center;
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group .button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-group .button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group .button-container button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.form-group .button-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-group .button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* 중복확인 버튼 스타일 */
+.duplicate-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.duplicate-button:hover {
+background-color: #1b4e54;
+}
+
+/* 주소검색 버튼 스타일 */
+.zip-search-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.zip-search-button:hover {
+background-color: #1b4e54;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-button {
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+background-color:#27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+width: 100%;
+margin-top: 10px;
+}
+
+.signup-button:hover {
+background-color: #1b4e54;
 }
 </style>
 <script type="text/javascript">
@@ -37,31 +134,44 @@ function modifyFormSubmit(f){
 </script>
 </head>
 <body>
-<div class="containor">
+<div class="containerJoin">
 <form action="userModifyAction.u" method="post" name="modiform">
 	<input type="hidden" name="id" id="id" value="${user.id }">
-	<div class="table">
-		<div class="row">
 			<h2>회원정보수정하기</h2>
-			<div class="열1">아이디 : </div><div class="열1">${user.id }</div>
-			<div><input type="checkbox" name="user_pwch" id="user_pwch" onclick="changePW(this)">비밀번호변경</div>
-			<div id="dspPWChange" style="display:none">
-			<div class="열2">비밀번호 : </div><div class="열2"><input type="password" name="user_pass" id="user_pass"></div>
-			<div class="열3">비밀번호 확인 : </div><div class="열3"><input type="password" name="user_pwchk" id="user_pwchk"></div>
+			 <div class="form-group">
+			      <label for="id">아이디</label><input type="text" value="${user.id }" readonly>
+			 </div>
+			 <div class="form-group">
+				<div><input type="checkbox" name="user_pwch" id="user_pwch" onclick="changePW(this)">비밀번호변경</div>
+				<div id="dspPWChange" style="display:none">
+				비밀번호 :<input type="password" name="user_pass" id="user_pass">
+				비밀번호 확인 :<input type="password" name="user_pwchk" id="user_pwchk">
+				</div>
+			 </div>
+			 <div class="form-group">
+			 	이름  <input type="text" name="user_name" id="user_name" value="${user.user_name }">
+			 </div>
+			 <div class="form-group">
+			 	우편번호 :<input type="text" name="user_zipcode" id="user_zipcode" value="${user.user_zipcode }" readonly>
+			 </div>
+			 <div class="form-group">
+			 	<input type="button" name="zipSearch" value="주소검색"  id="zipSearch" class="zip-search-button"/>
+			 </div>
+			 <div class="form-group">
+			 	주소 : <input type="text" name="user_addr" id="user_addr" value="${user.user_addr }">
+			 </div>
+			 <div class="form-group">
+				상세 주소 : <input type="text" name="user_addr2" id="user_addr2" value="${user.user_addr2 }">
+			 </div>
+			 <div class="form-group">
+				전화번호 : <input type="text" name="user_phone" id="user_phone" value="${user.user_phone }">
+			 </div>
+			 
+			<div class="form-group">
+			<input type="submit" value="정보수정" class="zip-search-button">
+			<input type="reset" value="다시작성" class="zip-search-button">&nbsp;
+			<input type="button" value="돌아가기" onclick="history.back()" class="zip-search-button">
 			</div>
-			<div class="열4">이름 : </div><div class="열4"><input type="text" name="user_name" id="user_name" value="${user.user_name }"></div>
-			<div class="열5">우편번호 : </div><div class="열5"><input type="text" name="user_zipcode" id="user_zipcode" value="${user.user_zipcode }" readonly></div>
-			<div class="열5"><input type="button" name="zipSearch" value="주소검색"  id="zipSearch" /> </div>
-			<div class="열6">주소 : </div><div class="열6"><input type="text" name="user_addr" id="user_addr" value="${user.user_addr }"> </div>
-			<div class="열7">상세 주소 : </div><div class="열7"><input type="text" name="user_addr2" id="user_addr2" value="${user.user_addr2 }"></div>
-			<div class="열8">전화번호 : </div><div class="열8"><input type="text" name="user_phone" id="user_phone" value="${user.user_phone }"></div>
-			<div class="열9">
-			<input type="submit" value="정보수정">
-			<input type="reset" value="다시작성">&nbsp;
-			<input type="button" value="돌아가기" onclick="history.back()">
-			</div>
-		</div>	
-	</div>
 </form>
 </div>
 </body>
