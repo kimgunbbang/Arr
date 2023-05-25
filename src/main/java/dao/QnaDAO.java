@@ -158,4 +158,64 @@ public class QnaDAO {
 		return qnaMyList;
 	}
 
+	public ArrayList<Qna> qnaAllList(int page, int limit) {
+		ArrayList<Qna> qnaList = new ArrayList<Qna>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
+		
+		String sql = "select * from qna order by qna_answer asc limit ?,?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Qna qna = new Qna();
+					qna.setQna_num(rs.getString("qna_num"));
+					qna.setId(rs.getString("id"));
+					qna.setP_num(rs.getString("p_num"));
+					qna.setQna_subject(rs.getString("qna_subject"));
+					qna.setQna_content(rs.getString("qna_content"));
+					qna.setQna_answer(rs.getString("qna_answer"));
+					qna.setQna_reply(rs.getString("qna_reply"));
+					qna.setQna_date(rs.getString("qna_date"));
+					
+					qnaList.add(qna);
+				}while(rs.next());
+			}
+			
+		}catch (Exception e) {
+			System.out.println("qnaDAO qnaAllList에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return qnaList;
+	}
+
+	public int selectListCount() {
+		int listcount=0;//초기화
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement("select count(*) from qna");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				listcount=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			System.out.println("getListCount에러"+ e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listcount;
+	}
+
 }

@@ -96,8 +96,8 @@ function toggleVisibility(event) {
             <b>커뮤니티</b>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">게시판 목록보기</a></li>
-            <li><a class="dropdown-item" href="#">상품전체 리뷰보기</a></li>  
+            <li><a class="dropdown-item" href="qnaList.q">1:1문의</a></li>
+            <li><a class="dropdown-item" href="reviewList.r">REVIEW</a></li>  
           </ul>
         </li>
         
@@ -114,7 +114,7 @@ function toggleVisibility(event) {
                <li><a class="dropdown-item" href="userListAction.u">회원관리</a></li>
                <li><a class="dropdown-item" href="adminBuyList.ad">주문관리</a></li>
                <li><a class="dropdown-item" href="adminProductList.ad">상품관리</a></li>
-               <li><a class="dropdown-item" href="#">게시글관리</a></li>
+               <li><a class="dropdown-item" href="adminQnaList.ad">문의관리</a></li>
             </ul>
          </li>
          <% } else if(userId != null){ %>
