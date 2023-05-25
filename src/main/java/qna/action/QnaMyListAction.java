@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import product.svc.ProductListService;
 import qna.svc.QanMyListService;
 import vo.ActionForward;
+import vo.Product;
 import vo.Qna;
 
 public class QnaMyListAction implements Action {
@@ -22,7 +24,10 @@ public class QnaMyListAction implements Action {
 		
 		QanMyListService qanMyListService = new QanMyListService();
 		ArrayList<Qna> qnaMyList = qanMyListService.getQnaMyList(id);
+		ProductListService productListService = new ProductListService();
+		ArrayList<Product> imgList = productListService.getProductAllList();
 		
+		request.setAttribute("imgList",imgList);
 		request.setAttribute("qnaMyList", qnaMyList);
 		request.setAttribute("pagefile", "/qna/qnaMyList.jsp");
 		forward = new ActionForward("/index.jsp",false);

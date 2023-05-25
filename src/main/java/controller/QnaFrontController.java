@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import qna.action.QnaAddFormAction;
+import qna.action.QnaAllListAction;
 import qna.action.QnaAnswerAction;
+import qna.action.QnaListAction;
 import qna.action.QnaMyListAction;
 import qna.action.QnaWriteAction;
 import qna.action.QnaWriteFormAction;
@@ -70,6 +73,20 @@ public class QnaFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/qnaMyListAction.q")) {
 			action = new QnaMyListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/qnaList.q")) {
+			action = new QnaAllListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/qnaAddForm.q")) {
+			action = new QnaAddFormAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

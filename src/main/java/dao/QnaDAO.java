@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import vo.Qna;
 import vo.Qna;
 
@@ -158,13 +160,19 @@ public class QnaDAO {
 		return qnaMyList;
 	}
 
-	public ArrayList<Qna> qnaAllList(int page, int limit) {
+	public ArrayList<Qna> qnaAllList(int page, int limit, String id) {
 		ArrayList<Qna> qnaList = new ArrayList<Qna>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
+		String sort = "qna_num";
+		if(id == null || id.equals("")) {
+			sort = "qna_num desc";
+		}else if(id.equals("admin")) {
+			sort = "qna_answer asc";
+		}
 		
-		String sql = "select * from qna order by qna_answer asc limit ?,?";
+		String sql = "select * from qna order by "+ sort +" limit ?,?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

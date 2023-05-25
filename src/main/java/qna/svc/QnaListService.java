@@ -6,6 +6,8 @@ import static db.JdbcUtil.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dao.InventoryDAO;
 import dao.QnaDAO;
 import vo.Qna;
@@ -30,7 +32,7 @@ public class QnaListService {
 		return qnaList;
 	}
 
-	public ArrayList<Qna> qnaAllList(int page, int limit) {
+	public ArrayList<Qna> qnaAllList(int page, int limit, String id) {
 		ArrayList<Qna> qnaList = null;
 		Connection conn = null;
 		try {
@@ -38,7 +40,7 @@ public class QnaListService {
 			QnaDAO qnaDAO = QnaDAO.getInstance();
 			qnaDAO.setConnection(conn);
 			
-			qnaList = qnaDAO.qnaAllList(page,limit);
+			qnaList = qnaDAO.qnaAllList(page,limit,id);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

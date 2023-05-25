@@ -96,8 +96,21 @@
         </div>
         <div class="qna_content" style="display: none;">
           <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+            <div class="col" style="float:left; display: inline;">
+          	<h6><b>${qna.qna_subject}</b></h6>
             <small>문의 내용</small><br>
-            ${qna.qna_content} <a href="productDetailView.p?p_num=${qna.p_num }#qnaSection" style="padding-top: 100px; padding-left: 300px">문의로 이동하기</a>
+            ${qna.qna_content}
+          	</div>
+            <div class="col" style="text-align: right;">
+            <c:forEach var="img" items="${imgList }">
+            	<c:if test="${qna.p_num == img.p_num }">
+            		<div style="float: right;">${img.p_name}</div><br>
+	            	<img src="${pageContext.request.contextPath }/images/${img.p_image}" style="width:8%; float: right;">
+	            	
+	            </c:if>
+            </c:forEach>
+          </div>
+	      <br>
           </div>
           <%-- 답변이 있는 경우에만 답변을 표시 --%>
           <c:if test="${not empty qna.qna_reply}">

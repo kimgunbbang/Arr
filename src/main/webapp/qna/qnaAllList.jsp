@@ -7,7 +7,6 @@
 	<!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://assets4.cre.ma/widgets/assets/pc-c9334d1331a67b88a5bbb28c4c16b01ef5184ab1c165983eb0e8207debdf3b2d.css" rel="stylesheet" type="text/css">
-<html>
 <style>
   .qna-board {
     display: flex;
@@ -67,13 +66,14 @@
   }
   
 </style>
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<jsp:include page="/adminCheck.jsp"></jsp:include>
 <body>
-<div id="qnaSection" style="text-align: center;"> <h3><b>Q&A</b></h3> </div>
+<div id="qnaSection" style="text-align: center;"> <h3><b>Q&A</b></h3></div>
+<div style="text-align: right; margin-right:400px;"><a href="qnaAddForm.q">문의 등록하기</a></div><br>
 <div class="qna-board">
   <c:forEach var="qna" items="${qnaList}">
       <div class="qnaForm" style="width: 800px; margin: auto;">
@@ -99,7 +99,7 @@
           <div class="qna-text" style="height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
           <div class="col" style="float:left; display: inline;">
           	<h6><b>${qna.qna_subject}</b></h6>
-            <small>문의 내용</small>
+            <small>문의 내용</small><br>
             ${qna.qna_content}
           </div>
           <div class="col" style="text-align: right;">
@@ -154,14 +154,14 @@
 	<c:choose>
 	<c:when test="${pageinfo.page<=1 }">[이전]&nbsp;</c:when>
 	<c:otherwise>
-			<a href="adminQnaList.ad?page=${pageinfo.page-1 }">[이전]</a>&nbsp;
+			<a href="qnaList.q?page=${pageinfo.page-1 }">[이전]</a>&nbsp;
 	</c:otherwise>
 	</c:choose>
 	<c:forEach var="a" begin="${pageinfo.startpage }" end="${pageinfo.endpage }" step="1">
 		<c:choose>
 			<c:when test="${a==pageinfo.page }">[${a }]</c:when>
 		<c:otherwise>
-			<a href="adminQnaList.ad?page=${a }">[${a }]</a>&nbsp;
+			<a href="qnaList.q?page=${a }">[${a }]</a>&nbsp;
 		</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -169,7 +169,7 @@
 	<c:choose>
 		<c:when test="${pageinfo.page>=pageinfo.maxpage }">[다음]</c:when>
 		<c:otherwise>
-			<a href="adminQnaList.ad?page=${pageinfo.page+1 }">[다음]</a>&nbsp;
+			<a href="qnaList.q?page=${pageinfo.page+1 }">[다음]</a>&nbsp;
 		</c:otherwise>
 	</c:choose>
 </section>

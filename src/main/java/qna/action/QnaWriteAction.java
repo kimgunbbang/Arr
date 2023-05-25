@@ -22,6 +22,9 @@ public class QnaWriteAction implements Action {
 		boolean writeResult = false;
 		
 		String id = (String) session.getAttribute("id");
+		if(id == null || id.equals("")) {
+			id="비회원";
+		}
 		
 		qna.setId(id);
 		qna.setP_num(request.getParameter("p_num"));
@@ -36,8 +39,13 @@ public class QnaWriteAction implements Action {
 		writeResult = qnaWriteService.writeQna(qna);
 				
 		if(writeResult) {
-			request.setAttribute("p_num", request.getParameter("p_num"));
-			forward = new ActionForward("productDetailView.p?p_num="+request.getParameter("p_num")+"#qnaSection",true);
+			if(session.getAttribute("id") == null || ((String)(session.getAttribute("id"))).equals("")) {
+				forward = new ActionForward("qnaList.q",true);
+			}else {
+				request.setAttribute("p_num", request.getParameter("p_num"));
+				forward = new ActionForward("productDetailView.p?p_num="+request.getParameter("p_num")+"#qnaSection",true);
+			}
+			
 		}else {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();

@@ -163,6 +163,65 @@ public class ReviewDAO {
 		
 		return deleteCount;
 	}
+
+	public int selectListCount() {
+		int listcount=0;//초기화
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement("select count(*) from review");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				listcount=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			System.out.println("getListCount에러"+ e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listcount;
+	}
+
+	public ArrayList<Review> reviewAllList(int page, int limit, String id) {
+		ArrayList<Review> reviewList = new ArrayList<Review>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int startrow = (page-1) * limit;//인덱스 0부터 9까지 나옴
+		String sql = "select * from review limit ?,?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Review review = new Review();
+					review.setR_rating(rs.getString("r_rating"));
+					review.setR_num(rs.getString("r_num"));
+					review.setP_num(rs.getString("p_num"));
+					review.setId(rs.getString("id"));
+					review.setR_title(rs.getString("r_title"));
+					review.setR_detail(rs.getString("r_detail"));
+					review.setR_image(rs.getString("r_image"));
+					review.setR_date(rs.getString("r_date"));
+					
+					reviewList.add(review);
+				}while(rs.next());
+			}
+			
+		}catch (Exception e) {
+			System.out.println("reviewDAO reviewAllList에러임"+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reviewList;
+	}
     
     
 }
