@@ -81,7 +81,7 @@ function toggleVisibility(event) {
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="productAllList.p">전체상품</a></li>
             <li><a class="dropdown-item" href="productSelectList.p?category_name=food">사료/간식</a></li>
-            <li><a class="dropdown-item" href="productSelectList.p?category_name=cloth">의류/악세사리</a></li>
+            <li><a class="dropdown-item" href="productSelectList.p?category_name=cloth">생활/의류</a></li>
             <li><a class="dropdown-item" href="productSelectList.p?category_name=play">산책/놀이</a></li>
             <li><a class="dropdown-item" href="productSelectList.p?category_name=care">미용/목욕</a></li>
             <li><a class="dropdown-item" href="productSelectList.p?category_name=health">영양/건강</a></li>

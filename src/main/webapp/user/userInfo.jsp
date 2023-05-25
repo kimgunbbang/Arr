@@ -41,7 +41,7 @@
 }
 
 .info-table {
-  background-color: #f8f9fa;
+
   border-radius: 5px;
   padding: 20px;
 }
@@ -54,6 +54,12 @@
 .info-table .value {
   color: #495057;
 }
+td{
+border: 1px solid gray;
+padding: 10px;
+border-radius: 10px;
+background-color: aliceblue;
+}
 </style>
 </head>
 <body>
@@ -61,33 +67,34 @@
   <div class="tableInfo">
     <div class="yst">
       <div class="column">
+      <h5>회원 정보</h5>
         <table class="info-table">
           <tr>
-            <td><span class="label">아이디:</span></td>
+            <td><span class="label">아이디</span></td>
             <td><span class="value">${user.id}</span></td>
           </tr>
           <tr>
-            <td><span class="label">비밀번호:</span></td>
+            <td><span class="label">비밀번호</span></td>
             <td><span class="value">${user.user_pass}</span></td>
           </tr>
           <tr>
-            <td><span class="label">이름:</span></td>
+            <td><span class="label">이름</span></td>
             <td><span class="value">${user.user_name}</span></td>
           </tr>
           <tr>
-            <td><span class="label">우편번호:</span></td>
+            <td><span class="label">우편번호</span></td>
             <td><span class="value">${user.user_zipcode}</span></td>
           </tr>
           <tr>
-            <td><span class="label">주소:</span></td>
+            <td><span class="label">주소</span></td>
             <td><span class="value">${user.user_addr}</span></td>
           </tr>
           <tr>
-            <td><span class="label">상세주소:</span></td>
+            <td><span class="label">상세주소</span></td>
             <td><span class="value">${user.user_addr2}</span></td>
           </tr>
           <tr>
-            <td><span class="label">전화번호:</span></td>
+            <td><span class="label">전화번호</span></td>
             <td><span class="value">${user.user_phone}</span></td>
           </tr>
         </table>

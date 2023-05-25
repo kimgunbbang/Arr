@@ -45,7 +45,7 @@ function cancel(buy_num, event) {
 		        <!-- 첫 번째 buy 객체이면 날짜 등 정보를 출력 -->
 		        <c:if test="${first}">
 		          <h3>${buy.buy_date }</h3>
-		          ${buy.buy_state } 확인용&nbsp;
+		          
 		          <c:set var="state" value="${buy.buy_state }"/>
 		          <c:choose>
 			          <c:when test="${buy.buy_state eq 'ready'}">
