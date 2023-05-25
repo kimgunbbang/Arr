@@ -14,78 +14,18 @@
 
 <style>
 
-/* cdn import */
-@font-face {
-  font-family: 'Godo';
-  font-style: normal;
-  font-weight: 400;
-  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
-}
-
-@import url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
-body {
-    font-family: 'Godo';
-}
-#prdtBtmAcdn {
-    margin: 50px auto;
-    padding: 0 10px;
-}
-#prdtBtmAcdn .accordionButton {
-    font-size: 12px;
-    height: 40px;
-    padding: 5px 0;
-}
-#prdtBtmAcdn .accordionButton {
-    font-family: 'HGGGothicssi','Helvetica','Arial','Apple SD Gothic Neo','맑은 고딕','Malgun Gothic','돋움','Dotum',sans-serif;
-    height: 50px;
-    border-top: 1px solid #477a7b;
-    padding: 10px 0;
-    color: #477a7b;
-    font-weight: 600;
-    position: relative;
-    cursor: pointer;
-}
-#prdtBtmAcdn .accordionContent {
-    padding: 10px 0 0;
-    margin-bottom: 30px;
-    line-height: 1.7em;
-}
-.accordionContent {
-    width: 100%;
-    line-height: 1.8em;
-    color: #333;
-    padding: 25px 30px 25px 40px;
-    margin: 0;
-    font-size: 13px;
-    clear: both;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
-.imgsize{
-	width: 70%;
-	
-}
-.nav nav-tabs{
-text-align: center;
-}
   .review-image{
   	width:200px;
   	height:200px;
   }
   .review-item {
-    margin-bottom: 20px;
     padding: 20px;
     background-color: aliceblue;
     border-radius: 20px;
     border: 1px solid lavender;
-    
+    float: left;
+    height:400px;
+    width:280px;
   }
   .review-item td.review-info {
   	text-align: right;
@@ -189,10 +129,10 @@ text-align: center;
       <h3><b>REVIEW</b></h3>
     </div>
     
-    <div class="reviewForm">
+    <div class="reviewForm" id="review">
       <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
-      <c:forEach var="review" items="${reviewList}">
-          <div class="review-item" style="height: auto; width: 800px; margin: auto; margin-bottom: 20px;">
+      <c:forEach var="review" items="${reviewList}" varStatus="status">
+          <div class="review-item col" style="margin: auto; margin-bottom: 20px; margin-left:15px;">
             <div class="rating">
               <c:forEach var="i" begin="1" end="${review.r_rating}">
                 <span class="star-icon">&#9733;</span>
@@ -214,10 +154,14 @@ text-align: center;
               </div>
             </c:if>
           </div>
+          <c:if test="${status.count % 5 == 0}">
+          <div style="clear: both;"></div>
+          </c:if>
       </c:forEach>
     </div>
   </div>
 </div>
+
 <script>
 function convertRating() {
   var stars = document.getElementsByName("r_ratingValue");
@@ -243,7 +187,7 @@ function confirmDelete(userId, event) {
 	  }
 	}
 </script>
-
+<div style="clear: both;"></div>
 <section id="pageList" style="text-align: center;">
 	<c:choose>
 	<c:when test="${pageinfo.page<=1 }">[이전]&nbsp;</c:when>

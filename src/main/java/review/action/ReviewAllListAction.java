@@ -22,7 +22,7 @@ public class ReviewAllListAction implements Action {
 				//페이지 들어가는부분 그냥 갖다붙여쓰면됨-페이지계산
 				ReviewListService reviewListService = new ReviewListService();
 				int page = 1;//첫페이지
-				int limit = 5;//한페이지에 목록수
+				int limit = 10;//한페이지에 목록수
 				int limitpage = 10;//한페이지에서 보이는 페이지수
 				if(request.getParameter("page") != null) {
 					page = Integer.parseInt(request.getParameter("page"));
