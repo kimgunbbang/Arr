@@ -147,12 +147,16 @@ function setDeliveryInfo(selectBox) {
 	  document.getElementById('deli_addr').value = addr;
 	  document.getElementById('deli_addr2').value = addr2;
 }
+function cancelSubmit(event) {
+	  event.preventDefault();
+	  history.back();
+}
 </script>
 <%int num=0; %>
 </head>
 <body>
 <div class="container">
-	<h1>구매 정보 입력</h1>
+	<h2 style="text-align: center;">구매 정보 입력</h2><hr>
 	<form action="buyAction.buy" method="post" name="buyForm" class="needs-validation" novalidate>
 		<c:if test="${not empty cartList}">
 		<c:forEach var="cart" items="${cartList}" varStatus="idx">
@@ -248,7 +252,7 @@ function setDeliveryInfo(selectBox) {
 	</div>
 	
 	<input type="submit" value="구매하기" class="btn btn-primary">
-	<button onclick="history.back()" class="btn btn-secondary">취소하기</button>
+	<button onclick="cancelSubmit(event)" class="btn btn-secondary">취소하기</button>
 </form>
 	</div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
