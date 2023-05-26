@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>구매가 완료 되었습니다.</h1><br>
+<div class="container">
+<h2 style="text-align: center;">구매가 완료 되었습니다.</h2><hr>
+<div style="text-align: center;">
 <c:choose>
 	<c:when test="${sessionScope.id eq null || sessionScope.id eq '' }">
 	구매번호는 ${buy_num }입니다.(비회원 주문조회시 꼭필요)<br>
@@ -19,5 +21,7 @@
 	<a href="main.p">홈으로 가기</a>
 	</c:otherwise>
 </c:choose>
+</div>
+</div>
 </body>
 </html>
