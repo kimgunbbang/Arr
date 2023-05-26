@@ -8,10 +8,7 @@ pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <title>배송지 목록 보기</title>
 <style>
-.container {
-  border: 1px solid gray;
-  margin: auto;
-}
+
 .table {
 margin: auto;
 text-align: center;
@@ -59,7 +56,7 @@ color: #fff;
 <div class="container">
 	<div class="table">
 		<div class="row">
-			<h3>배송지 목록</h3>
+			<h2>배송지 목록</h2><hr>
 			<c:forEach var="delivery" items="${deliveryList}">
 				<div class="열2"><a href="deliveryViewAction.del?deli_num=${delivery.deli_num}">${delivery.deli_name}</a></div>
 			</c:forEach>

@@ -1,7 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<style>
+.containerJoin {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+ 
+}
 
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group .button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-group .button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-group .button-container button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.form-group .button-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-group .button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* 중복확인 버튼 스타일 */
+.duplicate-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.duplicate-button:hover {
+background-color: #1b4e54;
+}
+
+/* 주소검색 버튼 스타일 */
+.zip-search-button {
+padding: 5px 10px;
+font-size: 16px;
+border-radius: 5px;
+background-color: #27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+}
+
+.zip-search-button:hover {
+background-color: #1b4e54;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-button {
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+background-color:#27737c;
+color: #fff;
+border: none;
+cursor: pointer;
+width: 100%;
+margin-top: 10px;
+}
+
+.signup-button:hover {
+background-color: #1b4e54;
+}
+</style>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,49 +113,46 @@
 </head>
 <body>
 <jsp:include page="/adminCheck.jsp"></jsp:include>
-<div class="container">
-<h1> 상품 수정 페이지</h1>
+<div class="containerJoin">
+<h2> 상품 수정 페이지</h2><hr>
 	<form action="productModifyAction.p" name="productModifyForm" method="post" enctype="multipart/form-data">
-		<div class="table">
-			<div class="row">
-				<div class="col">카테고리명</div>
-											<div class="col">
-												<select name="category_name">
-													<option value="food" ${product.category_name eq food? 'selected':'' }>사료/간식
-													<option value="cloth" ${product.category_name eq cloth? 'selected':'' }>의류/악세사리
-													<option value="play" ${product.category_name eq play? 'selected':'' }>산책/놀이
-													<option value="care" ${product.category_name eq care? 'selected':'' }>미용/목욕
-													<option value="health" ${product.category_name eq health? 'selected':'' }>영양/건강
-													<option value="potty" ${product.category_name eq potty? 'selected':'' }>배변/위생
-												</select>
-											</div>
-			</div>
+		<div class="form-group">
+				카테고리명
+				<select name="category_name">
+					<option value="food" ${product.category_name eq food? 'selected':'' }>사료/간식
+					<option value="cloth" ${product.category_name eq cloth? 'selected':'' }>의류/악세사리
+					<option value="play" ${product.category_name eq play? 'selected':'' }>산책/놀이
+					<option value="care" ${product.category_name eq care? 'selected':'' }>미용/목욕
+					<option value="health" ${product.category_name eq health? 'selected':'' }>영양/건강
+					<option value="potty" ${product.category_name eq potty? 'selected':'' }>배변/위생
+				</select>
+		</div>
+			
 			<input type="hidden" name="p_num" id ="p_num" value = "${product.p_num }">
 			<input type="hidden" name="p_readcount" id ="p_readcount" value = "${product.p_readcount }">
 			
-			<div class="row">
-				<div class="col">상품명</div><div class="col"><input type="text" name="p_name" id="p_name" value = "${product.p_name }" required></div>
-			</div>
-			<div class="row">
-				<div class="col">가격</div><div class="col"><input type="text" name="p_price" id="p_price" value = "${product.p_price }" required></div>
-			</div>
-			<div class="row">
-				<div class="col">상품상세내용</div><div class="col"><textarea cols="60" name="p_detail" id="p_detail">${product.p_detail }</textarea></div>
-			</div>
-			<div class="row">
-				<div class="col">상품이미지</div><div class="col">
-					메인용<input type="file" name="p_image" id="p_image" value="${product.p_image}">
+		<div class="form-group">	
+				상품명<input type="text" name="p_name" id="p_name" value = "${product.p_name }" required>
+		</div>	
+		<div class="form-group">	
+				가격<input type="text" name="p_price" id="p_price" value = "${product.p_price }" required>
+		</div>	
+		<div class="form-group">	
+				상품상세내용<textarea cols="60" name="p_detail" id="p_detail">${product.p_detail }</textarea>
+		</div>	
+		<div class="form-group">	
+				상품이미지<br>
+					메인용<input type="file" name="p_image" id="p_image" value="${product.p_image}"><br>
 					설명용<input type="file" name="p_image2" id="p_image2" value="${product.p_image2}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-				<input type="submit" value="상품수정">&nbsp;
-				<input type="reset"  value="다시작성">&nbsp;
-				<input type="button" value="목록보기" onclick="window.location.href='productAllList.p'">
-				</div>
-			</div>
 		</div>
+			
+		<div class="form-group">
+				<input type="submit" value="상품수정" class="zip-search-button">&nbsp;
+				<input type="reset"  value="다시작성" class="zip-search-button">&nbsp;
+				<input type="button" value="목록보기" onclick="window.location.href='productAllList.p'" class="zip-search-button">
+		</div>
+			
+		
 	</form>
 </div>
 </body>

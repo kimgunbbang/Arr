@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -193,14 +194,14 @@ text-align: center;
                 
                 <form action="buyActionForm.buy?id=${id }&p_num=${product.p_num}" method="post">
                 <input type="hidden" name="p_image" value="${product.p_image }">
-                <h2>${product.p_name }</h2>
-                <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly>${product.p_price }
+                <h2>${product.p_name }</h2><br>
+                <input type="hidden" class="text-muted" name="p_price" value="${product.p_price }" readonly><div style="margin-left:130px;"><fmt:formatNumber value="${product.p_price }" pattern="#,###" /></div>
                     <div class="form-group my-3">
-                        <label for="buy_qty">구매수량(재고수량${product.p_qty }) :</label>
-                        <input type="number" name="buy_qty" class="form-control" value="1" min="1">
+                        <label for="buy_qty">구매수량(재고수량${product.p_qty })</label>
+                        <input type="number" name="buy_qty" class="form-control" value="1" min="1" style="width: 150px;">
                     </div>
                     <div class="form-group my-3">
-                        <label for="p_detail">상세설명 :</label>
+                        <label for="p_detail">상세설명</label>
                         <p>${product.p_detail }</p>
                     </div>
                     <c:choose>
@@ -320,8 +321,11 @@ text-align: center;
     
     <div class="reviewForm">
       <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
+      <%int count=0; %>
       <c:forEach var="review" items="${reviewList}">
+      <c:if test="${count<5 }">
         <c:if test="${review.p_num eq param.p_num}">
+        <%++count; %>
           <div class="review-item" style="height: auto; width: 800px; margin: auto; margin-bottom: 20px;">
             <div class="rating">
               <c:forEach var="i" begin="1" end="${review.r_rating}">
@@ -345,6 +349,7 @@ text-align: center;
             </c:if>
           </div>
         </c:if>
+      </c:if>
       </c:forEach>
     </div>
   </div>

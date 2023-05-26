@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -134,12 +135,13 @@ background-color: #1b4e54;
         <div class="form-group">
             전화번호 <input type="text" value="${user.user_phone}" readonly>
         </div>
-        
+      <c:if test="${sessionScope.id eq user.id }"> 
       <div class="form-group">
         <a href="userModifyForm.u?id=${user.id}" class="zip-search-button" style="text-decoration: none;">수정</a>
         <a href="deliveryListAction.del?id=${user.id}" class="zip-search-button" style="text-decoration: none;">배송지관리</a>
         <a href="#" class="zip-search-button" onclick="confirmDelete('${user.id}', event)" style="text-decoration: none;">탈퇴</a>
       </div>
+      </c:if>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>

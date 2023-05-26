@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -67,7 +68,7 @@ function openModal(buy_num, event){
 		</ul>
 	</div>
 	<div class="row">
-		<div class="col-1">순번</div>
+		<div class="col-1" style="text-align: center;">순번</div>
 		<div class="col-1">주문번호</div>
 		<div class="col-2">주문날짜</div>
 		<div class="col-1">아이디</div>
@@ -83,7 +84,7 @@ function openModal(buy_num, event){
 	<%int count=0; //1건이상이면 '외 ' 추가할용도 %>
 		<form action="stateChange.ad" class="form-border" id="buyListForm">
 		<div class="row">
-			<div class="col-1"><%=++num %></div>
+			<div class="col-1" style="text-align: center;"><%=++num %></div>
 			<c:set var="first" value="true" />
 			<c:forEach var="buy" items="${buyList }" varStatus="i">
 			<c:if test="${buyNum eq buy.buy_num}">
@@ -97,7 +98,8 @@ function openModal(buy_num, event){
 					</c:if>
 				</div>
 				<div class="col-1"><input type="text" name="buy_qty" value="${buy.buy_qty }" readonly></div>
-				<div class="col-1"><input type="text" name="buy_totalmoney" value="${buy.buy_totalmoney }" readonly></div>
+				<div class="col-1" style="text-align: right;"><input type="hidden" name="buy_totalmoney" value="${buy.buy_totalmoney }">
+					<fmt:formatNumber value="${buy.buy_totalmoney }" pattern="#,###"/></div>
 				<div class="col-1">
 					<select name="buy_state" onchange="handleChange(this)">
 						<option value="ready" ${buy.buy_state =='ready'? 'selected':'' }>배송준비</option>

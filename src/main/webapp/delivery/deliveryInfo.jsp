@@ -133,8 +133,8 @@ background-color: #1b4e54;
 			수령인전화번호 <input type="text" value="${delivery.deli_phone }">
 			</div>
 			<div class="form-group">
-			<a href="deliveryModifyForm.del?deli_num=${delivery.deli_num}">수정</a>
-			<a href="deliveryDeleteAction.del?deli_num=${delivery.deli_num}" onclick="confirmDelete('${delivery.deli_num}', event)">삭제</a>
+			<a href="deliveryModifyForm.del?deli_num=${delivery.deli_num}" class="zip-search-button" style="text-decoration: none;">수정</a>
+			<a href="deliveryDeleteAction.del?deli_num=${delivery.deli_num}" onclick="confirmDelete('${delivery.deli_num}', event)" class="zip-search-button" style="text-decoration: none;">삭제</a>
 			</div>
 
 <script>
