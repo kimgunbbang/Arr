@@ -389,8 +389,11 @@ function confirmDelete(userId, event) {
   <br>
 <div id="qnaSection" style="text-align: center;"> <h3><b>Q&A</b></h3> </div>
 <div class="qna-board">
+<%int count1=0; %>
   <c:forEach var="qna" items="${qnaList}">
+  <c:if test="${count1<5 }">
     <c:if test="${qna.p_num eq param.p_num}">
+    <%++count1; %>
       <div class="qnaForm" style="width: 800px; margin: auto;">
         <div class="qna-summary" onclick="toggleqnaContent(this)">
           <div class="qna-summary-info">
@@ -453,6 +456,7 @@ function confirmDelete(userId, event) {
         }
       </script>
     </c:if>
+  </c:if>
   </c:forEach>
 </div>
 <br><br>
