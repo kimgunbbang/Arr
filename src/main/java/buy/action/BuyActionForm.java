@@ -61,16 +61,10 @@ public class BuyActionForm implements Action {
     	  
     	  id=uuid;
     	  
+    	  
     	  if(request.getParameterValues("remove") == null){//장바구니널일때,
-    		  if(request.getParameter("remove")==null) {
-    			  response.setContentType("text/html;charset=UTF-8"); 
-        		  PrintWriter out = response.getWriter(); out.println("<script>");
-        		  out.println("alert('구매하실 상품을 선택해주세요')"); 
-        		  out.println("history.back()");
-        		  out.println("</script>");
-    		  }else {
-	        	  p_num = request.getParameterValues("p_num");
-	        	  if(p_num.length == 1) {//p_num이 한개일때
+    		  p_num=request.getParameterValues("p_num");
+	        	  if( p_num.length == 1) {//p_num이 한개일때
 	                  p_num = request.getParameterValues("p_num");//상품번호
 	                  buy_qty = request.getParameterValues("buy_qty");//구매수량
 	                  p_price = request.getParameterValues("p_price");//상품금액
@@ -106,11 +100,9 @@ public class BuyActionForm implements Action {
 	        		  out.println("history.back()");
 	        		  out.println("</script>");
 	        	  }
-	    	  }
-        	  
           }else {//장바구니가 널아닐때,
         	  String[] cartList=request.getParameterValues("remove");//장바구니없애기용 cart번호
-        	  if(request.getParameter("remove") == null || request.getParameter("remove").equals("") || request.getParameterValues("remove")==null) {
+        	  if(request.getParameter("remove") == null) {
         		  response.setContentType("text/html;charset=UTF-8"); 
         		  PrintWriter out = response.getWriter(); out.println("<script>");
         		  out.println("alert('구매하실 상품을 선택해주세요')"); 
@@ -206,7 +198,7 @@ public class BuyActionForm implements Action {
 	    	  }
           }else {//장바구니가 널아닐때,
         	  String[] cartList=request.getParameterValues("remove");//장바구니없애기용 cart번호
-        	  if(request.getParameterValues("remove")==null || request.getParameter("remove") == null || request.getParameter("remove").equals("")) {
+        	  if(request.getParameterValues("remove")==null) {
         		  response.setContentType("text/html;charset=UTF-8"); 
         		  PrintWriter out = response.getWriter(); out.println("<script>");
         		  out.println("alert('구매하실 상품을 선택해주세요')"); 

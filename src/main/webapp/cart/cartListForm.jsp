@@ -118,7 +118,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
 </script>
 </head>
 <body>
-<form action="">
+<form action="" id="buyForm">
 <input type="hidden" name="id" value="${sessionScope.id }">
 <div class="container_cart">
    <div class="top_cart">
@@ -155,7 +155,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
    </c:forEach>
    <div class="money">총 금액 : <fmt:formatNumber value="${totalMoney }" pattern="#,###" />원</div>
    <div class="button" style="margin: auto;">
-   <input type="submit" class="buy" value="구매" formaction="buyActionForm.buy">
+   <input type="submit" class="buy" value="구매" onclick="formCheck();">
    <input type="submit" class="remove" value="삭제" formaction="cartRemove.ct" >
    </div>
    <c:if test="${cartList eq null}">
@@ -165,6 +165,25 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
 	</c:if>
 </div>
 </form>
+<script>
+function formCheck() {
+    var removeCheckboxes = document.getElementsByName('remove');
+    var isChecked = false;
 
+    for (var i = 0; i < removeCheckboxes.length; i++) {
+      if (removeCheckboxes[i].checked) {
+        isChecked = true;
+        break;
+      }
+    }
+
+    if (!isChecked) {
+      event.preventDefault(); // 폼 액션 실행 방지
+      alert('상품을 선택해주세요.!!');
+    } else {
+      document.getElementById('buyForm').action = "buyActionForm.buy";
+    }
+  }
+</script>
 </body>
 </html>
