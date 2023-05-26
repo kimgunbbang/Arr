@@ -321,11 +321,8 @@ text-align: center;
     
     <div class="reviewForm">
       <%-- 게시판 데이터를 반복해서 출력하는 부분 --%>
-      <%int count=0; %>
       <c:forEach var="review" items="${reviewList}">
-      <c:if test="${count<5 }">
         <c:if test="${review.p_num eq param.p_num}">
-        <%++count; %>
           <div class="review-item" style="height: auto; width: 800px; margin: auto; margin-bottom: 20px;">
             <div class="rating">
               <c:forEach var="i" begin="1" end="${review.r_rating}">
@@ -349,7 +346,6 @@ text-align: center;
             </c:if>
           </div>
         </c:if>
-      </c:if>
       </c:forEach>
     </div>
   </div>
@@ -389,11 +385,8 @@ function confirmDelete(userId, event) {
   <br>
 <div id="qnaSection" style="text-align: center;"> <h3><b>Q&A</b></h3> </div>
 <div class="qna-board">
-<%int count1=0; %>
   <c:forEach var="qna" items="${qnaList}">
-  <c:if test="${count1<5 }">
     <c:if test="${qna.p_num eq param.p_num}">
-    <%++count1; %>
       <div class="qnaForm" style="width: 800px; margin: auto;">
         <div class="qna-summary" onclick="toggleqnaContent(this)">
           <div class="qna-summary-info">
@@ -456,7 +449,6 @@ function confirmDelete(userId, event) {
         }
       </script>
     </c:if>
-  </c:if>
   </c:forEach>
 </div>
 <br><br>

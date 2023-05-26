@@ -133,7 +133,7 @@ function checkQty(cart_num,cart_qty) {//수량1밑으로 안가게 함
    </div>
    <% int num = 0; %>
    <c:forEach var="cart" items="${cartList }" varStatus="status">
-   
+   <input type="hidden" name="p_image" value="${cart.p_image }">
    <div class="list">
       <div class="col" style="display: none;"><input type="hidden" name="cart_num" value="${cart.cart_num }"> ${cart.cart_num }</div>
       <div class="col" style="display: none;"><input type="hidden" name="p_num" value="${cart.p_num }"> ${cart.p_num }</div>
