@@ -416,7 +416,6 @@ public class BuyDAO {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, buy_state);
-			System.out.println(pstmt);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				do {
@@ -522,6 +521,24 @@ public class BuyDAO {
 			close(pstmt);
 		}
 		return isBuyer;
+	}
+
+	public int changeFinish(int buy_num) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update buy set buy_state = 'finish' where buy_num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_num);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("buyDAO changeCompletion메서드 에러임");
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }//BuyDAO클래스끝

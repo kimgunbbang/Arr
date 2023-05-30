@@ -55,20 +55,22 @@ function cancel(buy_num, event) {
 			          	배송준비
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'cancel' }">
-			            <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			            <a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;<br> 
 			          	취소완료
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'completion' }">
 			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
-			          	<a href="" >구매확정</a>
+			          	<a href="#">배송조회</a> &nbsp;
+			          	<a href="buyCompletion.buy?buy_num=${buy.buy_num }" >구매확정</a><br> 
 			          	배송완료
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'finish' }">
-			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;<br> 
 			          	구매확정
 			          </c:when>
 			          <c:when test="${buy.buy_state eq 'deliver' }">
 			          	<a href="buyInfoForm.buy?buy_num=${buy.buy_num }">상세보기</a> &nbsp;
+			          	<a href="#">배송조회</a> &nbsp;<br> 
 			          	배송중
 			          </c:when>
 			          <c:otherwise>
@@ -100,10 +102,10 @@ function cancel(buy_num, event) {
 		    </c:forEach>
 		    <c:choose>
 			    <c:when test="${state eq 'cancel' }">
-			    <b style="text-decoration: line-through;">총 금액 : ${lastTotalMoney}원</b>
+			    <br><b style="text-decoration: line-through;">총 금액 : ${lastTotalMoney}원</b>
 			    </c:when>
 			    <c:otherwise>
-			    <b>총 금액 : ${lastTotalMoney }원</b>
+			    <br><b>총 금액 : ${lastTotalMoney }원</b>
 			    </c:otherwise>
 			</c:choose>
 		  </form>

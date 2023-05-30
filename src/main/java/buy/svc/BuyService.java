@@ -145,6 +145,28 @@ public class BuyService {
 		
 		return buyList;
 	}
+
+	public void changeFinish(int buy_num) {
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			BuyDAO buyDAO = BuyDAO.getInstance();
+			buyDAO.setConnection(conn);
+			int result = buyDAO.changeFinish(buy_num);
+			if(result>0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+	}
 	
 
 }

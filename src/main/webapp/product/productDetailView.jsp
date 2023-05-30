@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,24 @@
 	<!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://assets4.cre.ma/widgets/assets/pc-c9334d1331a67b88a5bbb28c4c16b01ef5184ab1c165983eb0e8207debdf3b2d.css" rel="stylesheet" type="text/css">
-	
+
+<script>
+  function alram(id, p_num, p_name, event) {
+    event.preventDefault(); // 기본 동작 막기
+
+    if (id) {
+      // 사용자 아이디가 세션에 저장되어 있는 경우
+      alert(p_name + ' 입고시 ' + id + '님에게 메시지 발송 신청 완료(추후구현예정)');
+      return;
+    } else {
+      // 사용자 아이디가 세션에 저장되어 있지 않은 경우
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+  }
+</script>
+
 
 <style>
 
@@ -213,7 +231,7 @@ text-align: center;
                     장바구니</button>
                     </c:when>
                     <c:otherwise>
-                    <button>입고시알림신청</button>
+                    <button onclick="alram('${id }','${product.p_num }','${product.p_name }',event);">입고시알림신청</button>
                     </c:otherwise>
 					</c:choose>
                     <!-- 탭 -->

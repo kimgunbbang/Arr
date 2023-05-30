@@ -13,6 +13,7 @@ import action.Action;
 import buy.action.BuyAction;
 import buy.action.BuyActionForm;
 import buy.action.BuyCancelAction;
+import buy.action.BuyCompletionAction;
 import buy.action.BuyInfoDetailAction;
 import buy.action.BuyInfoFormAction;
 import buy.action.BuyListFormAction;
@@ -97,6 +98,13 @@ public class BuyFrontController extends HttpServlet {
 			forward=new ActionForward("/index.jsp",false);//포워드는 요로케하기
 		}else if(command.equals("/nonUserBuyListAction.buy")) {
 			action = new BuyNonUserListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/buyCompletion.buy")) {
+			action = new BuyCompletionAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
