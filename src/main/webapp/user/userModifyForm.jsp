@@ -173,6 +173,25 @@ function modifyFormSubmit(f){
 			<input type="button" value="돌아가기" onclick="history.back()" class="zip-search-button">
 			</div>
 </form>
+<script>
+function changePW(checkbox) {
+  var pwChange = document.getElementById("dspPWChange");
+  pwChange.style.display = checkbox.checked ? "block" : "none";
+}
+function validateForm() {
+var password = document.getElementById("user_pass").value;
+var passwordConfirm = document.getElementById("user_pwchk").value;
+
+if (password !== passwordConfirm) {
+alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+return false;
+}
+
+return true;
+}
+
+document.modiform.onsubmit = validateForm;
+</script>
 </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
