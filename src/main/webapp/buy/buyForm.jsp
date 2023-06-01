@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"/>
+
 <style>
 .containerJoin {
   max-width: 500px;
@@ -114,11 +115,7 @@ background-color: #1b4e54;
 <meta charset="UTF-8">
 <title>구매 정보 입력</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-.img{
-	width:20%;
-}
-</style>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 window.onload = function(){
@@ -174,7 +171,7 @@ function cancelSubmit(event) {
 		<c:forEach var="buy" items="${buyList }" varStatus="idx">
 		<div class="row" style="text-align: center;">
 			<div class="col"><%=++num %></div>
-			<div class="col"><img src="${pageContext.request.contextPath }/images/${buy.p_image }" class="img"></div>
+			<div class="col"><img src="${pageContext.request.contextPath }/images/${buy.p_image }" style="width:20%;"></div>
 			<input type="hidden" name="p_num" id="p_num" value="${buy.p_num }">
 			<div class="col">${buy.buy_qty }</div>
 			<input type="hidden" name="buy_qty" id="buy_qty" value ="${buy.buy_qty }" onchange='qtychage(event)'>&nbsp;
@@ -208,7 +205,7 @@ function cancelSubmit(event) {
 	</c:if>
 
 	<br>
-		
+	
 	<div class="form-group">
 		<label for="deli_username">수령인:</label>
 		<input type="text" name="deli_username" id="deli_username" class="form-control" 
